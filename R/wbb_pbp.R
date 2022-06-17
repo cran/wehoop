@@ -11,7 +11,6 @@ NULL
 #' the season data into a database (used by `update_wbb_db()`).
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()] 
 #' @param tablename The name of the play by play data table within the database
-#' @import furrr
 #' @return A dataframe with 55 columns:
 #' \describe{
 #' \item{shooting_play}{Logical value (TRUE/FALSE) indicating whether the play was a shooting play}
@@ -73,7 +72,7 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#' load_wbb_pbp(2004:2021)
+#'   try(load_wbb_pbp())
 #' }
 load_wbb_pbp <- function(seasons = most_recent_wbb_season(),...,
                          dbConnection = NULL, tablename = NULL) {
@@ -89,7 +88,7 @@ load_wbb_pbp <- function(seasons = most_recent_wbb_season(),...,
             seasons >= 2004,
             seasons <= most_recent_wbb_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wbb/pbp/rds/play_by_play_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wbb/pbp/rds/play_by_play_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -100,7 +99,7 @@ load_wbb_pbp <- function(seasons = most_recent_wbb_season(),...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -120,10 +119,9 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()] 
 #' @param tablename The name of the play by play data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples \donttest{
-#' load_wbb_team_box(2021)
+#'   try(load_wbb_team_box())
 #' }
 load_wbb_team_box <- function(seasons = most_recent_wbb_season(), ...,
                               dbConnection = NULL, tablename = NULL) {
@@ -139,7 +137,7 @@ load_wbb_team_box <- function(seasons = most_recent_wbb_season(), ...,
             seasons >= 2006,
             seasons <= most_recent_wbb_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wbb/team_box/rds/team_box_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wbb/team_box/rds/team_box_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -150,7 +148,7 @@ load_wbb_team_box <- function(seasons = most_recent_wbb_season(), ...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -170,10 +168,9 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()] 
 #' @param tablename The name of the play by play data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples \donttest{
-#' load_wbb_player_box(2021)
+#'   try(load_wbb_player_box())
 #' }
 load_wbb_player_box <- function(seasons = most_recent_wbb_season(), ...,
                                 dbConnection = NULL, tablename = NULL) {
@@ -189,7 +186,7 @@ load_wbb_player_box <- function(seasons = most_recent_wbb_season(), ...,
             seasons >= 2003,
             seasons <= most_recent_wbb_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wbb/player_box/rds/player_box_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wbb/player_box/rds/player_box_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -200,7 +197,7 @@ load_wbb_player_box <- function(seasons = most_recent_wbb_season(), ...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -220,10 +217,9 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()] 
 #' @param tablename The name of the play by play data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples \donttest{
-#' load_wbb_schedule(2021)
+#'   try(load_wbb_schedule())
 #' }
 
 load_wbb_schedule <- function(seasons = most_recent_wbb_season(), ...,
@@ -241,7 +237,7 @@ load_wbb_schedule <- function(seasons = most_recent_wbb_season(), ...,
             seasons >= 2002,
             seasons <= most_recent_wbb_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wbb/schedules/rds/wbb_schedule_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wbb/schedules/rds/wbb_schedule_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -252,14 +248,14 @@ load_wbb_schedule <- function(seasons = most_recent_wbb_season(), ...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
 
 # load games file
 load_wbb_games <- function(){
-  .url <- "https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wbb/wbb_games_in_data_repo.csv"
+  .url <- "https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wbb/wbb_games_in_data_repo.csv"
   dat <- csv_from_url(.url)
   # close(con)
   return (dat)
@@ -308,7 +304,6 @@ load_wbb_games <- function(){
 #' @param db_connection A `DBIConnection` object, as returned by
 #' [DBI::dbConnect()] (please see details for further information)
 #' @return Logical TRUE/FALSE
-#' @import furrr
 #' @export
 update_wbb_db <- function(dbdir = ".",
                           dbname = "wehoop_db",

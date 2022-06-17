@@ -4,30 +4,30 @@
 \name{wehoop-package}
 \alias{wehoop}
 \alias{wehoop-package}
-\title{wehoop: Functions to Access Women's Basketball Play by Play Data}
+\title{wehoop: Access Women's Basketball Play by Play Data}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A utility for working with women's basketball data. A scraping and aggregating interface for ESPN's<https://www.espn.com> women's college basketball and WNBA statistics. It provides users with the capability to access the ESPN API's game play-by-plays, box scores, standings and results to analyze the data for themselves.
+A utility for working with women's basketball data. A scraping and aggregating interface for the WNBA Stats API \url{https://stats.wnba.com/} and ESPN's \url{https://www.espn.com} women's college basketball and WNBA statistics. It provides users with the capability to access the game play-by-plays, box scores, standings and results to analyze the data for themselves.
 
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A utility for working with women's basketball data. A scraping and aggregating interface for ESPN's<https://www.espn.com> women's college basketball and WNBA statistics. It provides users with the capability to access the ESPN API's game play-by-plays, box scores, standings and results to analyze the data for themselves.
+A utility for working with women's basketball data. A scraping and aggregating interface for the WNBA Stats API \url{https://stats.wnba.com/} and ESPN's \url{https://www.espn.com} women's college basketball and WNBA statistics. It provides users with the capability to access the game play-by-plays, box scores, standings and results to analyze the data for themselves.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://wehoop.sportsdataverse.org}
-  \item \url{https://github.com/saiemgilani/wehoop}
-  \item Report bugs at \url{https://github.com/saiemgilani/wehoop/issues}
+  \item \url{https://github.com/sportsdataverse/wehoop}
+  \item Report bugs at \url{https://github.com/sportsdataverse/wehoop/issues}
 }
 
 
 Useful links:
 \itemize{
   \item \url{https://wehoop.sportsdataverse.org}
-  \item \url{https://github.com/saiemgilani/wehoop}
-  \item Report bugs at \url{https://github.com/saiemgilani/wehoop/issues}
+  \item \url{https://github.com/sportsdataverse/wehoop}
+  \item Report bugs at \url{https://github.com/sportsdataverse/wehoop/issues}
 }
 
 }
@@ -36,15 +36,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Geoff Hutchinson \email{geoffery.hutchinson@gmail.com}
-}
-
-
-\strong{Maintainer}: Saiem Gilani \email{saiem.gilani@gmail.com}
-
-Authors:
-\itemize{
-  \item Geoff Hutchinson \email{geoffery.hutchinson@gmail.com}
+  \item Geoffery Hutchinson \email{geoffery.hutchinson@gmail.com}
 }
 
 }

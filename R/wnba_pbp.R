@@ -56,11 +56,10 @@ NULL
 #' \item{game_play_number}{Game play number}
 #' \item{game_id}{Unique identifier for the game event}
 #' }
-#' @import furrr
 #' @export
 #' @examples
 #' \donttest{
-#' load_wnba_pbp(2021)
+#'   try(load_wnba_pbp())
 #' }
 load_wnba_pbp <- function(seasons = most_recent_wnba_season(),...,
                          dbConnection = NULL, tablename = NULL) {
@@ -78,7 +77,7 @@ load_wnba_pbp <- function(seasons = most_recent_wnba_season(),...,
             seasons >= 2002,
             seasons <= most_recent_wnba_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wnba/pbp/rds/play_by_play_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wnba/pbp/rds/play_by_play_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -89,7 +88,7 @@ load_wnba_pbp <- function(seasons = most_recent_wnba_season(),...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
     
   }
   out
@@ -108,11 +107,10 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()]
 #' @param tablename The name of the team box data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples
 #' \donttest{
-#' load_wnba_team_box(2021)
+#'   try(load_wnba_team_box())
 #' }
 load_wnba_team_box <- function(seasons = most_recent_wnba_season(), ...,
                               dbConnection = NULL, tablename = NULL) {
@@ -129,14 +127,14 @@ load_wnba_team_box <- function(seasons = most_recent_wnba_season(), ...,
             seasons >= 2003,
             seasons <= most_recent_wnba_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wnba/team_box/rds/team_box_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wnba/team_box/rds/team_box_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
   
   out <- lapply(urls, progressively(loader, p))
   out <- data.table::rbindlist(out, use.names = TRUE, fill = TRUE)
-  class(out) <- c("tbl_df","tbl","data.table","data.frame")
+  class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   out
 }
 
@@ -157,11 +155,10 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()]
 #' @param tablename The name of the player box data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples
 #' \donttest{
-#' load_wnba_player_box(2021)
+#'   try(load_wnba_player_box())
 #' }
 load_wnba_player_box <- function(seasons = most_recent_wnba_season(), ...,
                                 dbConnection = NULL, tablename = NULL) {
@@ -177,7 +174,7 @@ load_wnba_player_box <- function(seasons = most_recent_wnba_season(), ...,
             seasons >= 2002,
             seasons <= most_recent_wnba_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wnba/player_box/rds/player_box_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wnba/player_box/rds/player_box_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -188,7 +185,7 @@ load_wnba_player_box <- function(seasons = most_recent_wnba_season(), ...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -207,11 +204,10 @@ NULL
 #' @param dbConnection A `DBIConnection` object, as returned by [DBI::dbConnect()]
 #' @param tablename The name of the schedule data table within the database
 #' @return Returns a tibble
-#' @import furrr
 #' @export
 #' @examples
 #' \donttest{
-#' load_wnba_schedule(2021)
+#'   try(load_wnba_schedule())
 #' }
 load_wnba_schedule <- function(seasons = most_recent_wnba_season(), ...,
                               dbConnection = NULL, tablename = NULL) {
@@ -228,7 +224,7 @@ load_wnba_schedule <- function(seasons = most_recent_wnba_season(), ...,
             seasons >= 2002,
             seasons <= most_recent_wnba_season())
   
-  urls <- paste0("https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wnba/schedules/rds/wnba_schedule_",seasons,".rds")
+  urls <- paste0("https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wnba/schedules/rds/wnba_schedule_",seasons,".rds")
   
   p <- NULL
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
@@ -239,14 +235,14 @@ load_wnba_schedule <- function(seasons = most_recent_wnba_season(), ...,
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
 
 # load games file
 load_wnba_games <- function(){
-  .url <- "https://raw.githubusercontent.com/saiemgilani/wehoop-data/master/wnba/wnba_games_in_data_repo.csv"
+  .url <- "https://raw.githubusercontent.com/sportsdataverse/wehoop-data/main/wnba/wnba_games_in_data_repo.csv"
   con <- url(.url)
   dat <- utils::read.csv(con)
   # close(con)
@@ -295,7 +291,6 @@ load_wnba_games <- function(){
 #' @param db_connection A `DBIConnection` object, as returned by
 #' [DBI::dbConnect()] (please see details for further information)
 #' @return Logical TRUE/FALSE
-#' @import furrr
 #' @export
 update_wnba_db <- function(dbdir = ".",
                           dbname = "wehoop_db",

@@ -24,7 +24,6 @@ progressively <- function(f, p = NULL){
   
 }
 
-
 #' @title
 #' **Load .csv / .csv.gz file from a remote connection**
 #' @description
@@ -35,9 +34,6 @@ progressively <- function(f, p = NULL){
 csv_from_url <- function(...){
   data.table::fread(...)
 }
-
-.datatable.aware <- TRUE
-
 
 #' @title
 #' **Load .rds file from a remote connection**
@@ -80,8 +76,7 @@ user_message <- function(x, type) {
     usethis::ui_oops("{my_time()} | {x}")
   }
 }
-# Identify sessions with sequential future resolving
-is_sequential <- function() inherits(future::plan(), "sequential")
+
 # check if a package is installed
 is_installed <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 # custom mode function from https://stackoverflow.com/questions/2547402/is-there-a-built-in-function-for-finding-the-mode/8189441
@@ -94,15 +89,22 @@ custom_mode <- function(x, na.rm = TRUE) {
 }
 
 
+#' @title
+#' **Most Recent Women's College Basketball Season**
+#' @export
 most_recent_wbb_season <- function() {
-  dplyr::if_else(
+  ifelse(
     as.double(substr(Sys.Date(), 6, 7)) >= 10,
     as.double(substr(Sys.Date(), 1, 4)) + 1,
     as.double(substr(Sys.Date(), 1, 4))
   )
 }
+
+#' @title
+#' **Most Recent WNBA Season**
+#' @export
 most_recent_wnba_season <- function() {
-  dplyr::if_else(
+  ifelse(
     as.double(substr(Sys.Date(), 6, 7)) >= 5,
     as.double(substr(Sys.Date(), 1, 4)),
     as.double(substr(Sys.Date(), 1, 4)) - 1
@@ -145,4 +147,33 @@ NULL
 
 `%c%` <- function(x,y){
   ifelse(!is.na(x),x,y)
+}
+
+
+
+# Functions for custom class
+# turn a data.frame into a tibble/wehoop_data
+make_wehoop_data <- function(df,type,timestamp){
+  out <- df %>%
+    tidyr::as_tibble()
+  
+  class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
+  attr(out,"wehoop_timestamp") <- timestamp
+  attr(out,"wehoop_type") <- type
+  return(out)
+}
+
+#' @export
+#' @noRd
+print.wehoop_data <- function(x,...) {
+  cli::cli_rule(left = "{attr(x,'wehoop_type')}",right = "{.emph wehoop {utils::packageVersion('wehoop')}}")
+  
+  if(!is.null(attr(x,'wehoop_timestamp'))) {
+    cli::cli_alert_info(
+      "Data updated: {.field {format(attr(x,'wehoop_timestamp'), tz = Sys.timezone(), usetz = TRUE)}}"
+    )
+  }
+  
+  NextMethod(print,x)
+  invisible(x)
 }
