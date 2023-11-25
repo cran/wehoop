@@ -10,15 +10,68 @@ espn_wbb_scoreboard(season)
 \item{season}{Either numeric or character}
 }
 \value{
-Returns a tibble
+Returns a tibble\tabular{ll}{
+   col_name \tab types \cr
+   matchup \tab character \cr
+   matchup_short \tab character \cr
+   season \tab integer \cr
+   season_type \tab integer \cr
+   season_slug \tab character \cr
+   game_id \tab integer \cr
+   game_uid \tab character \cr
+   game_date \tab Date \cr
+   attendance \tab integer \cr
+   status_name \tab character \cr
+   broadcast_market \tab character \cr
+   broadcast_name \tab character \cr
+   start_date \tab character \cr
+   game_date_time \tab POSIXct \cr
+   home_team_name \tab character \cr
+   home_team_logo \tab character \cr
+   home_team_abb \tab character \cr
+   home_team_id \tab integer \cr
+   home_team_location \tab character \cr
+   home_team_full_name \tab character \cr
+   home_team_color \tab character \cr
+   home_score \tab integer \cr
+   home_win \tab integer \cr
+   home_record \tab character \cr
+   away_team_name \tab character \cr
+   away_team_logo \tab character \cr
+   away_team_abb \tab character \cr
+   away_team_id \tab integer \cr
+   away_team_location \tab character \cr
+   away_team_full_name \tab character \cr
+   away_team_color \tab character \cr
+   away_score \tab integer \cr
+   away_win \tab integer \cr
+   away_record \tab character \cr
+}
 }
 \description{
 \strong{Get ESPN women's college basketball schedule for a specific year}
 }
 \examples{
 
-# Get schedule from date 2021-02-15
+# Get schedule from date 2022-11-15
 \donttest{
-  try(espn_wbb_scoreboard (season = "20220215"))
+  try(espn_wbb_scoreboard (season = "20230225"))
 }
 }
+\seealso{
+Other ESPN WBB Functions: 
+\code{\link{espn_wbb_conferences}()},
+\code{\link{espn_wbb_game_all}()},
+\code{\link{espn_wbb_game_rosters}()},
+\code{\link{espn_wbb_pbp}()},
+\code{\link{espn_wbb_player_box}()},
+\code{\link{espn_wbb_player_stats}()},
+\code{\link{espn_wbb_rankings}()},
+\code{\link{espn_wbb_standings}()},
+\code{\link{espn_wbb_team_box}()},
+\code{\link{espn_wbb_team_stats}()},
+\code{\link{espn_wbb_teams}()}
+}
+\concept{ESPN WBB Functions}
+\keyword{Scoreboard}
+\keyword{WBB}

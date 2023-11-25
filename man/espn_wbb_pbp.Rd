@@ -11,17 +11,87 @@ espn_wbb_pbp(game_id)
 }
 \value{
 Returns a play-by-play data frame
+
+\strong{Plays}\tabular{ll}{
+   col_name \tab types \cr
+   id \tab character \cr
+   sequence_number \tab character \cr
+   text \tab character \cr
+   away_score \tab integer \cr
+   home_score \tab integer \cr
+   scoring_play \tab logical \cr
+   score_value \tab integer \cr
+   wallclock \tab character \cr
+   shooting_play \tab logical \cr
+   type_id \tab integer \cr
+   type_text \tab character \cr
+   period_number \tab integer \cr
+   period_display_value \tab character \cr
+   clock_display_value \tab character \cr
+   team_id \tab integer \cr
+   coordinate_x_raw \tab numeric \cr
+   coordinate_y_raw \tab numeric \cr
+   coordinate_x \tab numeric \cr
+   coordinate_y \tab numeric \cr
+   play_id \tab character \cr
+   athlete_id_1 \tab integer \cr
+   athlete_id_2 \tab integer \cr
+   home_team_id \tab integer \cr
+   home_team_mascot \tab character \cr
+   home_team_name \tab character \cr
+   home_team_abbrev \tab character \cr
+   home_team_logo \tab character \cr
+   home_team_logo_dark \tab character \cr
+   home_team_full_name \tab character \cr
+   home_team_color \tab character \cr
+   home_team_alternate_color \tab character \cr
+   home_team_score \tab integer \cr
+   home_team_winner \tab logical \cr
+   home_team_record \tab character \cr
+   away_team_id \tab integer \cr
+   away_team_mascot \tab character \cr
+   away_team_name \tab character \cr
+   away_team_abbrev \tab character \cr
+   away_team_logo \tab character \cr
+   away_team_logo_dark \tab character \cr
+   away_team_full_name \tab character \cr
+   away_team_color \tab character \cr
+   away_team_alternate_color \tab character \cr
+   away_team_score \tab integer \cr
+   away_team_winner \tab logical \cr
+   away_team_record \tab character \cr
+   game_id \tab integer \cr
+   season \tab integer \cr
+   season_type \tab integer \cr
+   game_date \tab Date \cr
+   game_date_time \tab POSIXct \cr
+}
 }
 \description{
 Get ESPN women's college basketball play by play data
 }
 \examples{
 \donttest{
-  try(espn_wbb_pbp(game_id = 401276115))
+  try(espn_wbb_pbp(game_id = 401498717))
 }
+}
+\seealso{
+Other ESPN WBB Functions: 
+\code{\link{espn_wbb_conferences}()},
+\code{\link{espn_wbb_game_all}()},
+\code{\link{espn_wbb_game_rosters}()},
+\code{\link{espn_wbb_player_box}()},
+\code{\link{espn_wbb_player_stats}()},
+\code{\link{espn_wbb_rankings}()},
+\code{\link{espn_wbb_scoreboard}()},
+\code{\link{espn_wbb_standings}()},
+\code{\link{espn_wbb_team_box}()},
+\code{\link{espn_wbb_team_stats}()},
+\code{\link{espn_wbb_teams}()}
 }
 \author{
 Saiem Gilani
 }
+\concept{ESPN WBB Functions}
 \keyword{PBP}
 \keyword{WBB}

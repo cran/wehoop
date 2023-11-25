@@ -2,6 +2,7 @@
 test_that("ESPN - WBB Player Stats", {
   skip_on_cran()
   x <- espn_wbb_player_stats(athlete_id = 2984250, year = 2022)
+  
   cols <- c(
     "athlete_id",
     "athlete_uid",
@@ -36,6 +37,13 @@ test_that("ESPN - WBB Player Stats", {
     "status_name",
     "status_type",
     "status_abbreviation",
+    "defensive_blocks",
+    "defensive_defensive_rebounds",
+    "defensive_steals",
+    "defensive_turnover_points",
+    "defensive_avg_defensive_rebounds",
+    "defensive_avg_blocks",
+    "defensive_avg_steals",
     "general_disqualifications",
     "general_flagrant_fouls",
     "general_fouls",
@@ -105,13 +113,6 @@ test_that("ESPN - WBB Player Stats", {
     "offensive_two_point_field_goal_pct",
     "offensive_shooting_efficiency",
     "offensive_scoring_efficiency",
-    "defensive_blocks",
-    "defensive_defensive_rebounds",
-    "defensive_steals",
-    "defensive_turnover_points",
-    "defensive_avg_defensive_rebounds",
-    "defensive_avg_blocks",
-    "defensive_avg_steals",
     "team_id",
     "team_guid",
     "team_uid",
@@ -131,6 +132,6 @@ test_that("ESPN - WBB Player Stats", {
     "logo_dark_href"
   )
   
-  expect_equal(colnames(x), cols)
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

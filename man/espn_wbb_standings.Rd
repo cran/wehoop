@@ -10,7 +10,83 @@ espn_wbb_standings(year)
 \item{year}{Either numeric or character (YYYY)}
 }
 \value{
-Returns a tibble
+Returns a tibble\tabular{ll}{
+   col_name \tab types \cr
+   team_id \tab integer \cr
+   team \tab character \cr
+   avgpointsagainst \tab numeric \cr
+   avgpointsfor \tab numeric \cr
+   gamesbehind \tab numeric \cr
+   leaguewinpercent \tab numeric \cr
+   losses \tab numeric \cr
+   playoffseed \tab numeric \cr
+   pointsagainst \tab numeric \cr
+   pointsfor \tab numeric \cr
+   streak \tab numeric \cr
+   winpercent \tab numeric \cr
+   wins \tab numeric \cr
+   total \tab character \cr
+   home_avgpointsagainst \tab numeric \cr
+   home_avgpointsfor \tab numeric \cr
+   home_gamesbehind \tab numeric \cr
+   home_leaguewinpercent \tab numeric \cr
+   home_losses \tab numeric \cr
+   home_playoffseed \tab numeric \cr
+   home_pointsagainst \tab numeric \cr
+   home_pointsfor \tab numeric \cr
+   home_streak \tab numeric \cr
+   home_winpercent \tab numeric \cr
+   home_wins \tab numeric \cr
+   home \tab character \cr
+   road_avgpointsagainst \tab numeric \cr
+   road_avgpointsfor \tab numeric \cr
+   road_gamesbehind \tab numeric \cr
+   road_leaguewinpercent \tab numeric \cr
+   road_losses \tab numeric \cr
+   road_playoffseed \tab numeric \cr
+   road_pointsagainst \tab numeric \cr
+   road_pointsfor \tab numeric \cr
+   road_streak \tab numeric \cr
+   road_winpercent \tab numeric \cr
+   road_wins \tab numeric \cr
+   road \tab character \cr
+   vsaprankedteams_avgpointsagainst \tab numeric \cr
+   vsaprankedteams_avgpointsfor \tab numeric \cr
+   vsaprankedteams_gamesbehind \tab numeric \cr
+   vsaprankedteams_leaguewinpercent \tab numeric \cr
+   vsaprankedteams_losses \tab numeric \cr
+   vsaprankedteams_playoffseed \tab numeric \cr
+   vsaprankedteams_pointsagainst \tab numeric \cr
+   vsaprankedteams_pointsfor \tab numeric \cr
+   vsaprankedteams_streak \tab numeric \cr
+   vsaprankedteams_winpercent \tab numeric \cr
+   vsaprankedteams_wins \tab numeric \cr
+   vsaprankedteams \tab character \cr
+   vsusarankedteams_avgpointsagainst \tab numeric \cr
+   vsusarankedteams_avgpointsfor \tab numeric \cr
+   vsusarankedteams_gamesbehind \tab numeric \cr
+   vsusarankedteams_leaguewinpercent \tab numeric \cr
+   vsusarankedteams_losses \tab numeric \cr
+   vsusarankedteams_playoffseed \tab numeric \cr
+   vsusarankedteams_pointsagainst \tab numeric \cr
+   vsusarankedteams_pointsfor \tab numeric \cr
+   vsusarankedteams_streak \tab numeric \cr
+   vsusarankedteams_winpercent \tab numeric \cr
+   vsusarankedteams_wins \tab numeric \cr
+   vsusarankedteams \tab character \cr
+   vsconf_avgpointsagainst \tab numeric \cr
+   vsconf_avgpointsfor \tab numeric \cr
+   vsconf_gamesbehind \tab numeric \cr
+   vsconf_leaguewinpercent \tab numeric \cr
+   vsconf_losses \tab numeric \cr
+   vsconf_playoffseed \tab numeric \cr
+   vsconf_pointsagainst \tab numeric \cr
+   vsconf_pointsfor \tab numeric \cr
+   vsconf_streak \tab numeric \cr
+   vsconf_winpercent \tab numeric \cr
+   vsconf_wins \tab numeric \cr
+   vsconf \tab character \cr
+}
 }
 \description{
 Get ESPN women's college basketball standings
@@ -20,5 +96,20 @@ Get ESPN women's college basketball standings
   try(espn_wbb_standings(2021))
  }
 }
+\seealso{
+Other ESPN WBB Functions: 
+\code{\link{espn_wbb_conferences}()},
+\code{\link{espn_wbb_game_all}()},
+\code{\link{espn_wbb_game_rosters}()},
+\code{\link{espn_wbb_pbp}()},
+\code{\link{espn_wbb_player_box}()},
+\code{\link{espn_wbb_player_stats}()},
+\code{\link{espn_wbb_rankings}()},
+\code{\link{espn_wbb_scoreboard}()},
+\code{\link{espn_wbb_team_box}()},
+\code{\link{espn_wbb_team_stats}()},
+\code{\link{espn_wbb_teams}()}
+}
+\concept{ESPN WBB Functions}
 \keyword{Standings}
 \keyword{WBB}

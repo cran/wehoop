@@ -2,7 +2,7 @@
 % Please edit documentation in R/espn_wnba_data.R
 \name{espn_wnba_standings}
 \alias{espn_wnba_standings}
-\title{Get ESPN WNBA Standings}
+\title{\strong{Get ESPN WNBA Standings}}
 \usage{
 espn_wnba_standings(year)
 }
@@ -10,18 +10,53 @@ espn_wnba_standings(year)
 \item{year}{Either numeric or character (YYYY)}
 }
 \value{
-Returns a tibble
+Returns a tibble\tabular{ll}{
+   col_name \tab types \cr
+   team_id \tab integer \cr
+   team \tab character \cr
+   avgpointsagainst \tab numeric \cr
+   avgpointsfor \tab numeric \cr
+   clincher \tab numeric \cr
+   differential \tab numeric \cr
+   divisionwinpercent \tab numeric \cr
+   gamesbehind \tab numeric \cr
+   leaguewinpercent \tab numeric \cr
+   losses \tab numeric \cr
+   playoffseed \tab numeric \cr
+   streak \tab numeric \cr
+   winpercent \tab numeric \cr
+   wins \tab numeric \cr
+   leaguestandings \tab character \cr
+   home \tab character \cr
+   road \tab character \cr
+   vsdiv \tab character \cr
+   vsconf \tab character \cr
+   lasttengames \tab character \cr
+}
 }
 \description{
-Get ESPN WNBA Standings
+\strong{Get ESPN WNBA Standings}
 }
 \examples{
 \donttest{
   try(espn_wnba_standings(year = 2021))
 }
 }
+\seealso{
+Other ESPN WNBA Functions: 
+\code{\link{espn_wnba_game_all}()},
+\code{\link{espn_wnba_game_rosters}()},
+\code{\link{espn_wnba_pbp}()},
+\code{\link{espn_wnba_player_box}()},
+\code{\link{espn_wnba_player_stats}()},
+\code{\link{espn_wnba_scoreboard}()},
+\code{\link{espn_wnba_team_box}()},
+\code{\link{espn_wnba_team_stats}()},
+\code{\link{espn_wnba_teams}()}
+}
 \author{
 Geoff Hutchinson
 }
+\concept{ESPN WNBA Functions}
 \keyword{Standings}
 \keyword{WNBA}

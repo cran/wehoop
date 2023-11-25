@@ -2,7 +2,7 @@
 % Please edit documentation in R/espn_wnba_data.R
 \name{espn_wnba_scoreboard}
 \alias{espn_wnba_scoreboard}
-\title{Get WNBA schedule for a specific year/date from ESPN's API}
+\title{\strong{Get WNBA schedule for a specific year/date from ESPN's API}}
 \usage{
 espn_wnba_scoreboard(season)
 }
@@ -10,17 +10,68 @@ espn_wnba_scoreboard(season)
 \item{season}{Either numeric or character}
 }
 \value{
-Returns a tibble
+Returns a tibble\tabular{ll}{
+   col_name \tab types \cr
+   matchup \tab character \cr
+   matchup_short \tab character \cr
+   season \tab integer \cr
+   season_type \tab integer \cr
+   season_slug \tab character \cr
+   game_id \tab integer \cr
+   game_uid \tab character \cr
+   game_date \tab Date \cr
+   attendance \tab integer \cr
+   status_name \tab character \cr
+   broadcast_market \tab character \cr
+   broadcast_name \tab character \cr
+   start_date \tab character \cr
+   game_date_time \tab POSIXct \cr
+   home_team_name \tab character \cr
+   home_team_logo \tab character \cr
+   home_team_abb \tab character \cr
+   home_team_id \tab integer \cr
+   home_team_location \tab character \cr
+   home_team_full_name \tab character \cr
+   home_team_color \tab character \cr
+   home_score \tab integer \cr
+   home_win \tab integer \cr
+   home_record \tab character \cr
+   away_team_name \tab character \cr
+   away_team_logo \tab character \cr
+   away_team_abb \tab character \cr
+   away_team_id \tab integer \cr
+   away_team_location \tab character \cr
+   away_team_full_name \tab character \cr
+   away_team_color \tab character \cr
+   away_score \tab integer \cr
+   away_win \tab integer \cr
+   away_record \tab character \cr
+}
 }
 \description{
-Get WNBA schedule for a specific year/date from ESPN's API
+\strong{Get WNBA schedule for a specific year/date from ESPN's API}
 }
 \examples{
-# Get schedule from date 2020-08-29
+# Get schedule from date 2022-08-31
 \donttest{
-  try(espn_wnba_scoreboard (season = "20200829"))
+  try(espn_wnba_scoreboard (season = "20220831"))
 }
+}
+\seealso{
+Other ESPN WNBA Functions: 
+\code{\link{espn_wnba_game_all}()},
+\code{\link{espn_wnba_game_rosters}()},
+\code{\link{espn_wnba_pbp}()},
+\code{\link{espn_wnba_player_box}()},
+\code{\link{espn_wnba_player_stats}()},
+\code{\link{espn_wnba_standings}()},
+\code{\link{espn_wnba_team_box}()},
+\code{\link{espn_wnba_team_stats}()},
+\code{\link{espn_wnba_teams}()}
 }
 \author{
 Saiem Gilani.
 }
+\concept{ESPN WNBA Functions}
+\keyword{Scoreboard}
+\keyword{WNBA}

@@ -13,8 +13,8 @@
 #' @return a function that does the same as `f` but it calls `p()` after iteration.
 #'
 progressively <- function(f, p = NULL){
-  if(!is.null(p) && !inherits(p, "progressor")) stop("`p` must be a progressor function!")
-  if(is.null(p)) p <- function(...) NULL
+  if (!is.null(p) && !inherits(p, "progressor")) stop("`p` must be a progressor function!")
+  if (is.null(p)) p <- function(...) NULL
   force(f)
   
   function(...){
@@ -122,7 +122,7 @@ check_status <- function(res) {
   
   x = httr::status_code(res)
   
-  if(x != 200) stop("The API returned an error", call. = FALSE)
+  if (x != 200) stop("The API returned an error", call. = FALSE)
   
 }
 
@@ -153,7 +153,7 @@ NULL
 
 # Functions for custom class
 # turn a data.frame into a tibble/wehoop_data
-make_wehoop_data <- function(df,type,timestamp){
+make_wehoop_data <- function(df, type, timestamp){
   out <- df %>%
     tidyr::as_tibble()
   
@@ -168,7 +168,7 @@ make_wehoop_data <- function(df,type,timestamp){
 print.wehoop_data <- function(x,...) {
   cli::cli_rule(left = "{attr(x,'wehoop_type')}",right = "{.emph wehoop {utils::packageVersion('wehoop')}}")
   
-  if(!is.null(attr(x,'wehoop_timestamp'))) {
+  if (!is.null(attr(x,'wehoop_timestamp'))) {
     cli::cli_alert_info(
       "Data updated: {.field {format(attr(x,'wehoop_timestamp'), tz = Sys.timezone(), usetz = TRUE)}}"
     )
@@ -176,4 +176,18 @@ print.wehoop_data <- function(x,...) {
   
   NextMethod(print,x)
   invisible(x)
+}
+
+
+
+# rbindlist but maintain attributes of last file
+rbindlist_with_attrs <- function(dflist){
+  
+  wehoop_timestamp <- attr(dflist[[length(dflist)]], "wehoop_timestamp")
+  wehoop_type <- attr(dflist[[length(dflist)]], "wehoop_type")
+  out <- data.table::rbindlist(dflist, use.names = TRUE, fill = TRUE)
+  attr(out,"wehoop_timestamp") <- wehoop_timestamp
+  attr(out,"wehoop_type") <- wehoop_type
+  class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
+  out
 }
