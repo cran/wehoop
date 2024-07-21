@@ -90,9 +90,11 @@ wnba_teams <- function(...){
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team details data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team details data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -228,9 +230,11 @@ wnba_teamdetails <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team details data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team details data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -333,9 +337,11 @@ wnba_teamestimatedmetrics <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team estimated metrics data for {season} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team estimated metrics data for {season} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -437,9 +443,11 @@ wnba_teamgamelog <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team game log data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team game log data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -611,9 +619,11 @@ wnba_teamgamelogs <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team game logs for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team game logs for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -693,9 +703,11 @@ wnba_teamhistoricalleaders <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team historical leaders data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team historical leaders data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -768,8 +780,8 @@ NULL
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
 #' @import rvest
+#' @keywords internal
 #' @export
-#' @family WNBA Team Functions
 #' @details
 #' ```r
 #'   wnba_teaminfocommon(team_id = '1611661328')
@@ -780,37 +792,39 @@ wnba_teaminfocommon <- function(
     season_type = 'Regular Season',
     team_id = '1611661328',
     ...){
+  cli::cli_alert_danger("As of v2.1.0, `wnba_teaminfocommon()` is deprecated due to changes from the WNBA Stats API. Please use `wnba_teamdetails()` instead.")
   
-  # Intentionally not commented out
-  season_type <- gsub(' ', '+', season_type)
-  version <- "teaminfocommon"
-  endpoint <- wnba_endpoint(version)
-  full_url <- endpoint
-  
-  params <- list(
-    LeagueID = league_id,
-    Season = season,
-    SeasonType = season_type,
-    TeamID = team_id
-  )
-  
-  tryCatch(
-    expr = {
-      
-      resp <- request_with_proxy(url = full_url, params = params, ...)
-      
-      df_list <- wnba_stats_map_result_sets(resp)
-      
-    },
-    error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team common info data for {team_id} available!"))
-    },
-    warning = function(w) {
-    },
-    finally = {
-    }
-  )
-  return(df_list)
+  # # Intentionally not commented out
+  # season_type <- gsub(' ', '+', season_type)
+  # version <- "teaminfocommon"
+  # endpoint <- wnba_endpoint(version)
+  # full_url <- endpoint
+  # 
+  # params <- list(
+  #   LeagueID = league_id,
+  #   Season = season,
+  #   SeasonType = season_type,
+  #   TeamID = team_id
+  # )
+  # 
+  # tryCatch(
+  #   expr = {
+  #     
+  #     resp <- request_with_proxy(url = full_url, params = params, ...)
+  #     
+  #     df_list <- wnba_stats_map_result_sets(resp)
+  #     
+  #   },
+  #   error = function(e) {
+  #     cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team common info data for {team_id} available!")
+  #     cli::cli_alert_danger("Error:\n{e}")
+  #   },
+  #   warning = function(w) {
+  #     cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
+  #   },
+  #   finally = {
+  #   }
+  # )
 }
 
 
@@ -1118,9 +1132,11 @@ wnba_teamplayeronoffdetails <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team player on off details data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team player on off details data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1340,9 +1356,11 @@ wnba_teamplayeronoffsummary <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team player on off summary data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team player on off summary data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1593,9 +1611,11 @@ wnba_teamplayerdashboard <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team player dashboard data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team player dashboard data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1697,9 +1717,11 @@ wnba_teamyearbyyearstats <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team year-by-year stats data for {team_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team year-by-year stats data for {team_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -2118,9 +2140,11 @@ wnba_teamvsplayer <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team vs player data for {team_id} and {player_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team vs player data for {team_id} and {player_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -2754,9 +2778,11 @@ wnba_teamgamestreakfinder <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no team streak finder data for the given parameters available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team streak finder data for the given parameters available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }

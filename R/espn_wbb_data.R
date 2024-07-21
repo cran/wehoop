@@ -220,19 +220,19 @@ espn_wbb_game_all <- function(game_id){
       plays_df <- helper_espn_wbb_pbp(resp)
       
       if (is.null(plays_df)) {
-        message(glue::glue("{Sys.time()}: No play-by-play data for {game_id} available!"))
+        cli::cli_alert_danger("{Sys.time()}: No play-by-play data for {game_id} available!")
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no play-by-play data for {game_id} available!"
-        )
       )
+    
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -245,19 +245,18 @@ espn_wbb_game_all <- function(game_id){
       team_box_score <- helper_espn_wbb_team_box(resp)
       
       if (is.null(team_box_score)) {
-        message(glue::glue("{Sys.time()}: No team box score data for {game_id} available!"))
+        cli::cli_alert_danger("{Sys.time()}: No team box score data for {game_id} available!")
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no team box score data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -270,19 +269,18 @@ espn_wbb_game_all <- function(game_id){
       player_box_score <- helper_espn_wbb_player_box(resp)
       
       if (is.null(player_box_score)) {
-        message(glue::glue("{Sys.time()}: No player box score data for {game_id} available!"))
+        cli::cli_alert_danger("{Sys.time()}: No player box score data for {game_id} available!")
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no player box score data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -394,19 +392,18 @@ espn_wbb_pbp <- function(game_id){
       plays_df <- helper_espn_wbb_pbp(resp)
       
       if (is.null(plays_df)) {
-        return(message(glue::glue("{Sys.time()}: No play-by-play data for {game_id} available!")))
+        return(cli::cli_alert_danger("{Sys.time()}: No play-by-play data for {game_id} available!"))
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no play-by-play data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -516,19 +513,18 @@ espn_wbb_team_box <- function(game_id){
       team_box_score <- helper_espn_wbb_team_box(resp)
       
       if (is.null(team_box_score)) {
-        return(message(glue::glue("{Sys.time()}: No team box score data for {game_id} available!")))
+        cli::cli_alert_danger("{Sys.time()}: No team box score data for {game_id} available!")
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no team box score data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -639,19 +635,18 @@ espn_wbb_player_box <- function(game_id){
       player_box_score <- helper_espn_wbb_player_box(resp)
       
       if (is.null(player_box_score)) {
-        return(message(glue::glue("{Sys.time()}: No player box score data for {game_id} available!")))
+        return(cli::cli_alert_danger("{Sys.time()}: No player box score data for {game_id} available!"))
       }
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no player box score data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -957,14 +952,13 @@ espn_wbb_game_rosters <- function(game_id) {
       
     },
     error = function(e) {
-      message(
-        glue::glue(
+      cli::cli_alert_danger(
           "{Sys.time()}: Invalid arguments or no game roster data for {game_id} available!"
-        )
       )
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -1033,9 +1027,11 @@ espn_wbb_conferences <- function(){
         make_wehoop_data("ESPN WBB Conferences Information from ESPN.com",Sys.time())
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no conferences info available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no conferences info available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1213,9 +1209,11 @@ espn_wbb_teams <- function(year = most_recent_wbb_season()){
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no teams data available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no teams data available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1434,10 +1432,10 @@ parse_espn_wbb_scoreboard <- function(group, season_dates) {
       
     },
     error = function(e) {
-      
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
-      
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
       
@@ -1526,9 +1524,9 @@ espn_wbb_scoreboard <- function(season) {
                     parse_espn_wbb_scoreboard)
   
   if (!nrow(scoreboard_df)) {
-    message(glue::glue(
+    cli::cli_alert_danger(
       "{Sys.time()}: Invalid arguments or no scoreboard data available!"
-    ))
+    )
   }
   return(scoreboard_df)
 }
@@ -1646,9 +1644,11 @@ espn_wbb_rankings <- function(){
         make_wehoop_data("ESPN WBB Rankings Information from ESPN.com",Sys.time())
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no rankings data for {game_id} available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no rankings data for {game_id} available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -1886,9 +1886,11 @@ espn_wbb_standings <- function(year){
         make_wehoop_data("ESPN WBB Standings Information from ESPN.com",Sys.time())
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}: Invalid arguments or no standings data available!"))
+      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no standings data available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -2097,7 +2099,8 @@ espn_wbb_team_stats <- function(
               "logos.rel..dark.",
               "logos.lastUpdated.1",
               "X.ref",
-              "X.ref.1"))) %>% 
+              "X.ref.1",
+              "X.ref.2"))) %>% 
         janitor::clean_names() 
       colnames(team_df)[1:15] <- paste0("team_",colnames(team_df)[1:15])
       
@@ -2133,9 +2136,11 @@ espn_wbb_team_stats <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}:Invalid arguments or no team season stats data available!"))
+      cli::cli_alert_danger("{Sys.time()}:Invalid arguments or no team season stats data available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
@@ -2444,9 +2449,11 @@ espn_wbb_player_stats <- function(
       
     },
     error = function(e) {
-      message(glue::glue("{Sys.time()}:Invalid arguments or no player season stats data available!"))
+      cli::cli_alert_danger("{Sys.time()}:Invalid arguments or no player season stats data available!")
+      cli::cli_alert_danger("Error:\n{e}")
     },
     warning = function(w) {
+      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
     },
     finally = {
     }
