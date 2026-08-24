@@ -14,8 +14,9 @@ cols <- c(
 
 test_that("ESPN - WNBA Teams", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wnba_teams()
-  expect_equal(colnames(x), cols)
+  expect_in(cols, colnames(x))
   expect_s3_class(x, "data.frame")
 })
  

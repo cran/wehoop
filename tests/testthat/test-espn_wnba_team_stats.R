@@ -1,6 +1,7 @@
 
 test_that("ESPN - WNBA Team Stats", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wnba_team_stats(team_id = 18, year = 2020)
   cols <- c(
     "team_id",
@@ -119,6 +120,6 @@ test_that("ESPN - WNBA Team Stats", {
     "defensive_avg48steals"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

@@ -26,120 +26,48 @@ wnba_playercareerbycollegerollup(
 \value{
 Return a named list of data frames: East, Midwest, South, West
 
-\strong{East}\tabular{ll}{
-   col_name \tab types \cr
-   REGION \tab character \cr
-   SEED \tab character \cr
-   COLLEGE \tab character \cr
-   PLAYERS \tab character \cr
-   GP \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{East}
 
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      REGION \tab character \tab Region label. \cr
+      SEED \tab character \tab Tournament seed. \cr
+      COLLEGE \tab character \tab College or school attended. \cr
+      PLAYERS \tab character \tab  \cr
+      GP \tab character \tab Games played. \cr
+      MIN \tab character \tab Minutes played. \cr
+      FGM \tab character \tab Field goals made. \cr
+      FGA \tab character \tab Field goal attempts. \cr
+      FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+      FG3M \tab character \tab Three-point field goals made. \cr
+      FG3A \tab character \tab Three-point field goal attempts. \cr
+      FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+      FTM \tab character \tab Free throws made. \cr
+      FTA \tab character \tab Free throw attempts. \cr
+      FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+      OREB \tab character \tab Offensive rebounds. \cr
+      DREB \tab character \tab Defensive rebounds. \cr
+      REB \tab character \tab Total rebounds. \cr
+      AST \tab character \tab Assists. \cr
+      STL \tab character \tab Steals. \cr
+      BLK \tab character \tab Blocks. \cr
+      TOV \tab character \tab Turnovers. \cr
+      PF \tab character \tab Personal fouls. \cr
+      PTS \tab character \tab Points scored. \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 
-\strong{South}\tabular{ll}{
-   col_name \tab types \cr
-   REGION \tab character \cr
-   SEED \tab character \cr
-   COLLEGE \tab character \cr
-   PLAYERS \tab character \cr
-   GP \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{South}
 
+Same columns as the \strong{East} table above.
 
-\strong{Midwest}\tabular{ll}{
-   col_name \tab types \cr
-   REGION \tab character \cr
-   SEED \tab character \cr
-   COLLEGE \tab character \cr
-   PLAYERS \tab character \cr
-   GP \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{Midwest}
 
+Same columns as the \strong{East} table above.
 
-\strong{West}\tabular{ll}{
-   col_name \tab types \cr
-   REGION \tab character \cr
-   SEED \tab character \cr
-   COLLEGE \tab character \cr
-   PLAYERS \tab character \cr
-   GP \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{West}
+
+Same columns as the \strong{East} table above.
 }
 \description{
 \strong{Get WNBA Stats API Player Career By College Rollup}
@@ -151,37 +79,30 @@ Return a named list of data frames: East, Midwest, South, West
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Player Functions: 
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_playerawards}()},
-\code{\link{wnba_playercareerbycollege}()},
-\code{\link{wnba_playercareerstats}()},
-\code{\link{wnba_playercompare}()},
-\code{\link{wnba_playerdashboardbyclutch}()},
-\code{\link{wnba_playerdashboardbygamesplits}()},
-\code{\link{wnba_playerdashboardbygeneralsplits}()},
-\code{\link{wnba_playerdashboardbylastngames}()},
-\code{\link{wnba_playerdashboardbyopponent}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_playerdashboardbyteamperformance}()},
-\code{\link{wnba_playerdashboardbyyearoveryear}()},
-\code{\link{wnba_playerestimatedmetrics}()},
-\code{\link{wnba_playerfantasyprofilebargraph}()},
-\code{\link{wnba_playerfantasyprofile}()},
-\code{\link{wnba_playergamelogs}()},
-\code{\link{wnba_playergamelog}()},
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_playerheadshot}()},
-\code{\link{wnba_playerindex}()},
-\code{\link{wnba_playernextngames}()},
-\code{\link{wnba_playerprofilev2}()},
-\code{\link{wnba_playervsplayer}()}
+Other WNBA Player Functions:
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_playerawards]{wnba_playerawards()}},
+\code{\link[=wnba_playercareerbycollege]{wnba_playercareerbycollege()}},
+\code{\link[=wnba_playercareerstats]{wnba_playercareerstats()}},
+\code{\link[=wnba_playercompare]{wnba_playercompare()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_playerestimatedmetrics]{wnba_playerestimatedmetrics()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}},
+\code{\link[=wnba_playerfantasyprofilebargraph]{wnba_playerfantasyprofilebargraph()}},
+\code{\link[=wnba_playergamelog]{wnba_playergamelog()}},
+\code{\link[=wnba_playergamelogs]{wnba_playergamelogs()}},
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_playerheadshot]{wnba_playerheadshot()}},
+\code{\link[=wnba_playerindex]{wnba_playerindex()}},
+\code{\link[=wnba_playernextngames]{wnba_playernextngames()}},
+\code{\link[=wnba_playerprofilev2]{wnba_playerprofilev2()}},
+\code{\link[=wnba_playervsplayer]{wnba_playervsplayer()}}
 }
 \author{
 Saiem Gilani

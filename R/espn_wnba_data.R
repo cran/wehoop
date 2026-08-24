@@ -6,183 +6,17 @@
 #'    **Plays** 
 #'    
 #'    
-#'    |col_name                  |types     |
-#'    |:-------------------------|:---------|
-#'    |id                        |character |
-#'    |sequence_number           |character |
-#'    |text                      |character |
-#'    |away_score                |integer   |
-#'    |home_score                |integer   |
-#'    |scoring_play              |logical   |
-#'    |score_value               |integer   |
-#'    |wallclock                 |character |
-#'    |shooting_play             |logical   |
-#'    |type_id                   |integer   |
-#'    |type_text                 |character |
-#'    |period_number             |integer   |
-#'    |period_display_value      |character |
-#'    |clock_display_value       |character |
-#'    |team_id                   |integer   |
-#'    |coordinate_x_raw          |numeric   |
-#'    |coordinate_y_raw          |numeric   |
-#'    |coordinate_x              |numeric   |
-#'    |coordinate_y              |numeric   |
-#'    |play_id                   |character |
-#'    |athlete_id_1              |integer   |
-#'    |athlete_id_2              |integer   |
-#'    |athlete_id_3              |integer   |
-#'    |home_team_id              |integer   |
-#'    |home_team_mascot          |character |
-#'    |home_team_name            |character |
-#'    |home_team_abbrev          |character |
-#'    |home_team_logo            |character |
-#'    |home_team_logo_dark       |character |
-#'    |home_team_full_name       |character |
-#'    |home_team_color           |character |
-#'    |home_team_alternate_color |character |
-#'    |home_team_score           |integer   |
-#'    |home_team_winner          |logical   |
-#'    |home_team_record          |character |
-#'    |away_team_id              |integer   |
-#'    |away_team_mascot          |character |
-#'    |away_team_name            |character |
-#'    |away_team_abbrev          |character |
-#'    |away_team_logo            |character |
-#'    |away_team_logo_dark       |character |
-#'    |away_team_full_name       |character |
-#'    |away_team_color           |character |
-#'    |away_team_alternate_color |character |
-#'    |away_team_score           |integer   |
-#'    |away_team_winner          |logical   |
-#'    |away_team_record          |character |
-#'    |game_id                   |integer   |
-#'    |season                    |integer   |
-#'    |season_type               |integer   |
-#'    |game_date                 |Date      |
-#'    |game_date_time            |POSIXct   |
+#'    Columns as documented in the shared [espn_basketball_game_all_plays_schema] table.
 #'    
 #'    **Team** 
 #'    
 #'    
-#'    |col_name                          |types     |
-#'    |:---------------------------------|:---------|
-#'    |game_id                           |integer   |
-#'    |season                            |integer   |
-#'    |season_type                       |integer   |
-#'    |game_date                         |Date      |
-#'    |game_date_time                    |POSIXct   |
-#'    |team_id                           |integer   |
-#'    |team_uid                          |character |
-#'    |team_slug                         |character |
-#'    |team_location                     |character |
-#'    |team_name                         |character |
-#'    |team_abbreviation                 |character |
-#'    |team_display_name                 |character |
-#'    |team_short_display_name           |character |
-#'    |team_color                        |character |
-#'    |team_alternate_color              |character |
-#'    |team_logo                         |character |
-#'    |team_home_away                    |character |
-#'    |team_score                        |integer   |
-#'    |team_winner                       |logical   |
-#'    |assists                           |integer   |
-#'    |blocks                            |integer   |
-#'    |defensive_rebounds                |integer   |
-#'    |field_goal_pct                    |numeric   |
-#'    |field_goals_made                  |integer   |
-#'    |field_goals_attempted             |integer   |
-#'    |flagrant_fouls                    |integer   |
-#'    |fouls                             |integer   |
-#'    |free_throw_pct                    |numeric   |
-#'    |free_throws_made                  |integer   |
-#'    |free_throws_attempted             |integer   |
-#'    |largest_lead                      |character |
-#'    |offensive_rebounds                |integer   |
-#'    |steals                            |integer   |
-#'    |team_turnovers                    |integer   |
-#'    |technical_fouls                   |integer   |
-#'    |three_point_field_goal_pct        |numeric   |
-#'    |three_point_field_goals_made      |integer   |
-#'    |three_point_field_goals_attempted |integer   |
-#'    |total_rebounds                    |integer   |
-#'    |total_technical_fouls             |integer   |
-#'    |total_turnovers                   |integer   |
-#'    |turnovers                         |integer   |
-#'    |opponent_team_id                  |integer   |
-#'    |opponent_team_uid                 |character |
-#'    |opponent_team_slug                |character |
-#'    |opponent_team_location            |character |
-#'    |opponent_team_name                |character |
-#'    |opponent_team_abbreviation        |character |
-#'    |opponent_team_display_name        |character |
-#'    |opponent_team_short_display_name  |character |
-#'    |opponent_team_color               |character |
-#'    |opponent_team_alternate_color     |character |
-#'    |opponent_team_logo                |character |
-#'    |opponent_team_score               |integer   |
+#'    Columns as documented in the shared [espn_basketball_team_box_schema] table.
 #'    
 #'    **Player** 
 #'    
 #'    
-#'    |col_name                          |types     |
-#'    |:---------------------------------|:---------|
-#'    |game_id                           |integer   |
-#'    |season                            |integer   |
-#'    |season_type                       |integer   |
-#'    |game_date                         |Date      |
-#'    |game_date_time                    |POSIXct   |
-#'    |athlete_id                        |integer   |
-#'    |athlete_display_name              |character |
-#'    |team_id                           |integer   |
-#'    |team_name                         |character |
-#'    |team_location                     |character |
-#'    |team_short_display_name           |character |
-#'    |minutes                           |numeric   |
-#'    |field_goals_made                  |integer   |
-#'    |field_goals_attempted             |integer   |
-#'    |three_point_field_goals_made      |integer   |
-#'    |three_point_field_goals_attempted |integer   |
-#'    |free_throws_made                  |integer   |
-#'    |free_throws_attempted             |integer   |
-#'    |offensive_rebounds                |integer   |
-#'    |defensive_rebounds                |integer   |
-#'    |rebounds                          |integer   |
-#'    |assists                           |integer   |
-#'    |steals                            |integer   |
-#'    |blocks                            |integer   |
-#'    |turnovers                         |integer   |
-#'    |fouls                             |integer   |
-#'    |plus_minus                        |character |
-#'    |points                            |integer   |
-#'    |starter                           |logical   |
-#'    |ejected                           |logical   |
-#'    |did_not_play                      |logical   |
-#'    |reason                            |character |
-#'    |active                            |logical   |
-#'    |athlete_jersey                    |character |
-#'    |athlete_short_name                |character |
-#'    |athlete_headshot_href             |character |
-#'    |athlete_position_name             |character |
-#'    |athlete_position_abbreviation     |character |
-#'    |team_display_name                 |character |
-#'    |team_uid                          |character |
-#'    |team_slug                         |character |
-#'    |team_logo                         |character |
-#'    |team_abbreviation                 |character |
-#'    |team_color                        |character |
-#'    |team_alternate_color              |character |
-#'    |home_away                         |character |
-#'    |team_winner                       |logical   |
-#'    |team_score                        |integer   |
-#'    |opponent_team_id                  |integer   |
-#'    |opponent_team_name                |character |
-#'    |opponent_team_location            |character |
-#'    |opponent_team_display_name        |character |
-#'    |opponent_team_abbreviation        |character |
-#'    |opponent_team_logo                |character |
-#'    |opponent_team_color               |character |
-#'    |opponent_team_alternate_color     |character |
-#'    |opponent_team_score               |integer   |
+#'    Columns as documented in the shared [espn_basketball_game_all_player_schema] table.
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -198,6 +32,7 @@
 #' }
 
 espn_wnba_game_all <- function(game_id){
+  .args <- mget(setdiff(names(formals()), "..."))
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
   
@@ -207,37 +42,53 @@ espn_wnba_game_all <- function(game_id){
   ## game_id
   full_url <- paste0(summary_url,
                      "event=", game_id)
-  
-  res <- httr::RETRY("GET", full_url)
-  
-  # Check the result
-  check_status(res)
-  
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
-  
+
+  pbp <- list(Plays = NULL, Team = NULL, Player = NULL)
+  resp <- NULL
+  plays_df <- NULL
+  team_box_score <- NULL
+  player_box_score <- NULL
+
+  #---- Fetch the summary endpoint (single outer tryCatch) -------------------
+  tryCatch(
+    expr = {
+      res <- .retry_request(full_url)
+      check_status(res)
+      resp <- res %>%
+        .resp_text()
+    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Could not fetch game summary for game_id = {game_id}",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
+    finally = {}
+  )
+
+  if (is.null(resp)) {
+    return(pbp)
+  }
+
   #---- Play-by-Play ------
   tryCatch(
     expr = {
-      
+
       plays_df <- helper_espn_wnba_pbp(resp)
-      
+
       if (is.null(plays_df)) {
         cli::cli_alert_danger("{Sys.time()}: No play-by-play data for {game_id} available!")
       }
-      
+
     },
-    error = function(e) {
-      cli::cli_alert_danger(
-          "{Sys.time()}: Invalid arguments or no play-by-play data for {game_id} available!"
-      )
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no play-by-play data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
-      
+
     }
   )
   #---- Team Box ------
@@ -251,15 +102,12 @@ espn_wnba_game_all <- function(game_id){
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger(
-          "{Sys.time()}: Invalid arguments or no team box score data for {game_id} available!"
-      )
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no team box score data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
       
     }
@@ -275,15 +123,12 @@ espn_wnba_game_all <- function(game_id){
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger(
-          "{Sys.time()}: Invalid arguments or no player box score data for {game_id} available!"
-      )
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player box score data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
       
     }
@@ -296,6 +141,7 @@ espn_wnba_game_all <- function(game_id){
 }
 
 #' Get ESPN's WNBA play by play data
+#' @rdname espn_wnba_game_all
 #' @author Saiem Gilani
 #' @param game_id Game ID
 #' @return Returns a play-by-play data frame
@@ -303,60 +149,7 @@ espn_wnba_game_all <- function(game_id){
 #'    **Plays** 
 #'    
 #'    
-#'    |col_name                  |types     |
-#'    |:-------------------------|:---------|
-#'    |id                        |character |
-#'    |sequence_number           |character |
-#'    |text                      |character |
-#'    |away_score                |integer   |
-#'    |home_score                |integer   |
-#'    |scoring_play              |logical   |
-#'    |score_value               |integer   |
-#'    |wallclock                 |character |
-#'    |shooting_play             |logical   |
-#'    |type_id                   |integer   |
-#'    |type_text                 |character |
-#'    |period_number             |integer   |
-#'    |period_display_value      |character |
-#'    |clock_display_value       |character |
-#'    |team_id                   |integer   |
-#'    |coordinate_x_raw          |numeric   |
-#'    |coordinate_y_raw          |numeric   |
-#'    |coordinate_x              |numeric   |
-#'    |coordinate_y              |numeric   |
-#'    |play_id                   |character |
-#'    |athlete_id_1              |integer   |
-#'    |athlete_id_2              |integer   |
-#'    |athlete_id_3              |integer   |
-#'    |home_team_id              |integer   |
-#'    |home_team_mascot          |character |
-#'    |home_team_name            |character |
-#'    |home_team_abbrev          |character |
-#'    |home_team_logo            |character |
-#'    |home_team_logo_dark       |character |
-#'    |home_team_full_name       |character |
-#'    |home_team_color           |character |
-#'    |home_team_alternate_color |character |
-#'    |home_team_score           |integer   |
-#'    |home_team_winner          |logical   |
-#'    |home_team_record          |character |
-#'    |away_team_id              |integer   |
-#'    |away_team_mascot          |character |
-#'    |away_team_name            |character |
-#'    |away_team_abbrev          |character |
-#'    |away_team_logo            |character |
-#'    |away_team_logo_dark       |character |
-#'    |away_team_full_name       |character |
-#'    |away_team_color           |character |
-#'    |away_team_alternate_color |character |
-#'    |away_team_score           |integer   |
-#'    |away_team_winner          |logical   |
-#'    |away_team_record          |character |
-#'    |game_id                   |integer   |
-#'    |season                    |integer   |
-#'    |season_type               |integer   |
-#'    |game_date                 |Date      |
-#'    |game_date_time            |POSIXct   |
+#'    Columns as documented in the shared [espn_basketball_game_all_plays_schema] table.
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -372,6 +165,7 @@ espn_wnba_game_all <- function(game_id){
 #'    try(espn_wnba_pbp(game_id = 401455681))
 #' }
 espn_wnba_pbp <- function(game_id){
+  .args <- mget(setdiff(names(formals()), "..."))
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
   
@@ -381,19 +175,17 @@ espn_wnba_pbp <- function(game_id){
   ## game_id
   full_url <- paste0(summary_url,
                      "event=", game_id)
-  
-  res <- httr::RETRY("GET", full_url)
-  
-  # Check the result
-  check_status(res)
-  
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
-  
+
   #---- Play-by-Play ------
+  plays_df <- NULL
+
   tryCatch(
     expr = {
-      
+      res <- .retry_request(full_url)
+      check_status(res)
+      resp <- res %>%
+        .resp_text()
+
       plays_df <- helper_espn_wnba_pbp(resp)
       
       if (is.null(plays_df)) {
@@ -401,13 +193,12 @@ espn_wnba_pbp <- function(game_id){
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no play-by-play data for {game_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no play-by-play data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -417,6 +208,7 @@ espn_wnba_pbp <- function(game_id){
 }
 
 #' Get ESPN's WNBA team box data
+#' @rdname espn_wnba_game_all
 #' @author Saiem Gilani
 #' @param game_id Game ID
 #' @return Returns a team boxscore data frame
@@ -424,62 +216,7 @@ espn_wnba_pbp <- function(game_id){
 #'    **Team** 
 #'    
 #'    
-#'    |col_name                          |types     |
-#'    |:---------------------------------|:---------|
-#'    |game_id                           |integer   |
-#'    |season                            |integer   |
-#'    |season_type                       |integer   |
-#'    |game_date                         |Date      |
-#'    |game_date_time                    |POSIXct   |
-#'    |team_id                           |integer   |
-#'    |team_uid                          |character |
-#'    |team_slug                         |character |
-#'    |team_location                     |character |
-#'    |team_name                         |character |
-#'    |team_abbreviation                 |character |
-#'    |team_display_name                 |character |
-#'    |team_short_display_name           |character |
-#'    |team_color                        |character |
-#'    |team_alternate_color              |character |
-#'    |team_logo                         |character |
-#'    |team_home_away                    |character |
-#'    |team_score                        |integer   |
-#'    |team_winner                       |logical   |
-#'    |assists                           |integer   |
-#'    |blocks                            |integer   |
-#'    |defensive_rebounds                |integer   |
-#'    |field_goal_pct                    |numeric   |
-#'    |field_goals_made                  |integer   |
-#'    |field_goals_attempted             |integer   |
-#'    |flagrant_fouls                    |integer   |
-#'    |fouls                             |integer   |
-#'    |free_throw_pct                    |numeric   |
-#'    |free_throws_made                  |integer   |
-#'    |free_throws_attempted             |integer   |
-#'    |largest_lead                      |character |
-#'    |offensive_rebounds                |integer   |
-#'    |steals                            |integer   |
-#'    |team_turnovers                    |integer   |
-#'    |technical_fouls                   |integer   |
-#'    |three_point_field_goal_pct        |numeric   |
-#'    |three_point_field_goals_made      |integer   |
-#'    |three_point_field_goals_attempted |integer   |
-#'    |total_rebounds                    |integer   |
-#'    |total_technical_fouls             |integer   |
-#'    |total_turnovers                   |integer   |
-#'    |turnovers                         |integer   |
-#'    |opponent_team_id                  |integer   |
-#'    |opponent_team_uid                 |character |
-#'    |opponent_team_slug                |character |
-#'    |opponent_team_location            |character |
-#'    |opponent_team_name                |character |
-#'    |opponent_team_abbreviation        |character |
-#'    |opponent_team_display_name        |character |
-#'    |opponent_team_short_display_name  |character |
-#'    |opponent_team_color               |character |
-#'    |opponent_team_alternate_color     |character |
-#'    |opponent_team_logo                |character |
-#'    |opponent_team_score               |integer   |
+#'    Columns as documented in the shared [espn_basketball_team_box_schema] table.
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -495,6 +232,7 @@ espn_wnba_pbp <- function(game_id){
 #'    try(espn_wnba_team_box(game_id = 401244185))
 #' }
 espn_wnba_team_box <- function(game_id){
+  .args <- mget(setdiff(names(formals()), "..."))
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
   summary_url <- "http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary?"
@@ -503,19 +241,17 @@ espn_wnba_team_box <- function(game_id){
   ## game_id
   full_url <- paste0(summary_url,
                      "event=", game_id)
-  
-  res <- httr::RETRY("GET", full_url)
-  
-  # Check the result
-  check_status(res)
-  
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
-  
+
   #---- Team Box ------
+  team_box_score <- NULL
+
   tryCatch(
     expr = {
-      
+      res <- .retry_request(full_url)
+      check_status(res)
+      resp <- res %>%
+        .resp_text()
+
       team_box_score <- helper_espn_wnba_team_box(resp)
       
       if (is.null(team_box_score)) {
@@ -523,13 +259,12 @@ espn_wnba_team_box <- function(game_id){
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no team box score data for {game_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no team box score data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -537,6 +272,7 @@ espn_wnba_team_box <- function(game_id){
 }
 
 #' Get ESPN's WNBA player box data
+#' @rdname espn_wnba_game_all
 #' @author Saiem Gilani
 #' @param game_id Game ID
 #' @return Returns a player boxscore data frame
@@ -544,65 +280,7 @@ espn_wnba_team_box <- function(game_id){
 #'    **Player** 
 #'    
 #'    
-#'    |col_name                          |types     |
-#'    |:---------------------------------|:---------|
-#'    |game_id                           |integer   |
-#'    |season                            |integer   |
-#'    |season_type                       |integer   |
-#'    |game_date                         |Date      |
-#'    |game_date_time                    |POSIXct   |
-#'    |athlete_id                        |integer   |
-#'    |athlete_display_name              |character |
-#'    |team_id                           |integer   |
-#'    |team_name                         |character |
-#'    |team_location                     |character |
-#'    |team_short_display_name           |character |
-#'    |minutes                           |numeric   |
-#'    |field_goals_made                  |integer   |
-#'    |field_goals_attempted             |integer   |
-#'    |three_point_field_goals_made      |integer   |
-#'    |three_point_field_goals_attempted |integer   |
-#'    |free_throws_made                  |integer   |
-#'    |free_throws_attempted             |integer   |
-#'    |offensive_rebounds                |integer   |
-#'    |defensive_rebounds                |integer   |
-#'    |rebounds                          |integer   |
-#'    |assists                           |integer   |
-#'    |steals                            |integer   |
-#'    |blocks                            |integer   |
-#'    |turnovers                         |integer   |
-#'    |fouls                             |integer   |
-#'    |plus_minus                        |character |
-#'    |points                            |integer   |
-#'    |starter                           |logical   |
-#'    |ejected                           |logical   |
-#'    |did_not_play                      |logical   |
-#'    |reason                            |character |
-#'    |active                            |logical   |
-#'    |athlete_jersey                    |character |
-#'    |athlete_short_name                |character |
-#'    |athlete_headshot_href             |character |
-#'    |athlete_position_name             |character |
-#'    |athlete_position_abbreviation     |character |
-#'    |team_display_name                 |character |
-#'    |team_uid                          |character |
-#'    |team_slug                         |character |
-#'    |team_logo                         |character |
-#'    |team_abbreviation                 |character |
-#'    |team_color                        |character |
-#'    |team_alternate_color              |character |
-#'    |home_away                         |character |
-#'    |team_winner                       |logical   |
-#'    |team_score                        |integer   |
-#'    |opponent_team_id                  |integer   |
-#'    |opponent_team_name                |character |
-#'    |opponent_team_location            |character |
-#'    |opponent_team_display_name        |character |
-#'    |opponent_team_abbreviation        |character |
-#'    |opponent_team_logo                |character |
-#'    |opponent_team_color               |character |
-#'    |opponent_team_alternate_color     |character |
-#'    |opponent_team_score               |integer   |
+#'    Columns as documented in the shared [espn_basketball_game_all_player_schema] table.
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -618,6 +296,7 @@ espn_wnba_team_box <- function(game_id){
 #' }
 #' 
 espn_wnba_player_box <- function(game_id){
+  .args <- mget(setdiff(names(formals()), "..."))
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
   summary_url <- "http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary?"
@@ -626,19 +305,17 @@ espn_wnba_player_box <- function(game_id){
   ## game_id
   full_url <- paste0(summary_url,
                      "event=", game_id)
-  
-  res <- httr::RETRY("GET", full_url)
-  
-  # Check the result
-  check_status(res)
-  
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
-  
+
   #---- Player Box ------
+  player_box_score <- NULL
+
   tryCatch(
     expr = {
-      
+      res <- .retry_request(full_url)
+      check_status(res)
+      resp <- res %>%
+        .resp_text()
+
       player_box_score <- helper_espn_wnba_player_box(resp)
       
       if (is.null(player_box_score)) {
@@ -646,13 +323,12 @@ espn_wnba_player_box <- function(game_id){
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player box score data for {game_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player box score data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -662,83 +338,86 @@ espn_wnba_player_box <- function(game_id){
 
 
 #' **Get ESPN WNBA game rosters**
+#' @rdname espn_wnba_game_all
 #' @author Saiem Gilani
 #' @param game_id Game ID
 #' @return A game rosters data frame
 #' 
-#'    |col_name                |types     |
-#'    |:-----------------------|:---------|
-#'    |athlete_id              |integer   |
-#'    |athlete_uid             |character |
-#'    |athlete_guid            |character |
-#'    |athlete_type            |character |
-#'    |sdr                     |integer   |
-#'    |first_name              |character |
-#'    |last_name               |character |
-#'    |full_name               |character |
-#'    |athlete_display_name    |character |
-#'    |short_name              |character |
-#'    |weight                  |numeric   |
-#'    |display_weight          |character |
-#'    |height                  |numeric   |
-#'    |display_height          |character |
-#'    |age                     |integer   |
-#'    |date_of_birth           |character |
-#'    |slug                    |character |
-#'    |headshot_href           |character |
-#'    |headshot_alt            |character |
-#'    |jersey                  |character |
-#'    |position_id             |integer   |
-#'    |position_name           |character |
-#'    |position_display_name   |character |
-#'    |position_abbreviation   |character |
-#'    |position_leaf           |logical   |
-#'    |linked                  |logical   |
-#'    |years                   |integer   |
-#'    |active                  |logical   |
-#'    |status_id               |integer   |
-#'    |status_name             |character |
-#'    |status_type             |character |
-#'    |status_abbreviation     |character |
-#'    |birth_place_city        |character |
-#'    |birth_place_state       |character |
-#'    |birth_place_country     |character |
-#'    |starter                 |logical   |
-#'    |valid                   |logical   |
-#'    |did_not_play            |logical   |
-#'    |display_name            |character |
-#'    |reason                  |character |
-#'    |ejected                 |logical   |
-#'    |team_id                 |integer   |
-#'    |team_guid               |character |
-#'    |team_uid                |character |
-#'    |team_sdr                |integer   |
-#'    |team_slug               |character |
-#'    |team_location           |character |
-#'    |team_name               |character |
-#'    |team_abbreviation       |character |
-#'    |team_display_name       |character |
-#'    |team_short_display_name |character |
-#'    |team_color              |character |
-#'    |team_alternate_color    |character |
-#'    |team_is_active          |logical   |
-#'    |is_all_star             |logical   |
-#'    |logo_href               |character |
-#'    |logo_dark_href          |character |
-#'    |logos_href_2            |character |
-#'    |logos_href_3            |character |
-#'    |game_id                 |integer   |
-#'    |order                   |integer   |
-#'    |home_away               |character |
-#'    |winner                  |logical   |
-#'    |draft_display_text      |character |
-#'    |draft_round             |integer   |
-#'    |draft_year              |integer   |
-#'    |draft_selection         |integer   |
-#'    |hand_type               |character |
-#'    |hand_abbreviation       |character |
-#'    |hand_display_value      |character |
-#'    |citizenship             |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       athlete_id \tab integer \tab Unique athlete identifier (ESPN). \cr
+#'       athlete_uid \tab character \tab ESPN athlete UID (universal identifier). \cr
+#'       athlete_guid \tab character \tab ESPN athlete GUID. \cr
+#'       athlete_type \tab character \tab Athlete type / class. \cr
+#'       sdr \tab integer \tab Sdr. \cr
+#'       first_name \tab character \tab Player's first name. \cr
+#'       last_name \tab character \tab Player's last name. \cr
+#'       full_name \tab character \tab Player's full name. \cr
+#'       athlete_display_name \tab character \tab Athlete display name (full). \cr
+#'       short_name \tab character \tab Short display name. \cr
+#'       weight \tab numeric \tab Player weight in pounds. \cr
+#'       display_weight \tab character \tab Player weight in display format (e.g. '180 lbs'). \cr
+#'       height \tab numeric \tab Player height (string e.g. '6-2' or inches). \cr
+#'       display_height \tab character \tab Player height in display format (e.g. '6-2'). \cr
+#'       age \tab integer \tab Player age (in years). \cr
+#'       date_of_birth \tab character \tab Date of birth (YYYY-MM-DD). \cr
+#'       slug \tab character \tab URL-safe identifier. \cr
+#'       headshot_href \tab character \tab Headshot image URL. \cr
+#'       headshot_alt \tab character \tab Alternative-text label for the headshot. \cr
+#'       jersey \tab character \tab Jersey number worn by the player. \cr
+#'       position_id \tab integer \tab Unique position identifier. \cr
+#'       position_name \tab character \tab Listed roster position ('Guard', 'Forward', 'Center'). \cr
+#'       position_display_name \tab character \tab Position display name. \cr
+#'       position_abbreviation \tab character \tab Position abbreviation ('G' / 'F' / 'C'). \cr
+#'       position_leaf \tab logical \tab Position leaf. \cr
+#'       linked \tab logical \tab TRUE if the record is linked to a related entity. \cr
+#'       years \tab integer \tab Years. \cr
+#'       active \tab logical \tab TRUE if the row represents an active record (player / team / season). \cr
+#'       status_id \tab integer \tab Status identifier. \cr
+#'       status_name \tab character \tab Status label. \cr
+#'       status_type \tab character \tab Status type. \cr
+#'       status_abbreviation \tab character \tab Status abbreviation. \cr
+#'       birth_place_city \tab character \tab Birth place city. \cr
+#'       birth_place_state \tab character \tab Birth place state. \cr
+#'       birth_place_country \tab character \tab Birth place country. \cr
+#'       starter \tab logical \tab TRUE if the player was in the starting lineup; FALSE otherwise. \cr
+#'       valid \tab logical \tab Valid. \cr
+#'       did_not_play \tab logical \tab TRUE if the player did not appear in the game. \cr
+#'       display_name \tab character \tab Display name. \cr
+#'       reason \tab character \tab Reason. \cr
+#'       ejected \tab logical \tab TRUE if the player was ejected from the game. \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team_guid \tab character \tab ESPN team GUID. \cr
+#'       team_uid \tab character \tab ESPN universal team identifier (UID format 's:40~l:...~t:...'). \cr
+#'       team_sdr \tab integer \tab ESPN team SDR identifier. \cr
+#'       team_slug \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+#'       team_location \tab character \tab Team city or location string. \cr
+#'       team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       team_abbreviation \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       team_display_name \tab character \tab Full team display name. \cr
+#'       team_short_display_name \tab character \tab Short team display name (e.g. 'Aces'). \cr
+#'       team_color \tab character \tab Team primary color (hex without leading '#'). \cr
+#'       team_alternate_color \tab character \tab Team alternate color (hex without leading '#'). \cr
+#'       team_is_active \tab logical \tab TRUE if the team is currently active. \cr
+#'       is_all_star \tab logical \tab Is all star. \cr
+#'       logo_href \tab character \tab Team or league logo URL. \cr
+#'       logo_dark_href \tab character \tab Logo URL for dark backgrounds. \cr
+#'       logos_href_2 \tab character \tab Logos href 2. \cr
+#'       logos_href_3 \tab character \tab Logos href 3. \cr
+#'       game_id \tab integer \tab Unique game identifier. \cr
+#'       order \tab integer \tab Display order within the result set. \cr
+#'       home_away \tab character \tab Game venue label ('home' or 'away'). \cr
+#'       winner \tab logical \tab Winner. \cr
+#'       draft_display_text \tab character \tab Draft display text. \cr
+#'       draft_round \tab integer \tab Round of the draft selection. \cr
+#'       draft_year \tab integer \tab Draft year (4-digit). \cr
+#'       draft_selection \tab integer \tab Draft selection. \cr
+#'       hand_type \tab character \tab Hand type. \cr
+#'       hand_abbreviation \tab character \tab Hand abbreviation. \cr
+#'       hand_display_value \tab character \tab Hand display value. \cr
+#'       citizenship \tab character \tab Citizenship. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows
@@ -753,20 +432,23 @@ espn_wnba_player_box <- function(game_id){
 #'   try(espn_wnba_game_rosters(game_id = 401244185))
 #' }
 espn_wnba_game_rosters <- function(game_id) {
+  .args <- mget(setdiff(names(formals()), "..."))
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
+  athlete_roster_df <- data.frame()
+
   tryCatch(
     expr = {
       play_base_url <- paste0(
         "https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/",
         game_id, "/competitions/",
         game_id,"/competitors/")
-      game_res <- httr::RETRY("GET", play_base_url)
+      game_res <- .retry_request(play_base_url)
       # Check the result
       check_status(game_res)
       
       game_resp <- game_res %>%
-        httr::content(as = "text", encoding = "UTF-8")
+        .resp_text()
       game_df <- jsonlite::fromJSON(game_resp)[["items"]] %>%
         jsonlite::toJSON() %>%
         jsonlite::fromJSON(flatten = TRUE) %>%
@@ -783,12 +465,12 @@ espn_wnba_game_rosters <- function(game_id) {
       
       teams_df <- purrr::map_dfr(game_df$team_href, function(x){
         
-        res <- httr::RETRY("GET", x)
+        res <- .retry_request(x)
         # Check the result
         check_status(res)
         
         team_df <- res %>%
-          httr::content(as = "text", encoding = "UTF-8") %>%
+          .resp_text() %>%
           jsonlite::fromJSON(simplifyDataFrame = FALSE, simplifyVector = FALSE, simplifyMatrix = FALSE)
         
         team_df[["links"]] <- NULL
@@ -875,13 +557,13 @@ espn_wnba_game_rosters <- function(game_id) {
       ## game_id
       team_roster_df <- purrr::map_dfr(teams_df$team_id, function(x){
         
-        res <- httr::RETRY("GET", paste0(play_base_url, x, "/roster"))
+        res <- .retry_request(paste0(play_base_url, x, "/roster"))
         
         # Check the result
         check_status(res)
         
         resp <- res %>%
-          httr::content(as = "text", encoding = "UTF-8")
+          .resp_text()
         
         raw_play_df <- jsonlite::fromJSON(resp)[["entries"]]
         
@@ -900,13 +582,13 @@ espn_wnba_game_rosters <- function(game_id) {
       
       athlete_roster_df <- purrr::map_dfr(team_roster_df$athlete_href, function(x){
         
-        res <- httr::RETRY("GET", x)
+        res <- .retry_request(x)
         
         # Check the result
         check_status(res)
         
         resp <- res %>%
-          httr::content(as = "text", encoding = "UTF-8")
+          .resp_text()
         
         raw_play_df <- jsonlite::fromJSON(resp, flatten = TRUE)
         raw_play_df[["links"]] <- NULL
@@ -974,15 +656,12 @@ espn_wnba_game_rosters <- function(game_id) {
         make_wehoop_data("ESPN WNBA Game Roster Information from ESPN.com",Sys.time())
       
     },
-    error = function(e) {
-      cli::cli_alert_danger(
-          "{Sys.time()}: Invalid arguments or no game roster data for {game_id} available!"
-      )
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no game roster data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
       
     }
@@ -995,18 +674,20 @@ espn_wnba_game_rosters <- function(game_id) {
 #' @author Saiem Gilani
 #' @return Returns a tibble
 #' 
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |team_id         |integer   |
-#'    |team            |character |
-#'    |mascot          |character |
-#'    |display_name    |character |
-#'    |short_name      |character |
-#'    |abbreviation    |character |
-#'    |color           |character |
-#'    |alternate_color |character |
-#'    |logo            |character |
-#'    |logo_dark       |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team \tab character \tab Team-side label or team identifier. \cr
+#'       mascot \tab character \tab Team mascot. \cr
+#'       display_name \tab character \tab Display name. \cr
+#'       short_name \tab character \tab Short display name. \cr
+#'       abbreviation \tab character \tab Short abbreviation. \cr
+#'       color \tab character \tab Primary color (hex without leading '#'). \cr
+#'       alternate_color \tab character \tab Alternate color (hex without leading '#'). \cr
+#'       logo \tab character \tab Team or league logo URL. \cr
+#'       logo_dark \tab character \tab Logo dark. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -1022,55 +703,64 @@ espn_wnba_game_rosters <- function(game_id) {
 #' }
 
 espn_wnba_teams <- function(){
+  .args <- .capture_args()
   old <- options(list(stringsAsFactors = FALSE, scipen = 999))
   on.exit(options(old))
   play_base_url <- "http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams?limit=1000"
-  res <- httr::RETRY(
-    "GET", play_base_url
+
+  wnba_teams <- data.frame()
+
+  tryCatch(
+    expr = {
+      res <- .retry_request(play_base_url)
+      check_status(res)
+      resp <- res %>%
+        .resp_text()
+
+      leagues <- jsonlite::fromJSON(resp)[["sports"]][["leagues"]][[1]][['teams']][[1]][['team']] %>%
+        dplyr::group_by(.data$id) %>%
+        tidyr::unnest_wider("logos", names_sep = "_") %>%
+        tidyr::unnest_wider("logos_href", names_sep = "_") %>%
+        dplyr::select(
+          -"logos_width",
+          -"logos_height",
+          -"logos_alt",
+          -"logos_rel") %>%
+        dplyr::ungroup()
+
+      wnba_teams <- leagues %>%
+        dplyr::select(
+          "id",
+          "location",
+          "name",
+          "displayName",
+          "shortDisplayName",
+          "abbreviation",
+          "color",
+          "alternateColor",
+          "logos_href_1",
+          "logos_href_2") %>%
+        dplyr::rename(
+          "logo" = "logos_href_1",
+          "logo_dark" = "logos_href_2",
+          "mascot" = "name",
+          "team" = "location",
+          "team_id" = "id",
+          "alternate_color" = "alternateColor",
+          "short_name" = "shortDisplayName",
+          "display_name" = "displayName") %>%
+        dplyr::mutate(team_id = as.integer(.data$team_id)) %>%
+        make_wehoop_data("ESPN WNBA Teams Information from ESPN.com", Sys.time())
+    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Could not fetch ESPN WNBA teams",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
+    finally = {}
   )
-  
-  # Check the result
-  check_status(res)
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8") 
-  
-  ## Inputs
-  ## game_id
-  leagues <- jsonlite::fromJSON(resp)[["sports"]][["leagues"]][[1]][['teams']][[1]][['team']] %>%
-    dplyr::group_by(.data$id) %>%
-    tidyr::unnest_wider("logos", names_sep = "_") %>%
-    tidyr::unnest_wider("logos_href", names_sep = "_") %>%
-    dplyr::select(
-      -"logos_width",
-      -"logos_height",
-      -"logos_alt", 
-      -"logos_rel") %>%
-    dplyr::ungroup()
-  
-  wnba_teams <- leagues %>%
-    dplyr::select(
-      "id", 
-      "location", 
-      "name", 
-      "displayName", 
-      "shortDisplayName", 
-      "abbreviation", 
-      "color", 
-      "alternateColor", 
-      "logos_href_1", 
-      "logos_href_2") %>%
-    dplyr::rename(
-      "logo" = "logos_href_1",
-      "logo_dark" = "logos_href_2",
-      "mascot" = "name",
-      "team" = "location",
-      "team_id" = "id",
-      "alternate_color" = "alternateColor",
-      "short_name" = "shortDisplayName",
-      "display_name" = "displayName") %>%
-    dplyr::mutate(team_id = as.integer(.data$team_id)) %>%
-    make_wehoop_data("ESPN WNBA Teams Information from ESPN.com",Sys.time())
-  
+
   return(wnba_teams)
 }
 
@@ -1080,49 +770,13 @@ espn_wnba_teams <- function(){
 #' @author Saiem Gilani.
 #' @return Returns a tibble
 #' 
-#'    |col_name            |types     |
-#'    |:-------------------|:---------|
-#'    |matchup             |character |
-#'    |matchup_short       |character |
-#'    |season              |integer   |
-#'    |season_type         |integer   |
-#'    |season_slug         |character |
-#'    |game_id             |integer   |
-#'    |game_uid            |character |
-#'    |game_date           |Date      |
-#'    |attendance          |integer   |
-#'    |status_name         |character |
-#'    |broadcast_market    |character |
-#'    |broadcast_name      |character |
-#'    |start_date          |character |
-#'    |game_date_time      |POSIXct   |
-#'    |home_team_name      |character |
-#'    |home_team_logo      |character |
-#'    |home_team_abb       |character |
-#'    |home_team_id        |integer   |
-#'    |home_team_location  |character |
-#'    |home_team_full_name |character |
-#'    |home_team_color     |character |
-#'    |home_score          |integer   |
-#'    |home_win            |integer   |
-#'    |home_record         |character |
-#'    |away_team_name      |character |
-#'    |away_team_logo      |character |
-#'    |away_team_abb       |character |
-#'    |away_team_id        |integer   |
-#'    |away_team_location  |character |
-#'    |away_team_full_name |character |
-#'    |away_team_color     |character |
-#'    |away_score          |integer   |
-#'    |away_win            |integer   |
-#'    |away_record         |character |
+#'    Columns as documented in the shared [espn_basketball_scoreboard_schema] table.
 #' 
 #' @import utils
 #' @import rvest
 #' @importFrom dplyr select rename any_of mutate
 #' @importFrom jsonlite fromJSON
 #' @importFrom tidyr unnest_wider unchop hoist
-#' @importFrom glue glue
 #' @importFrom lubridate with_tz ymd_hm
 #' @import rvest
 #' @export
@@ -1135,6 +789,7 @@ espn_wnba_teams <- function(){
 #' }
 
 espn_wnba_scoreboard <- function(season){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # cli::cli_alert_danger("Returning data for {season}!"))
   
@@ -1151,17 +806,13 @@ espn_wnba_scoreboard <- function(season){
   
   schedule_api <- paste0("http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard?limit=1000&dates=",
                          season_dates)
-  res <- httr::RETRY(
-    "GET", schedule_api
-  )
-  
-  # Check the result
-  check_status(res)
-  
+
   tryCatch(
     expr = {
+      res <- .retry_request(schedule_api)
+      check_status(res)
       raw_sched <- res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON(simplifyDataFrame = FALSE, simplifyVector = FALSE, simplifyMatrix = FALSE)
       
       wnba_data <- raw_sched[["events"]] %>%
@@ -1290,13 +941,12 @@ espn_wnba_scoreboard <- function(season){
           make_wehoop_data("ESPN WNBA Scoreboard Information from ESPN.com",Sys.time())
       }
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no scoreboard data available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no scoreboard data available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1308,28 +958,30 @@ espn_wnba_scoreboard <- function(season){
 #' @param year Either numeric or character (YYYY)
 #' @return Returns a tibble
 #' 
-#'    |col_name           |types     |
-#'    |:------------------|:---------|
-#'    |team_id            |integer   |
-#'    |team               |character |
-#'    |avgpointsagainst   |numeric   |
-#'    |avgpointsfor       |numeric   |
-#'    |clincher           |numeric   |
-#'    |differential       |numeric   |
-#'    |divisionwinpercent |numeric   |
-#'    |gamesbehind        |numeric   |
-#'    |leaguewinpercent   |numeric   |
-#'    |losses             |numeric   |
-#'    |playoffseed        |numeric   |
-#'    |streak             |numeric   |
-#'    |winpercent         |numeric   |
-#'    |wins               |numeric   |
-#'    |leaguestandings    |character |
-#'    |home               |character |
-#'    |road               |character |
-#'    |vsdiv              |character |
-#'    |vsconf             |character |
-#'    |lasttengames       |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team \tab character \tab Team-side label or team identifier. \cr
+#'       avgpointsagainst \tab numeric \tab Avgpointsagainst. \cr
+#'       avgpointsfor \tab numeric \tab Avgpointsfor. \cr
+#'       clincher \tab numeric \tab Clincher. \cr
+#'       differential \tab numeric \tab Differential. \cr
+#'       divisionwinpercent \tab numeric \tab Divisionwinpercent. \cr
+#'       gamesbehind \tab numeric \tab Gamesbehind. \cr
+#'       leaguewinpercent \tab numeric \tab Leaguewinpercent. \cr
+#'       losses \tab numeric \tab Total losses. \cr
+#'       playoffseed \tab numeric \tab Playoffseed. \cr
+#'       streak \tab numeric \tab Current streak (e.g. 'W3' for three-game win streak). \cr
+#'       winpercent \tab numeric \tab Winpercent. \cr
+#'       wins \tab numeric \tab Total wins. \cr
+#'       leaguestandings \tab character \tab Leaguestandings. \cr
+#'       home \tab character \tab Home. \cr
+#'       road \tab character \tab Road. \cr
+#'       vsdiv \tab character \tab Vsdiv. \cr
+#'       vsconf \tab character \tab Vsconf. \cr
+#'       lasttengames \tab character \tab Lasttengames. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom rlang .data
 #' @importFrom jsonlite fromJSON toJSON
@@ -1344,6 +996,7 @@ espn_wnba_scoreboard <- function(season){
 #'   try(espn_wnba_standings(year = 2021))
 #' }
 espn_wnba_standings <- function(year){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   standings_url <- "https://site.web.api.espn.com/apis/v2/sports/basketball/wnba/standings?region=us&lang=en&contentorigin=espn&type=0&level=1&sort=winpercent%3Adesc%2Cwins%3Adesc%2Cgamesbehind%3Aasc&"
   
@@ -1351,16 +1004,16 @@ espn_wnba_standings <- function(year){
   ## year
   full_url <- paste0(standings_url,
                      "season=", year)
-  
-  res <- httr::RETRY("GET", full_url)
-  
-  # Check the result
-  check_status(res)
+
+  standings <- data.frame()
+
   tryCatch(
     expr = {
+      res <- .retry_request(full_url)
+      check_status(res)
       resp <- res %>%
-        httr::content(as = "text", encoding = "UTF-8")
-      
+        .resp_text()
+
       raw_standings <- jsonlite::fromJSON(resp)[["standings"]]
       
       #Create a dataframe of all NBA teams by extracting from the raw_standings file
@@ -1419,13 +1072,12 @@ espn_wnba_standings <- function(year){
         ), as.numeric) %>% 
         make_wehoop_data("ESPN WNBA Standings Information from ESPN.com",Sys.time())
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no standings data available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no standings data available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
     
@@ -1445,122 +1097,124 @@ utils::globalVariables(c("where"))
 #' @param total (boolean, default: FALSE): Totals
 #' @return Returns a tibble with the team stats data
 #' 
-#'    |col_name                                         |types     |
-#'    |:------------------------------------------------|:---------|
-#'    |team_id                                          |integer   |
-#'    |team_guid                                        |character |
-#'    |team_uid                                         |character |
-#'    |team_sdr                                         |integer   |
-#'    |team_slug                                        |character |
-#'    |team_location                                    |character |
-#'    |team_name                                        |character |
-#'    |team_abbreviation                                |character |
-#'    |team_display_name                                |character |
-#'    |team_short_display_name                          |character |
-#'    |team_color                                       |character |
-#'    |team_alternate_color                             |character |
-#'    |team_is_active                                   |logical   |
-#'    |team_is_all_star                                 |logical   |
-#'    |logo_href                                        |character |
-#'    |logo_dark_href                                   |character |
-#'    |defensive_blocks                                 |numeric   |
-#'    |defensive_defensive_rebounds                     |numeric   |
-#'    |defensive_steals                                 |numeric   |
-#'    |defensive_avg_defensive_rebounds                 |numeric   |
-#'    |defensive_avg_blocks                             |numeric   |
-#'    |defensive_avg_steals                             |numeric   |
-#'    |defensive_avg48defensive_rebounds                |numeric   |
-#'    |defensive_avg48blocks                            |numeric   |
-#'    |defensive_avg48steals                            |numeric   |
-#'    |general_disqualifications                        |numeric   |
-#'    |general_flagrant_fouls                           |numeric   |
-#'    |general_fouls                                    |numeric   |
-#'    |general_ejections                                |numeric   |
-#'    |general_technical_fouls                          |numeric   |
-#'    |general_rebounds                                 |numeric   |
-#'    |general_avg_minutes                              |numeric   |
-#'    |general_nba_rating                               |numeric   |
-#'    |general_plus_minus                               |numeric   |
-#'    |general_game_day_of_year                         |numeric   |
-#'    |general_avg_rebounds                             |numeric   |
-#'    |general_avg_fouls                                |numeric   |
-#'    |general_avg_flagrant_fouls                       |numeric   |
-#'    |general_avg_technical_fouls                      |numeric   |
-#'    |general_avg_ejections                            |numeric   |
-#'    |general_avg_disqualifications                    |numeric   |
-#'    |general_assist_turnover_ratio                    |numeric   |
-#'    |general_steal_foul_ratio                         |numeric   |
-#'    |general_block_foul_ratio                         |numeric   |
-#'    |general_avg_team_rebounds                        |numeric   |
-#'    |general_total_rebounds                           |numeric   |
-#'    |general_total_technical_fouls                    |numeric   |
-#'    |general_team_assist_turnover_ratio               |numeric   |
-#'    |general_team_rebounds                            |numeric   |
-#'    |general_steal_turnover_ratio                     |numeric   |
-#'    |general_avg48rebounds                            |numeric   |
-#'    |general_avg48fouls                               |numeric   |
-#'    |general_avg48flagrant_fouls                      |numeric   |
-#'    |general_avg48technical_fouls                     |numeric   |
-#'    |general_avg48ejections                           |numeric   |
-#'    |general_avg48disqualifications                   |numeric   |
-#'    |general_games_played                             |numeric   |
-#'    |general_games_started                            |numeric   |
-#'    |general_double_double                            |numeric   |
-#'    |general_triple_double                            |numeric   |
-#'    |offensive_assists                                |numeric   |
-#'    |offensive_field_goals                            |numeric   |
-#'    |offensive_field_goals_attempted                  |numeric   |
-#'    |offensive_field_goals_made                       |numeric   |
-#'    |offensive_field_goal_pct                         |numeric   |
-#'    |offensive_free_throws                            |numeric   |
-#'    |offensive_free_throw_pct                         |numeric   |
-#'    |offensive_free_throws_attempted                  |numeric   |
-#'    |offensive_free_throws_made                       |numeric   |
-#'    |offensive_offensive_rebounds                     |numeric   |
-#'    |offensive_points                                 |numeric   |
-#'    |offensive_turnovers                              |numeric   |
-#'    |offensive_three_point_pct                        |numeric   |
-#'    |offensive_three_point_field_goals_attempted      |numeric   |
-#'    |offensive_three_point_field_goals_made           |numeric   |
-#'    |offensive_team_turnovers                         |numeric   |
-#'    |offensive_total_turnovers                        |numeric   |
-#'    |offensive_points_in_paint                        |numeric   |
-#'    |offensive_brick_index                            |numeric   |
-#'    |offensive_avg_field_goals_made                   |numeric   |
-#'    |offensive_avg_field_goals_attempted              |numeric   |
-#'    |offensive_avg_three_point_field_goals_made       |numeric   |
-#'    |offensive_avg_three_point_field_goals_attempted  |numeric   |
-#'    |offensive_avg_free_throws_made                   |numeric   |
-#'    |offensive_avg_free_throws_attempted              |numeric   |
-#'    |offensive_avg_points                             |numeric   |
-#'    |offensive_avg_points_allowed                     |numeric   |
-#'    |offensive_avg_offensive_rebounds                 |numeric   |
-#'    |offensive_avg_assists                            |numeric   |
-#'    |offensive_avg_turnovers                          |numeric   |
-#'    |offensive_offensive_rebound_pct                  |numeric   |
-#'    |offensive_estimated_possessions                  |numeric   |
-#'    |offensive_avg_estimated_possessions              |numeric   |
-#'    |offensive_points_per_estimated_possessions       |numeric   |
-#'    |offensive_avg_team_turnovers                     |numeric   |
-#'    |offensive_avg_total_turnovers                    |numeric   |
-#'    |offensive_three_point_field_goal_pct             |numeric   |
-#'    |offensive_two_point_field_goals_made             |numeric   |
-#'    |offensive_two_point_field_goals_attempted        |numeric   |
-#'    |offensive_avg_two_point_field_goals_made         |numeric   |
-#'    |offensive_avg_two_point_field_goals_attempted    |numeric   |
-#'    |offensive_two_point_field_goal_pct               |numeric   |
-#'    |offensive_shooting_efficiency                    |numeric   |
-#'    |offensive_scoring_efficiency                     |numeric   |
-#'    |offensive_avg48field_goals_made                  |numeric   |
-#'    |offensive_avg48field_goals_attempted             |numeric   |
-#'    |offensive_avg48three_point_field_goals_made      |numeric   |
-#'    |offensive_avg48three_point_field_goals_attempted |numeric   |
-#'    |offensive_avg48free_throws_made                  |numeric   |
-#'    |offensive_avg48free_throws_attempted             |numeric   |
-#'    |offensive_avg48points                            |numeric   |
-#'    |offensive_avg48offensive_rebounds                |numeric   |
-#'    |offensive_avg48assists                           |numeric   |
-#'    |offensive_avg48turnovers                         |numeric   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team_guid \tab character \tab ESPN team GUID. \cr
+#'       team_uid \tab character \tab ESPN universal team identifier (UID format 's:40~l:...~t:...'). \cr
+#'       team_sdr \tab integer \tab ESPN team SDR identifier. \cr
+#'       team_slug \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+#'       team_location \tab character \tab Team city or location string. \cr
+#'       team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       team_abbreviation \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       team_display_name \tab character \tab Full team display name. \cr
+#'       team_short_display_name \tab character \tab Short team display name (e.g. 'Aces'). \cr
+#'       team_color \tab character \tab Team primary color (hex without leading '#'). \cr
+#'       team_alternate_color \tab character \tab Team alternate color (hex without leading '#'). \cr
+#'       team_is_active \tab logical \tab TRUE if the team is currently active. \cr
+#'       team_is_all_star \tab logical \tab TRUE if the row represents an All-Star team. \cr
+#'       logo_href \tab character \tab Team or league logo URL. \cr
+#'       logo_dark_href \tab character \tab Logo URL for dark backgrounds. \cr
+#'       defensive_blocks \tab numeric \tab Short for blocked shot, number of times when a defensive player legally deflects a field goal attempt from an offensive player. \cr
+#'       defensive_defensive_rebounds \tab numeric \tab The number of times when the defense obtains the possession of the ball after a missed shot by the offense. \cr
+#'       defensive_steals \tab numeric \tab The number of times a defensive player forced a turnover by intercepting or deflecting a pass or a dribble of an offensive player. \cr
+#'       defensive_avg_defensive_rebounds \tab numeric \tab The average defensive rebounds per game. \cr
+#'       defensive_avg_blocks \tab numeric \tab The average blocks per game. \cr
+#'       defensive_avg_steals \tab numeric \tab The average steals per game. \cr
+#'       defensive_avg48defensive_rebounds \tab numeric \tab The average number of defensive rebounds per 48 minutes. \cr
+#'       defensive_avg48blocks \tab numeric \tab The average number of blocks per 48 minutes. \cr
+#'       defensive_avg48steals \tab numeric \tab The average number of steals per 48 minutes. \cr
+#'       general_disqualifications \tab numeric \tab The number of times a player reached the foul limit. \cr
+#'       general_flagrant_fouls \tab numeric \tab The number of fouls that the officials thought were unnecessary or excessive. \cr
+#'       general_fouls \tab numeric \tab The number of times a player had illegal contact with the opponent. \cr
+#'       general_ejections \tab numeric \tab The number of times a player or coach is removed from the game as a result of a serious offense. \cr
+#'       general_technical_fouls \tab numeric \tab The number of times an player or coach was called for a technical foul (unsportsmanlike conduct or violations). \cr
+#'       general_rebounds \tab numeric \tab The total number of rebounds (offensive and defensive). \cr
+#'       general_avg_minutes \tab numeric \tab The average number of minutes per game. \cr
+#'       general_nba_rating \tab numeric \tab General nba rating. \cr
+#'       general_plus_minus \tab numeric \tab A player's estimated on-court impact on team performance measured in point differential per 100 possessions. \cr
+#'       general_game_day_of_year \tab numeric \tab The day of the season on which this game falls; if it's the 15th day of the regular season in Nov, the game day of year is 15 (ie, game day of year != day of year). \cr
+#'       general_avg_rebounds \tab numeric \tab The average rebounds per game. \cr
+#'       general_avg_fouls \tab numeric \tab The average fouls committed per game. \cr
+#'       general_avg_flagrant_fouls \tab numeric \tab The average number of flagrant fouls per game. \cr
+#'       general_avg_technical_fouls \tab numeric \tab The average number of technical fouls per game. \cr
+#'       general_avg_ejections \tab numeric \tab The average ejections per game. \cr
+#'       general_avg_disqualifications \tab numeric \tab The average number of disqualifications per game. \cr
+#'       general_assist_turnover_ratio \tab numeric \tab The average number of assists a player or team records per turnover. \cr
+#'       general_steal_foul_ratio \tab numeric \tab The average number of steals a player or team records per foul committed. \cr
+#'       general_block_foul_ratio \tab numeric \tab The average number of blocks a player or record per foul committed. \cr
+#'       general_avg_team_rebounds \tab numeric \tab The average number of rebounds for a team per game. \cr
+#'       general_total_rebounds \tab numeric \tab The total number of rebounds for a team or player. \cr
+#'       general_total_technical_fouls \tab numeric \tab The total number of technical fouls for a team or player. \cr
+#'       general_team_assist_turnover_ratio \tab numeric \tab The number of assists per turnover for a team. \cr
+#'       general_team_rebounds \tab numeric \tab The total number of rebounds for a team. \cr
+#'       general_steal_turnover_ratio \tab numeric \tab The number of steals per turnover. \cr
+#'       general_avg48rebounds \tab numeric \tab The average number of rebounds per 48 minutes. \cr
+#'       general_avg48fouls \tab numeric \tab The average number of fouls committed per 48 minutes. \cr
+#'       general_avg48flagrant_fouls \tab numeric \tab The average number of flagrant fouls committed per 48 minutes. \cr
+#'       general_avg48technical_fouls \tab numeric \tab The average number of technical fouls committed per 48 minutes. \cr
+#'       general_avg48ejections \tab numeric \tab The average number of ejections per 48 minutes. \cr
+#'       general_avg48disqualifications \tab numeric \tab The average number of disqualifications per 48 minutes. \cr
+#'       general_games_played \tab numeric \tab Games Played. \cr
+#'       general_games_started \tab numeric \tab The number of games started by an athlete. \cr
+#'       general_double_double \tab numeric \tab The number of times double digit values were accumulated in 2 of the following categories: points, rebounds, assists, steals, and blocked shots. \cr
+#'       general_triple_double \tab numeric \tab The number of times double digit values were accumulated in 3 of the following categories: points, rebounds, assists, steals, and blocked shots. \cr
+#'       offensive_assists \tab numeric \tab The number of times a player who passes the ball to a teammate in a way that leads to a score by field goal, meaning that he or she was "assisting" in the basket. There is some judgment involved in deciding whether a passer should be credited with an assist. \cr
+#'       offensive_field_goals \tab numeric \tab Field Goal makes and attempts. \cr
+#'       offensive_field_goals_attempted \tab numeric \tab The number of times a 2pt field goal was attempted. \cr
+#'       offensive_field_goals_made \tab numeric \tab The number of times a 2pt field goal was made. \cr
+#'       offensive_field_goal_pct \tab numeric \tab The ratio of field goals made to field goals attempted: FGM / FGA. \cr
+#'       offensive_free_throws \tab numeric \tab Free Throw makes and attempts. \cr
+#'       offensive_free_throw_pct \tab numeric \tab The ratio of free throws made to free throws attempted: FTM / FTA. \cr
+#'       offensive_free_throws_attempted \tab numeric \tab The number of times a free throw was attempted. \cr
+#'       offensive_free_throws_made \tab numeric \tab The number of times a free throw was made. \cr
+#'       offensive_offensive_rebounds \tab numeric \tab The number of times when the offense obtains the possession of the ball after a missed shot. \cr
+#'       offensive_points \tab numeric \tab The number of points scored. \cr
+#'       offensive_turnovers \tab numeric \tab The number of times a player loses possession to the other team. \cr
+#'       offensive_three_point_pct \tab numeric \tab The ratio of 3pt field goals made to 3pt field goals attempted: 3PM / 3PA. \cr
+#'       offensive_three_point_field_goals_attempted \tab numeric \tab The number of times a 3pt field goal was attempted. \cr
+#'       offensive_three_point_field_goals_made \tab numeric \tab The number of times a 3pt field goal was made. \cr
+#'       offensive_team_turnovers \tab numeric \tab The number of turnovers for the team. \cr
+#'       offensive_total_turnovers \tab numeric \tab The number of turnovers plus team turnovers for the team. \cr
+#'       offensive_points_in_paint \tab numeric \tab The amount of points scored in the area known as "the Paint"(the rectangle between the foul line and the baseline). \cr
+#'       offensive_brick_index \tab numeric \tab How many points a player costs his team with his shooting compared with the league average on a per-40-minute basis. ((52.8 - TS\%) x (FGA + (FTA x 0.44))) / (Min/40) . \cr
+#'       offensive_avg_field_goals_made \tab numeric \tab The average field goals made per game. \cr
+#'       offensive_avg_field_goals_attempted \tab numeric \tab The average field goals attempted per game. \cr
+#'       offensive_avg_three_point_field_goals_made \tab numeric \tab The average three point field goals made per game. \cr
+#'       offensive_avg_three_point_field_goals_attempted \tab numeric \tab The average three point field goals attempted per game. \cr
+#'       offensive_avg_free_throws_made \tab numeric \tab The average free throw shots made per game. \cr
+#'       offensive_avg_free_throws_attempted \tab numeric \tab The average free throw shots attempted per game. \cr
+#'       offensive_avg_points \tab numeric \tab The average number of points scored per game. \cr
+#'       offensive_avg_points_allowed \tab numeric \tab The average number of points allowed per game. \cr
+#'       offensive_avg_offensive_rebounds \tab numeric \tab The average offensive rebounds per game. \cr
+#'       offensive_avg_assists \tab numeric \tab The average assists per game. \cr
+#'       offensive_avg_turnovers \tab numeric \tab The average turnovers committed per game. \cr
+#'       offensive_offensive_rebound_pct \tab numeric \tab The percentage of the number of times they obtain the possession of the ball after a missed shot. \cr
+#'       offensive_estimated_possessions \tab numeric \tab An estimation of the number of possessions for a team or player. \cr
+#'       offensive_avg_estimated_possessions \tab numeric \tab The average number of estimated possessions per game for a team or player. \cr
+#'       offensive_points_per_estimated_possessions \tab numeric \tab The number of points per estimated possession for a team or player. \cr
+#'       offensive_avg_team_turnovers \tab numeric \tab The average number of turnovers for a team per game. \cr
+#'       offensive_avg_total_turnovers \tab numeric \tab The average number of total turnovers for a team per game. \cr
+#'       offensive_three_point_field_goal_pct \tab numeric \tab The ratio of 3pt field goals made to 3pt field goals attempted: 3PM / 3PA. \cr
+#'       offensive_two_point_field_goals_made \tab numeric \tab The number of 2-point field goals made for a team or player. \cr
+#'       offensive_two_point_field_goals_attempted \tab numeric \tab The number of 2-point field goals attempted for a team or player. \cr
+#'       offensive_avg_two_point_field_goals_made \tab numeric \tab The number of 2-point field goals made per game for a team or player. \cr
+#'       offensive_avg_two_point_field_goals_attempted \tab numeric \tab The number of 2-point field goals attempted per game for a team or player. \cr
+#'       offensive_two_point_field_goal_pct \tab numeric \tab The percentage of 2-points fields goals made by a team or player. \cr
+#'       offensive_shooting_efficiency \tab numeric \tab The efficiency with which a team or player shoots the basketball. \cr
+#'       offensive_scoring_efficiency \tab numeric \tab The efficiency with which a team or player scores the basketball. \cr
+#'       offensive_avg48field_goals_made \tab numeric \tab The average number of fieldgoals made per 48 minutes. \cr
+#'       offensive_avg48field_goals_attempted \tab numeric \tab The average number of fieldgoals attempted per 48 minutes. \cr
+#'       offensive_avg48three_point_field_goals_made \tab numeric \tab The average per number of 3-Pointers made per 48 minutes. \cr
+#'       offensive_avg48three_point_field_goals_attempted \tab numeric \tab The average number of 3-pointers attempted per 48 minutes. \cr
+#'       offensive_avg48free_throws_made \tab numeric \tab The average number of Free Throws made per 48 minutes. \cr
+#'       offensive_avg48free_throws_attempted \tab numeric \tab The average number of free throws attempted per 48 minutes. \cr
+#'       offensive_avg48points \tab numeric \tab The average number of points scored per 48 minutes. \cr
+#'       offensive_avg48offensive_rebounds \tab numeric \tab The average number of offenseive rebounds per 48 minutes. \cr
+#'       offensive_avg48assists \tab numeric \tab The average number of assists per 48 minutes. \cr
+#'       offensive_avg48turnovers \tab numeric \tab The average number of turnovers per 48 minutes. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows
@@ -1571,7 +1225,7 @@ utils::globalVariables(c("where"))
 #'
 #' @examples
 #' \donttest{
-#'   try(espn_wnba_team_stats(team_id = 18, year = 2020))
+#'   try(espn_wnba_team_stats(team_id = 17, year = 2020))
 #' }
 
 espn_wnba_team_stats <- function(
@@ -1580,6 +1234,7 @@ espn_wnba_team_stats <- function(
     season_type = 'regular', 
     total = FALSE
 ){
+  .args <- mget(setdiff(names(formals()), "..."))
   if (!(tolower(season_type) %in% c("regular","postseason"))) {
     # Check if season_type is appropriate, if not regular
     cli::cli_abort("Enter valid season_type: regular or postseason")
@@ -1602,28 +1257,28 @@ espn_wnba_team_stats <- function(
     expr = {
       
       # Create the GET request and set response as res
-      res <- httr::RETRY("GET", full_url)
+      res <- .retry_request(full_url)
       
       # Check the result
       check_status(res)
       
       # Get the content and return result as data.frame
       df <- res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON() 
       
       
       team_url <- df[["team"]][["$ref"]]
       
       # Create the GET request and set response as res
-      team_res <- httr::RETRY("GET", team_url)
+      team_res <- .retry_request(team_url)
       
       # Check the result
       check_status(team_res)
       
       # Get the content and return result as data.frame
       team_df <- team_res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON(simplifyDataFrame = FALSE, simplifyVector = FALSE, simplifyMatrix = FALSE) 
       
       team_df[["links"]] <- NULL
@@ -1676,7 +1331,7 @@ espn_wnba_team_stats <- function(
         tidyr::unnest("stats", names_sep = "_")
       df <- df %>%
         dplyr::mutate(
-          stats_category_name = glue::glue("{.data$name}_{.data$stats_name}")) %>%
+          stats_category_name = paste0(.data$name, "_", .data$stats_name)) %>%
         dplyr::select(
           "stats_category_name", 
           "stats_value") %>%
@@ -1695,13 +1350,12 @@ espn_wnba_team_stats <- function(
         make_wehoop_data("ESPN WNBA Team Season Stats from ESPN.com",Sys.time())
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}:Invalid arguments or no team season stats data available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no team season stats data available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1717,152 +1371,154 @@ espn_wnba_team_stats <- function(
 #' @param total (boolean, default: FALSE): Totals
 #' @return Returns a tibble with the player stats data
 #' 
-#'    |col_name                                         |types     |
-#'    |:------------------------------------------------|:---------|
-#'    |athlete_id                                       |integer   |
-#'    |athlete_uid                                      |character |
-#'    |athlete_guid                                     |character |
-#'    |athlete_type                                     |character |
-#'    |sdr                                              |integer   |
-#'    |first_name                                       |character |
-#'    |last_name                                        |character |
-#'    |full_name                                        |character |
-#'    |display_name                                     |character |
-#'    |short_name                                       |character |
-#'    |weight                                           |numeric   |
-#'    |display_weight                                   |character |
-#'    |height                                           |numeric   |
-#'    |display_height                                   |character |
-#'    |age                                              |integer   |
-#'    |date_of_birth                                    |character |
-#'    |slug                                             |character |
-#'    |headshot_href                                    |character |
-#'    |headshot_alt                                     |character |
-#'    |position_id                                      |integer   |
-#'    |position_name                                    |character |
-#'    |position_display_name                            |character |
-#'    |position_abbreviation                            |character |
-#'    |position_leaf                                    |logical   |
-#'    |linked                                           |logical   |
-#'    |years                                            |integer   |
-#'    |active                                           |logical   |
-#'    |status_id                                        |integer   |
-#'    |status_name                                      |character |
-#'    |status_type                                      |character |
-#'    |status_abbreviation                              |character |
-#'    |defensive_blocks                                 |numeric   |
-#'    |defensive_defensive_rebounds                     |numeric   |
-#'    |defensive_steals                                 |numeric   |
-#'    |defensive_avg_defensive_rebounds                 |numeric   |
-#'    |defensive_avg_blocks                             |numeric   |
-#'    |defensive_avg_steals                             |numeric   |
-#'    |defensive_avg48defensive_rebounds                |numeric   |
-#'    |defensive_avg48blocks                            |numeric   |
-#'    |defensive_avg48steals                            |numeric   |
-#'    |general_disqualifications                        |numeric   |
-#'    |general_flagrant_fouls                           |numeric   |
-#'    |general_fouls                                    |numeric   |
-#'    |general_ejections                                |numeric   |
-#'    |general_technical_fouls                          |numeric   |
-#'    |general_rebounds                                 |numeric   |
-#'    |general_vorp                                     |numeric   |
-#'    |general_minutes                                  |numeric   |
-#'    |general_avg_minutes                              |numeric   |
-#'    |general_fantasy_rating                           |numeric   |
-#'    |general_nba_rating                               |numeric   |
-#'    |general_plus_minus                               |numeric   |
-#'    |general_avg_rebounds                             |numeric   |
-#'    |general_avg_fouls                                |numeric   |
-#'    |general_avg_flagrant_fouls                       |numeric   |
-#'    |general_avg_technical_fouls                      |numeric   |
-#'    |general_avg_ejections                            |numeric   |
-#'    |general_avg_disqualifications                    |numeric   |
-#'    |general_assist_turnover_ratio                    |numeric   |
-#'    |general_steal_foul_ratio                         |numeric   |
-#'    |general_block_foul_ratio                         |numeric   |
-#'    |general_avg_team_rebounds                        |numeric   |
-#'    |general_total_rebounds                           |numeric   |
-#'    |general_total_technical_fouls                    |numeric   |
-#'    |general_team_assist_turnover_ratio               |numeric   |
-#'    |general_steal_turnover_ratio                     |numeric   |
-#'    |general_avg48rebounds                            |numeric   |
-#'    |general_avg48fouls                               |numeric   |
-#'    |general_avg48flagrant_fouls                      |numeric   |
-#'    |general_avg48technical_fouls                     |numeric   |
-#'    |general_avg48ejections                           |numeric   |
-#'    |general_avg48disqualifications                   |numeric   |
-#'    |general_games_played                             |numeric   |
-#'    |general_games_started                            |numeric   |
-#'    |general_double_double                            |numeric   |
-#'    |general_triple_double                            |numeric   |
-#'    |offensive_assists                                |numeric   |
-#'    |offensive_field_goals                            |numeric   |
-#'    |offensive_field_goals_attempted                  |numeric   |
-#'    |offensive_field_goals_made                       |numeric   |
-#'    |offensive_field_goal_pct                         |numeric   |
-#'    |offensive_free_throws                            |numeric   |
-#'    |offensive_free_throw_pct                         |numeric   |
-#'    |offensive_free_throws_attempted                  |numeric   |
-#'    |offensive_free_throws_made                       |numeric   |
-#'    |offensive_offensive_rebounds                     |numeric   |
-#'    |offensive_points                                 |numeric   |
-#'    |offensive_turnovers                              |numeric   |
-#'    |offensive_three_point_pct                        |numeric   |
-#'    |offensive_three_point_field_goals_attempted      |numeric   |
-#'    |offensive_three_point_field_goals_made           |numeric   |
-#'    |offensive_total_turnovers                        |numeric   |
-#'    |offensive_points_in_paint                        |numeric   |
-#'    |offensive_brick_index                            |numeric   |
-#'    |offensive_avg_field_goals_made                   |numeric   |
-#'    |offensive_avg_field_goals_attempted              |numeric   |
-#'    |offensive_avg_three_point_field_goals_made       |numeric   |
-#'    |offensive_avg_three_point_field_goals_attempted  |numeric   |
-#'    |offensive_avg_free_throws_made                   |numeric   |
-#'    |offensive_avg_free_throws_attempted              |numeric   |
-#'    |offensive_avg_points                             |numeric   |
-#'    |offensive_avg_offensive_rebounds                 |numeric   |
-#'    |offensive_avg_assists                            |numeric   |
-#'    |offensive_avg_turnovers                          |numeric   |
-#'    |offensive_offensive_rebound_pct                  |numeric   |
-#'    |offensive_estimated_possessions                  |numeric   |
-#'    |offensive_avg_estimated_possessions              |numeric   |
-#'    |offensive_points_per_estimated_possessions       |numeric   |
-#'    |offensive_avg_team_turnovers                     |numeric   |
-#'    |offensive_avg_total_turnovers                    |numeric   |
-#'    |offensive_three_point_field_goal_pct             |numeric   |
-#'    |offensive_two_point_field_goals_made             |numeric   |
-#'    |offensive_two_point_field_goals_attempted        |numeric   |
-#'    |offensive_avg_two_point_field_goals_made         |numeric   |
-#'    |offensive_avg_two_point_field_goals_attempted    |numeric   |
-#'    |offensive_two_point_field_goal_pct               |numeric   |
-#'    |offensive_shooting_efficiency                    |numeric   |
-#'    |offensive_scoring_efficiency                     |numeric   |
-#'    |offensive_avg48field_goals_made                  |numeric   |
-#'    |offensive_avg48field_goals_attempted             |numeric   |
-#'    |offensive_avg48three_point_field_goals_made      |numeric   |
-#'    |offensive_avg48three_point_field_goals_attempted |numeric   |
-#'    |offensive_avg48free_throws_made                  |numeric   |
-#'    |offensive_avg48free_throws_attempted             |numeric   |
-#'    |offensive_avg48points                            |numeric   |
-#'    |offensive_avg48offensive_rebounds                |numeric   |
-#'    |offensive_avg48assists                           |numeric   |
-#'    |offensive_avg48turnovers                         |numeric   |
-#'    |team_id                                          |integer   |
-#'    |team_guid                                        |character |
-#'    |team_uid                                         |character |
-#'    |team_sdr                                         |integer   |
-#'    |team_slug                                        |character |
-#'    |team_location                                    |character |
-#'    |team_name                                        |character |
-#'    |team_abbreviation                                |character |
-#'    |team_display_name                                |character |
-#'    |team_short_display_name                          |character |
-#'    |team_color                                       |character |
-#'    |team_alternate_color                             |character |
-#'    |team_is_active                                   |logical   |
-#'    |team_is_all_star                                 |logical   |
-#'    |logo_href                                        |character |
-#'    |logo_dark_href                                   |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       athlete_id \tab integer \tab Unique athlete identifier (ESPN). \cr
+#'       athlete_uid \tab character \tab ESPN athlete UID (universal identifier). \cr
+#'       athlete_guid \tab character \tab ESPN athlete GUID. \cr
+#'       athlete_type \tab character \tab Athlete type / class. \cr
+#'       sdr \tab integer \tab Sdr. \cr
+#'       first_name \tab character \tab Player's first name. \cr
+#'       last_name \tab character \tab Player's last name. \cr
+#'       full_name \tab character \tab Player's full name. \cr
+#'       display_name \tab character \tab Display name. \cr
+#'       short_name \tab character \tab Short display name. \cr
+#'       weight \tab numeric \tab Player weight in pounds. \cr
+#'       display_weight \tab character \tab Player weight in display format (e.g. '180 lbs'). \cr
+#'       height \tab numeric \tab Player height (string e.g. '6-2' or inches). \cr
+#'       display_height \tab character \tab Player height in display format (e.g. '6-2'). \cr
+#'       age \tab integer \tab Player age (in years). \cr
+#'       date_of_birth \tab character \tab Date of birth (YYYY-MM-DD). \cr
+#'       slug \tab character \tab URL-safe identifier. \cr
+#'       headshot_href \tab character \tab Headshot image URL. \cr
+#'       headshot_alt \tab character \tab Alternative-text label for the headshot. \cr
+#'       position_id \tab integer \tab Unique position identifier. \cr
+#'       position_name \tab character \tab Listed roster position ('Guard', 'Forward', 'Center'). \cr
+#'       position_display_name \tab character \tab Position display name. \cr
+#'       position_abbreviation \tab character \tab Position abbreviation ('G' / 'F' / 'C'). \cr
+#'       position_leaf \tab logical \tab Position leaf. \cr
+#'       linked \tab logical \tab TRUE if the record is linked to a related entity. \cr
+#'       years \tab integer \tab Years. \cr
+#'       active \tab logical \tab TRUE if the row represents an active record (player / team / season). \cr
+#'       status_id \tab integer \tab Status identifier. \cr
+#'       status_name \tab character \tab Status label. \cr
+#'       status_type \tab character \tab Status type. \cr
+#'       status_abbreviation \tab character \tab Status abbreviation. \cr
+#'       defensive_blocks \tab numeric \tab Short for blocked shot, number of times when a defensive player legally deflects a field goal attempt from an offensive player. \cr
+#'       defensive_defensive_rebounds \tab numeric \tab The number of times when the defense obtains the possession of the ball after a missed shot by the offense. \cr
+#'       defensive_steals \tab numeric \tab The number of times a defensive player forced a turnover by intercepting or deflecting a pass or a dribble of an offensive player. \cr
+#'       defensive_avg_defensive_rebounds \tab numeric \tab The average defensive rebounds per game. \cr
+#'       defensive_avg_blocks \tab numeric \tab The average blocks per game. \cr
+#'       defensive_avg_steals \tab numeric \tab The average steals per game. \cr
+#'       defensive_avg48defensive_rebounds \tab numeric \tab The average number of defensive rebounds per 48 minutes. \cr
+#'       defensive_avg48blocks \tab numeric \tab The average number of blocks per 48 minutes. \cr
+#'       defensive_avg48steals \tab numeric \tab The average number of steals per 48 minutes. \cr
+#'       general_disqualifications \tab numeric \tab The number of times a player reached the foul limit. \cr
+#'       general_flagrant_fouls \tab numeric \tab The number of fouls that the officials thought were unnecessary or excessive. \cr
+#'       general_fouls \tab numeric \tab The number of times a player had illegal contact with the opponent. \cr
+#'       general_ejections \tab numeric \tab The number of times a player or coach is removed from the game as a result of a serious offense. \cr
+#'       general_technical_fouls \tab numeric \tab The number of times an player or coach was called for a technical foul (unsportsmanlike conduct or violations). \cr
+#'       general_rebounds \tab numeric \tab The total number of rebounds (offensive and defensive). \cr
+#'       general_vorp \tab numeric \tab Value Over Replacement Player. \cr
+#'       general_minutes \tab numeric \tab The total number of minutes played. \cr
+#'       general_avg_minutes \tab numeric \tab The average number of minutes per game. \cr
+#'       general_fantasy_rating \tab numeric \tab The Fantasy Rating of a player. \cr
+#'       general_nba_rating \tab numeric \tab General nba rating. \cr
+#'       general_plus_minus \tab numeric \tab A player's estimated on-court impact on team performance measured in point differential per 100 possessions. \cr
+#'       general_avg_rebounds \tab numeric \tab The average rebounds per game. \cr
+#'       general_avg_fouls \tab numeric \tab The average fouls committed per game. \cr
+#'       general_avg_flagrant_fouls \tab numeric \tab The average number of flagrant fouls per game. \cr
+#'       general_avg_technical_fouls \tab numeric \tab The average number of technical fouls per game. \cr
+#'       general_avg_ejections \tab numeric \tab The average ejections per game. \cr
+#'       general_avg_disqualifications \tab numeric \tab The average number of disqualifications per game. \cr
+#'       general_assist_turnover_ratio \tab numeric \tab The average number of assists a player or team records per turnover. \cr
+#'       general_steal_foul_ratio \tab numeric \tab The average number of steals a player or team records per foul committed. \cr
+#'       general_block_foul_ratio \tab numeric \tab The average number of blocks a player or record per foul committed. \cr
+#'       general_avg_team_rebounds \tab numeric \tab The average number of rebounds for a team per game. \cr
+#'       general_total_rebounds \tab numeric \tab The total number of rebounds for a team or player. \cr
+#'       general_total_technical_fouls \tab numeric \tab The total number of technical fouls for a team or player. \cr
+#'       general_team_assist_turnover_ratio \tab numeric \tab The number of assists per turnover for a team. \cr
+#'       general_steal_turnover_ratio \tab numeric \tab The number of steals per turnover. \cr
+#'       general_avg48rebounds \tab numeric \tab The average number of rebounds per 48 minutes. \cr
+#'       general_avg48fouls \tab numeric \tab The average number of fouls committed per 48 minutes. \cr
+#'       general_avg48flagrant_fouls \tab numeric \tab The average number of flagrant fouls committed per 48 minutes. \cr
+#'       general_avg48technical_fouls \tab numeric \tab The average number of technical fouls committed per 48 minutes. \cr
+#'       general_avg48ejections \tab numeric \tab The average number of ejections per 48 minutes. \cr
+#'       general_avg48disqualifications \tab numeric \tab The average number of disqualifications per 48 minutes. \cr
+#'       general_games_played \tab numeric \tab Games Played. \cr
+#'       general_games_started \tab numeric \tab The number of games started by an athlete. \cr
+#'       general_double_double \tab numeric \tab The number of times double digit values were accumulated in 2 of the following categories: points, rebounds, assists, steals, and blocked shots. \cr
+#'       general_triple_double \tab numeric \tab The number of times double digit values were accumulated in 3 of the following categories: points, rebounds, assists, steals, and blocked shots. \cr
+#'       offensive_assists \tab numeric \tab The number of times a player who passes the ball to a teammate in a way that leads to a score by field goal, meaning that he or she was "assisting" in the basket. There is some judgment involved in deciding whether a passer should be credited with an assist. \cr
+#'       offensive_field_goals \tab numeric \tab Field Goal makes and attempts. \cr
+#'       offensive_field_goals_attempted \tab numeric \tab The number of times a 2pt field goal was attempted. \cr
+#'       offensive_field_goals_made \tab numeric \tab The number of times a 2pt field goal was made. \cr
+#'       offensive_field_goal_pct \tab numeric \tab The ratio of field goals made to field goals attempted: FGM / FGA. \cr
+#'       offensive_free_throws \tab numeric \tab Free Throw makes and attempts. \cr
+#'       offensive_free_throw_pct \tab numeric \tab The ratio of free throws made to free throws attempted: FTM / FTA. \cr
+#'       offensive_free_throws_attempted \tab numeric \tab The number of times a free throw was attempted. \cr
+#'       offensive_free_throws_made \tab numeric \tab The number of times a free throw was made. \cr
+#'       offensive_offensive_rebounds \tab numeric \tab The number of times when the offense obtains the possession of the ball after a missed shot. \cr
+#'       offensive_points \tab numeric \tab The number of points scored. \cr
+#'       offensive_turnovers \tab numeric \tab The number of times a player loses possession to the other team. \cr
+#'       offensive_three_point_pct \tab numeric \tab The ratio of 3pt field goals made to 3pt field goals attempted: 3PM / 3PA. \cr
+#'       offensive_three_point_field_goals_attempted \tab numeric \tab The number of times a 3pt field goal was attempted. \cr
+#'       offensive_three_point_field_goals_made \tab numeric \tab The number of times a 3pt field goal was made. \cr
+#'       offensive_total_turnovers \tab numeric \tab The number of turnovers plus team turnovers for the team. \cr
+#'       offensive_points_in_paint \tab numeric \tab The amount of points scored in the area known as "the Paint"(the rectangle between the foul line and the baseline). \cr
+#'       offensive_brick_index \tab numeric \tab How many points a player costs his team with his shooting compared with the league average on a per-40-minute basis. ((52.8 - TS\%) x (FGA + (FTA x 0.44))) / (Min/40) . \cr
+#'       offensive_avg_field_goals_made \tab numeric \tab The average field goals made per game. \cr
+#'       offensive_avg_field_goals_attempted \tab numeric \tab The average field goals attempted per game. \cr
+#'       offensive_avg_three_point_field_goals_made \tab numeric \tab The average three point field goals made per game. \cr
+#'       offensive_avg_three_point_field_goals_attempted \tab numeric \tab The average three point field goals attempted per game. \cr
+#'       offensive_avg_free_throws_made \tab numeric \tab The average free throw shots made per game. \cr
+#'       offensive_avg_free_throws_attempted \tab numeric \tab The average free throw shots attempted per game. \cr
+#'       offensive_avg_points \tab numeric \tab The average number of points scored per game. \cr
+#'       offensive_avg_offensive_rebounds \tab numeric \tab The average offensive rebounds per game. \cr
+#'       offensive_avg_assists \tab numeric \tab The average assists per game. \cr
+#'       offensive_avg_turnovers \tab numeric \tab The average turnovers committed per game. \cr
+#'       offensive_offensive_rebound_pct \tab numeric \tab The percentage of the number of times they obtain the possession of the ball after a missed shot. \cr
+#'       offensive_estimated_possessions \tab numeric \tab An estimation of the number of possessions for a team or player. \cr
+#'       offensive_avg_estimated_possessions \tab numeric \tab The average number of estimated possessions per game for a team or player. \cr
+#'       offensive_points_per_estimated_possessions \tab numeric \tab The number of points per estimated possession for a team or player. \cr
+#'       offensive_avg_team_turnovers \tab numeric \tab The average number of turnovers for a team per game. \cr
+#'       offensive_avg_total_turnovers \tab numeric \tab The average number of total turnovers for a team per game. \cr
+#'       offensive_three_point_field_goal_pct \tab numeric \tab The ratio of 3pt field goals made to 3pt field goals attempted: 3PM / 3PA. \cr
+#'       offensive_two_point_field_goals_made \tab numeric \tab The number of 2-point field goals made for a team or player. \cr
+#'       offensive_two_point_field_goals_attempted \tab numeric \tab The number of 2-point field goals attempted for a team or player. \cr
+#'       offensive_avg_two_point_field_goals_made \tab numeric \tab The number of 2-point field goals made per game for a team or player. \cr
+#'       offensive_avg_two_point_field_goals_attempted \tab numeric \tab The number of 2-point field goals attempted per game for a team or player. \cr
+#'       offensive_two_point_field_goal_pct \tab numeric \tab The percentage of 2-points fields goals made by a team or player. \cr
+#'       offensive_shooting_efficiency \tab numeric \tab The efficiency with which a team or player shoots the basketball. \cr
+#'       offensive_scoring_efficiency \tab numeric \tab The efficiency with which a team or player scores the basketball. \cr
+#'       offensive_avg48field_goals_made \tab numeric \tab The average number of fieldgoals made per 48 minutes. \cr
+#'       offensive_avg48field_goals_attempted \tab numeric \tab The average number of fieldgoals attempted per 48 minutes. \cr
+#'       offensive_avg48three_point_field_goals_made \tab numeric \tab The average per number of 3-Pointers made per 48 minutes. \cr
+#'       offensive_avg48three_point_field_goals_attempted \tab numeric \tab The average number of 3-pointers attempted per 48 minutes. \cr
+#'       offensive_avg48free_throws_made \tab numeric \tab The average number of Free Throws made per 48 minutes. \cr
+#'       offensive_avg48free_throws_attempted \tab numeric \tab The average number of free throws attempted per 48 minutes. \cr
+#'       offensive_avg48points \tab numeric \tab The average number of points scored per 48 minutes. \cr
+#'       offensive_avg48offensive_rebounds \tab numeric \tab The average number of offenseive rebounds per 48 minutes. \cr
+#'       offensive_avg48assists \tab numeric \tab The average number of assists per 48 minutes. \cr
+#'       offensive_avg48turnovers \tab numeric \tab The average number of turnovers per 48 minutes. \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team_guid \tab character \tab ESPN team GUID. \cr
+#'       team_uid \tab character \tab ESPN universal team identifier (UID format 's:40~l:...~t:...'). \cr
+#'       team_sdr \tab integer \tab ESPN team SDR identifier. \cr
+#'       team_slug \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+#'       team_location \tab character \tab Team city or location string. \cr
+#'       team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       team_abbreviation \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       team_display_name \tab character \tab Full team display name. \cr
+#'       team_short_display_name \tab character \tab Short team display name (e.g. 'Aces'). \cr
+#'       team_color \tab character \tab Team primary color (hex without leading '#'). \cr
+#'       team_alternate_color \tab character \tab Team alternate color (hex without leading '#'). \cr
+#'       team_is_active \tab logical \tab TRUE if the team is currently active. \cr
+#'       team_is_all_star \tab logical \tab TRUE if the row represents an All-Star team. \cr
+#'       logo_href \tab character \tab Team or league logo URL. \cr
+#'       logo_dark_href \tab character \tab Logo URL for dark backgrounds. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #' @export
 #' @keywords WNBA Player Stats
@@ -1879,6 +1535,7 @@ espn_wnba_player_stats <- function(
     season_type = 'regular', 
     total = FALSE
 ){
+  .args <- mget(setdiff(names(formals()), "..."))
   if (!(tolower(season_type) %in% c("regular","postseason"))) {
     # Check if season_type is appropriate, if not regular
     cli::cli_abort("Enter valid season_type: regular or postseason")
@@ -1905,30 +1562,30 @@ espn_wnba_player_stats <- function(
     expr = {
       
       # Create the GET request and set response as res
-      res <- httr::RETRY("GET", full_url)
+      res <- .retry_request(full_url)
       
       # Check the result
       check_status(res)
       # Create the GET request and set response as res
-      athlete_res <- httr::RETRY("GET", athlete_url)
+      athlete_res <- .retry_request(athlete_url)
       
       # Check the result
       check_status(athlete_res)
       
       athlete_df <- athlete_res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON(simplifyDataFrame = FALSE, simplifyVector = FALSE, simplifyMatrix = FALSE) 
       
       team_url <- athlete_df[["team"]][["$ref"]]
       
       # Create the GET request and set response as res
-      team_res <- httr::RETRY("GET", team_url)
+      team_res <- .retry_request(team_url)
       
       # Check the result
       check_status(team_res)
       
       team_df <- team_res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON(simplifyDataFrame = FALSE, simplifyVector = FALSE, simplifyMatrix = FALSE) 
       
       team_df[["links"]] <- NULL
@@ -1995,14 +1652,14 @@ espn_wnba_player_stats <- function(
       
       # Get the content and return result as data.frame
       df <- res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
+        .resp_text() %>%
         jsonlite::fromJSON() %>%
         purrr::pluck("splits") %>%
         purrr::pluck("categories") %>%
         tidyr::unnest("stats", names_sep = "_")
       df <- df %>%
         dplyr::mutate(
-          stats_category_name = glue::glue("{.data$name}_{.data$stats_name}")) %>%
+          stats_category_name = paste0(.data$name, "_", .data$stats_name)) %>%
         dplyr::select(
           "stats_category_name", 
           "stats_value") %>%
@@ -2025,13 +1682,12 @@ espn_wnba_player_stats <- function(
         make_wehoop_data("ESPN WNBA Player Season Stats from ESPN.com",Sys.time())
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}:Invalid arguments or no player season stats data available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player season stats data available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -2275,7 +1931,11 @@ helper_espn_wnba_pbp <- function(resp){
             "athlete.id") %>%
           tidyr::unnest_wider("athlete.id", names_sep = "_")
       )
-      names(aths) <- c("play.id", "athlete.id.1", "athlete.id.2", "athlete.id.3")
+      names(aths) <- c("play.id", paste0("athlete.id.", seq_len(ncol(aths) - 1)))
+      for (nm in paste0("athlete.id.", 1:3)) {
+        if (!nm %in% names(aths)) aths[[nm]] <- NA_character_
+      }
+      aths <- aths[, c("play.id", paste0("athlete.id.", 1:3))]
       plays <- plays %>%
         dplyr::bind_cols(aths) %>%
         janitor::clean_names() %>%
@@ -2322,6 +1982,7 @@ helper_espn_wnba_pbp <- function(resp){
 }
 
 #'  **Parse ESPN WNBA Team Box, helper function**
+#' @rdname helper_espn_wnba_pbp
 #' @param resp Response object from the ESPN WNBA game summary endpoint
 #' @return Returns a tibble
 #' @importFrom lubridate with_tz ymd_hm
@@ -2338,7 +1999,11 @@ helper_espn_wnba_team_box <- function(resp){
     lubridate::with_tz(tzone = "America/New_York")
   
   game_date <- as.Date(substr(game_date_time, 0, 10))
-  box_score_available <- game_json[["header"]][["competitions"]][["boxscoreAvailable"]]
+  # ESPN's header `boxscoreAvailable` flag is unreliable for archival games
+  # (the WBB twin drops pre-2014 boxscores over it), so availability is
+  # derived from the payload itself; the statistics-length check below
+  # remains the real gate.
+  box_score_available <- length(game_json[["boxscore"]][["teams"]]) > 0
   if (box_score_available == TRUE) {
     teams_box_score_df <- game_json[["boxscore"]][["teams"]] %>%
       jsonlite::toJSON() %>%
@@ -2536,6 +2201,7 @@ helper_espn_wnba_team_box <- function(resp){
 }
 
 #'  **Parse ESPN WNBA Player Box, helper function**
+#' @rdname helper_espn_wnba_pbp
 #' @param resp Response object from the ESPN WNBA game summary endpoint
 #' @return Returns a tibble
 #' @importFrom lubridate with_tz ymd_hm
@@ -2571,7 +2237,10 @@ helper_espn_wnba_player_box <- function(resp){
       purrr::pluck(7) %>% 
       as.numeric()
   )
-  if (boxScoreAvailable == TRUE &&
+  # Payload presence replaces ESPN's unreliable header `boxscoreAvailable`
+  # flag (archival games carry stats while the flag says FALSE); the athlete
+  # and stat validity conjuncts below remain the real gate.
+  if (length(game_json[["boxscore"]][["players"]]) > 0 &&
       length(players_box_score_df[["statistics"]][[1]][["athletes"]][[1]]) > 1 &&
       !is.na(valid_stats)) {
       players_df <- players_box_score_df %>%

@@ -9,7 +9,8 @@ NULL
 #' @param date_from date_from
 #' @param date_to date_to
 #' @param direction direction
-#' @param league_id league_id
+#' @param league_id league_id. Default `'10'` (WNBA). Use `'00'` for NBA or
+#'   `'20'` for G-League data on the same endpoint.
 #' @param player_or_team player_or_team
 #' @param season season
 #' @param season_type season_type
@@ -20,37 +21,39 @@ NULL
 #'    **LeagueGameLog**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |SEASON_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |GAME_ID           |character |
-#'    |GAME_DATE         |character |
-#'    |MATCHUP           |character |
-#'    |WL                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
-#'    |PLUS_MINUS        |character |
-#'    |VIDEO_AVAILABLE   |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       SEASON_ID \tab character \tab Unique season identifier. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'       GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+#'       MATCHUP \tab character \tab Matchup. \cr
+#'       WL \tab character \tab  \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       VIDEO_AVAILABLE \tab character \tab Video available. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -67,12 +70,13 @@ wnba_leaguegamelog <- function(
     date_from = '',
     date_to = '',
     direction = 'ASC',
-    league_id = '00',
+    league_id = '10',
     player_or_team = 'T',
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     sorter = 'DATE',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -80,18 +84,25 @@ wnba_leaguegamelog <- function(
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
   
+  # Param order matters here. As of 2026, the WNBA Stats API rejects
+  # the alphabetical ordering (Counter first) with a Cloudflare HTML error
+  # page; the LeagueID-first ordering matches what the wnba.com client sends
+  # and parses successfully. Verified 2026-05-16: same param values,
+  # alphabetical-first returns HTML, LeagueID-first returns 16,588 rows.
   params <- list(
-    Counter = counter,
-    DateFrom = date_from,
-    DateTo = date_to,
-    Direction = direction,
-    LeagueID = league_id,
+    LeagueID     = league_id,
+    Season       = season,
+    SeasonType   = season_type,
     PlayerOrTeam = player_or_team,
-    Season = season,
-    SeasonType = season_type,
-    Sorter = sorter
+    Counter      = counter,
+    Direction    = direction,
+    Sorter       = sorter,
+    DateFrom     = date_from,
+    DateTo       = date_to
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -100,13 +111,12 @@ wnba_leaguegamelog <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no league game log data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no league game log data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -132,96 +142,98 @@ NULL
 #'    **Standings** 
 #'    
 #'    
-#'    |col_name                |types     |
-#'    |:-----------------------|:---------|
-#'    |LeagueID                |character |
-#'    |SeasonID                |character |
-#'    |TeamID                  |character |
-#'    |TeamCity                |character |
-#'    |TeamName                |character |
-#'    |TeamSlug                |character |
-#'    |Conference              |character |
-#'    |ConferenceRecord        |character |
-#'    |PlayoffRank             |character |
-#'    |ClinchIndicator         |character |
-#'    |Division                |character |
-#'    |DivisionRecord          |character |
-#'    |DivisionRank            |character |
-#'    |WINS                    |character |
-#'    |LOSSES                  |character |
-#'    |WinPCT                  |character |
-#'    |LeagueRank              |character |
-#'    |Record                  |character |
-#'    |HOME                    |character |
-#'    |ROAD                    |character |
-#'    |L10                     |character |
-#'    |Last10Home              |character |
-#'    |Last10Road              |character |
-#'    |OT                      |character |
-#'    |ThreePTSOrLess          |character |
-#'    |TenPTSOrMore            |character |
-#'    |LongHomeStreak          |character |
-#'    |strLongHomeStreak       |character |
-#'    |LongRoadStreak          |character |
-#'    |strLongRoadStreak       |character |
-#'    |LongWinStreak           |character |
-#'    |LongLossStreak          |character |
-#'    |CurrentHomeStreak       |character |
-#'    |strCurrentHomeStreak    |character |
-#'    |CurrentRoadStreak       |character |
-#'    |strCurrentRoadStreak    |character |
-#'    |CurrentStreak           |character |
-#'    |strCurrentStreak        |character |
-#'    |ConferenceGamesBack     |character |
-#'    |DivisionGamesBack       |character |
-#'    |ClinchedConferenceTitle |character |
-#'    |ClinchedDivisionTitle   |character |
-#'    |ClinchedPlayoffBirth    |character |
-#'    |ClinchedPlayIn          |character |
-#'    |EliminatedConference    |character |
-#'    |EliminatedDivision      |character |
-#'    |AheadAtHalf             |character |
-#'    |BehindAtHalf            |character |
-#'    |TiedAtHalf              |character |
-#'    |AheadAtThird            |character |
-#'    |BehindAtThird           |character |
-#'    |TiedAtThird             |character |
-#'    |Score100PTS             |character |
-#'    |OppScore100PTS          |character |
-#'    |OppOver500              |character |
-#'    |LeadInFGPCT             |character |
-#'    |LeadInReb               |character |
-#'    |FewerTurnovers          |character |
-#'    |PointsPG                |character |
-#'    |OppPointsPG             |character |
-#'    |DiffPointsPG            |character |
-#'    |vsEast                  |character |
-#'    |vsAtlantic              |character |
-#'    |vsCentral               |character |
-#'    |vsSoutheast             |character |
-#'    |vsWest                  |character |
-#'    |vsNorthwest             |character |
-#'    |vsPacific               |character |
-#'    |vsSouthwest             |character |
-#'    |Jan                     |character |
-#'    |Feb                     |character |
-#'    |Mar                     |character |
-#'    |Apr                     |character |
-#'    |May                     |character |
-#'    |Jun                     |character |
-#'    |Jul                     |character |
-#'    |Aug                     |character |
-#'    |Sep                     |character |
-#'    |Oct                     |character |
-#'    |Nov                     |character |
-#'    |Dec                     |character |
-#'    |Score_80_Plus           |character |
-#'    |Opp_Score_80_Plus       |character |
-#'    |Score_Below_80          |character |
-#'    |Opp_Score_Below_80      |character |
-#'    |TotalPoints             |character |
-#'    |OppTotalPoints          |character |
-#'    |DiffTotalPoints         |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       LeagueID \tab character \tab  \cr
+#'       SeasonID \tab character \tab  \cr
+#'       TeamID \tab character \tab  \cr
+#'       TeamCity \tab character \tab  \cr
+#'       TeamName \tab character \tab  \cr
+#'       TeamSlug \tab character \tab  \cr
+#'       Conference \tab character \tab Filter players or teams by conference. \cr
+#'       ConferenceRecord \tab character \tab  \cr
+#'       PlayoffRank \tab character \tab  \cr
+#'       ClinchIndicator \tab character \tab  \cr
+#'       Division \tab character \tab Team division. \cr
+#'       DivisionRecord \tab character \tab  \cr
+#'       DivisionRank \tab character \tab  \cr
+#'       WINS \tab character \tab Total wins. \cr
+#'       LOSSES \tab character \tab Total losses. \cr
+#'       WinPCT \tab character \tab  \cr
+#'       LeagueRank \tab character \tab  \cr
+#'       Record \tab character \tab Record string (e.g. '12-4'). \cr
+#'       HOME \tab character \tab Home. \cr
+#'       ROAD \tab character \tab Road. \cr
+#'       L10 \tab character \tab L10. \cr
+#'       Last10Home \tab character \tab  \cr
+#'       Last10Road \tab character \tab  \cr
+#'       OT \tab character \tab  \cr
+#'       ThreePTSOrLess \tab character \tab  \cr
+#'       TenPTSOrMore \tab character \tab  \cr
+#'       LongHomeStreak \tab character \tab  \cr
+#'       strLongHomeStreak \tab character \tab  \cr
+#'       LongRoadStreak \tab character \tab  \cr
+#'       strLongRoadStreak \tab character \tab  \cr
+#'       LongWinStreak \tab character \tab  \cr
+#'       LongLossStreak \tab character \tab  \cr
+#'       CurrentHomeStreak \tab character \tab  \cr
+#'       strCurrentHomeStreak \tab character \tab  \cr
+#'       CurrentRoadStreak \tab character \tab  \cr
+#'       strCurrentRoadStreak \tab character \tab  \cr
+#'       CurrentStreak \tab character \tab  \cr
+#'       strCurrentStreak \tab character \tab Strcurrentstreak. \cr
+#'       ConferenceGamesBack \tab character \tab  \cr
+#'       DivisionGamesBack \tab character \tab  \cr
+#'       ClinchedConferenceTitle \tab character \tab  \cr
+#'       ClinchedDivisionTitle \tab character \tab  \cr
+#'       ClinchedPlayoffBirth \tab character \tab  \cr
+#'       ClinchedPlayIn \tab character \tab  \cr
+#'       EliminatedConference \tab character \tab  \cr
+#'       EliminatedDivision \tab character \tab  \cr
+#'       AheadAtHalf \tab character \tab  \cr
+#'       BehindAtHalf \tab character \tab  \cr
+#'       TiedAtHalf \tab character \tab  \cr
+#'       AheadAtThird \tab character \tab  \cr
+#'       BehindAtThird \tab character \tab  \cr
+#'       TiedAtThird \tab character \tab  \cr
+#'       Score100PTS \tab character \tab  \cr
+#'       OppScore100PTS \tab character \tab  \cr
+#'       OppOver500 \tab character \tab  \cr
+#'       LeadInFGPCT \tab character \tab  \cr
+#'       LeadInReb \tab character \tab  \cr
+#'       FewerTurnovers \tab character \tab  \cr
+#'       PointsPG \tab character \tab  \cr
+#'       OppPointsPG \tab character \tab  \cr
+#'       DiffPointsPG \tab character \tab  \cr
+#'       vsEast \tab character \tab  \cr
+#'       vsAtlantic \tab character \tab  \cr
+#'       vsCentral \tab character \tab  \cr
+#'       vsSoutheast \tab character \tab  \cr
+#'       vsWest \tab character \tab  \cr
+#'       vsNorthwest \tab character \tab  \cr
+#'       vsPacific \tab character \tab  \cr
+#'       vsSouthwest \tab character \tab  \cr
+#'       Jan \tab character \tab  \cr
+#'       Feb \tab character \tab  \cr
+#'       Mar \tab character \tab  \cr
+#'       Apr \tab character \tab  \cr
+#'       May \tab character \tab  \cr
+#'       Jun \tab character \tab  \cr
+#'       Jul \tab character \tab  \cr
+#'       Aug \tab character \tab  \cr
+#'       Sep \tab character \tab  \cr
+#'       Oct \tab character \tab  \cr
+#'       Nov \tab character \tab  \cr
+#'       Dec \tab character \tab  \cr
+#'       Score_80_Plus \tab character \tab  \cr
+#'       Opp_Score_80_Plus \tab character \tab  \cr
+#'       Score_Below_80 \tab character \tab  \cr
+#'       Opp_Score_Below_80 \tab character \tab  \cr
+#'       TotalPoints \tab character \tab  \cr
+#'       OppTotalPoints \tab character \tab  \cr
+#'       DiffTotalPoints \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -239,6 +251,7 @@ wnba_leaguestandingsv3 <- function(
     season_type = 'Regular Season',
     season_year = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ','+',season_type)
@@ -253,6 +266,8 @@ wnba_leaguestandingsv3 <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -261,13 +276,12 @@ wnba_leaguestandingsv3 <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no league standings v3 data available for {season}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no league standings v3 data available for {season}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -376,36 +390,38 @@ NULL
 #'    **LeagueGameFinderResults**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |SEASON_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |GAME_ID           |character |
-#'    |GAME_DATE         |character |
-#'    |MATCHUP           |character |
-#'    |WL                |character |
-#'    |MIN               |character |
-#'    |PTS               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PLUS_MINUS        |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       SEASON_ID \tab character \tab Unique season identifier. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'       GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+#'       MATCHUP \tab character \tab Matchup. \cr
+#'       WL \tab character \tab  \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -507,6 +523,7 @@ wnba_leaguegamefinder <- function(
     vs_team_id = '',
     years_experience = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # season_type <- gsub(' ','+',season_type)
   version <- "leaguegamefinder"
@@ -604,6 +621,8 @@ wnba_leaguegamefinder <- function(
     YearsExperience = years_experience
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -612,13 +631,12 @@ wnba_leaguegamefinder <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no league game finder data available for the given parameters!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no league game finder data available for the given parameters!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

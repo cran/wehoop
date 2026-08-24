@@ -32,45 +32,37 @@ NULL
 #'    **Shot_Chart_Detail**
 #'
 #'
-#'    |col_name            |types     |
-#'    |:-------------------|:---------|
-#'    |GRID_TYPE           |character |
-#'    |GAME_ID             |character |
-#'    |GAME_EVENT_ID       |character |
-#'    |PLAYER_ID           |character |
-#'    |PLAYER_NAME         |character |
-#'    |TEAM_ID             |character |
-#'    |TEAM_NAME           |character |
-#'    |PERIOD              |character |
-#'    |MINUTES_REMAINING   |character |
-#'    |SECONDS_REMAINING   |character |
-#'    |EVENT_TYPE          |character |
-#'    |ACTION_TYPE         |character |
-#'    |SHOT_TYPE           |character |
-#'    |SHOT_ZONE_BASIC     |character |
-#'    |SHOT_ZONE_AREA      |character |
-#'    |SHOT_ZONE_RANGE     |character |
-#'    |SHOT_DISTANCE       |character |
-#'    |LOC_X               |character |
-#'    |LOC_Y               |character |
-#'    |SHOT_ATTEMPTED_FLAG |character |
-#'    |SHOT_MADE_FLAG      |character |
-#'    |GAME_DATE           |character |
-#'    |HTM                 |character |
-#'    |VTM                 |character |
+#'    |col_name            |types     |description                                                           |
+#'    |:-------------------|:---------|:---------------------------------------------------------------------|
+#'    |GRID_TYPE           |character |                                                                      |
+#'    |GAME_ID             |character |Unique game identifier.                                               |
+#'    |GAME_EVENT_ID       |character |Unique identifier for game event.                                     |
+#'    |PLAYER_ID           |character |Unique player identifier.                                             |
+#'    |PLAYER_NAME         |character |Player name.                                                          |
+#'    |TEAM_ID             |character |Unique team identifier.                                               |
+#'    |TEAM_NAME           |character |Full team display name (e.g. 'Las Vegas Aces').                       |
+#'    |PERIOD              |character |Period of the game (1-4 quarters; 5+ for OT).                         |
+#'    |MINUTES_REMAINING   |character |Minutes remaining.                                                    |
+#'    |SECONDS_REMAINING   |character |Seconds remaining in the period.                                      |
+#'    |EVENT_TYPE          |character |Event / play type code (V2 PBP).                                      |
+#'    |ACTION_TYPE         |character |Action type label (e.g. 'Made Shot', 'Substitution').                 |
+#'    |SHOT_TYPE           |character |Shot type label (e.g. 'Jump Shot', 'Layup').                          |
+#'    |SHOT_ZONE_BASIC     |character |Shot zone (e.g. 'Restricted Area', 'Mid-Range', 'Above the Break 3'). |
+#'    |SHOT_ZONE_AREA      |character |Shot zone area ('Left Side', 'Right Side', 'Center').                 |
+#'    |SHOT_ZONE_RANGE     |character |Shot zone range ('Less Than 8 ft.', '8-16 ft.', '16-24 ft.', etc.).   |
+#'    |SHOT_DISTANCE       |character |Shot distance from the basket, in feet.                               |
+#'    |LOC_X               |character |X coordinate on the court (units of inches; 0 = basket center).       |
+#'    |LOC_Y               |character |Y coordinate on the court (units of inches; baseline at 0).           |
+#'    |SHOT_ATTEMPTED_FLAG |character |1 if a shot was attempted on this event.                              |
+#'    |SHOT_MADE_FLAG      |character |1 if the shot was made; 0 if missed.                                  |
+#'    |GAME_DATE           |character |Game date (YYYY-MM-DD).                                               |
+#'    |HTM                 |character |                                                                      |
+#'    |VTM                 |character |                                                                      |
 #'
 #'    **LeagueAverages**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GRID_TYPE       |character |
-#'    |SHOT_ZONE_BASIC |character |
-#'    |SHOT_ZONE_AREA  |character |
-#'    |SHOT_ZONE_RANGE |character |
-#'    |FGA             |character |
-#'    |FGM             |character |
-#'    |FG_PCT          |character |
+#'    Columns as documented in the shared [wnba_shotchartdetail_league_averages_schema] table.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -104,6 +96,7 @@ wnba_shotchartdetail <- function(
     vs_conference = '',
     vs_division = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -135,6 +128,8 @@ wnba_shotchartdetail <- function(
     VsDivision = vs_division
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -143,13 +138,12 @@ wnba_shotchartdetail <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no shot chart detail data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no shot chart detail data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -172,15 +166,7 @@ NULL
 #'    **League_Wide**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GRID_TYPE       |character |
-#'    |SHOT_ZONE_BASIC |character |
-#'    |SHOT_ZONE_AREA  |character |
-#'    |SHOT_ZONE_RANGE |character |
-#'    |FGA             |character |
-#'    |FGM             |character |
-#'    |FG_PCT          |character |
+#'    Columns as documented in the shared [wnba_shotchartdetail_league_averages_schema] table.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -196,6 +182,7 @@ wnba_shotchartleaguewide <- function(
     league_id = '10',
     season = most_recent_wnba_season() - 1,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "shotchartleaguewide"
   endpoint <- wnba_endpoint(version)
@@ -206,6 +193,8 @@ wnba_shotchartleaguewide <- function(
     Season = season
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -214,13 +203,12 @@ wnba_shotchartleaguewide <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no league-wide shot chart data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no league-wide shot chart data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -295,47 +283,39 @@ NULL
 #'    **ShotChartLineupDetail**
 #'
 #'
-#'    |col_name            |types     |
-#'    |:-------------------|:---------|
-#'    |GRID_TYPE           |character |
-#'    |GAME_ID             |character |
-#'    |GAME_EVENT_ID       |character |
-#'    |GROUP_ID            |character |
-#'    |GROUP_NAME          |character |
-#'    |PLAYER_ID           |character |
-#'    |PLAYER_NAME         |character |
-#'    |TEAM_ID             |character |
-#'    |TEAM_NAME           |character |
-#'    |PERIOD              |character |
-#'    |MINUTES_REMAINING   |character |
-#'    |SECONDS_REMAINING   |character |
-#'    |EVENT_TYPE          |character |
-#'    |ACTION_TYPE         |character |
-#'    |SHOT_TYPE           |character |
-#'    |SHOT_ZONE_BASIC     |character |
-#'    |SHOT_ZONE_AREA      |character |
-#'    |SHOT_ZONE_RANGE     |character |
-#'    |SHOT_DISTANCE       |character |
-#'    |LOC_X               |character |
-#'    |LOC_Y               |character |
-#'    |SHOT_ATTEMPTED_FLAG |character |
-#'    |SHOT_MADE_FLAG      |character |
-#'    |GAME_DATE           |character |
-#'    |HTM                 |character |
-#'    |VTM                 |character |
+#'    |col_name            |types     |description                                                           |
+#'    |:-------------------|:---------|:---------------------------------------------------------------------|
+#'    |GRID_TYPE           |character |                                                                      |
+#'    |GAME_ID             |character |Unique game identifier.                                               |
+#'    |GAME_EVENT_ID       |character |Unique identifier for game event.                                     |
+#'    |GROUP_ID            |character |Group identifier (e.g. conference group_id).                          |
+#'    |GROUP_NAME          |character |Group name.                                                           |
+#'    |PLAYER_ID           |character |Unique player identifier.                                             |
+#'    |PLAYER_NAME         |character |Player name.                                                          |
+#'    |TEAM_ID             |character |Unique team identifier.                                               |
+#'    |TEAM_NAME           |character |Full team display name (e.g. 'Las Vegas Aces').                       |
+#'    |PERIOD              |character |Period of the game (1-4 quarters; 5+ for OT).                         |
+#'    |MINUTES_REMAINING   |character |Minutes remaining.                                                    |
+#'    |SECONDS_REMAINING   |character |Seconds remaining in the period.                                      |
+#'    |EVENT_TYPE          |character |Event / play type code (V2 PBP).                                      |
+#'    |ACTION_TYPE         |character |Action type label (e.g. 'Made Shot', 'Substitution').                 |
+#'    |SHOT_TYPE           |character |Shot type label (e.g. 'Jump Shot', 'Layup').                          |
+#'    |SHOT_ZONE_BASIC     |character |Shot zone (e.g. 'Restricted Area', 'Mid-Range', 'Above the Break 3'). |
+#'    |SHOT_ZONE_AREA      |character |Shot zone area ('Left Side', 'Right Side', 'Center').                 |
+#'    |SHOT_ZONE_RANGE     |character |Shot zone range ('Less Than 8 ft.', '8-16 ft.', '16-24 ft.', etc.).   |
+#'    |SHOT_DISTANCE       |character |Shot distance from the basket, in feet.                               |
+#'    |LOC_X               |character |X coordinate on the court (units of inches; 0 = basket center).       |
+#'    |LOC_Y               |character |Y coordinate on the court (units of inches; baseline at 0).           |
+#'    |SHOT_ATTEMPTED_FLAG |character |1 if a shot was attempted on this event.                              |
+#'    |SHOT_MADE_FLAG      |character |1 if the shot was made; 0 if missed.                                  |
+#'    |GAME_DATE           |character |Game date (YYYY-MM-DD).                                               |
+#'    |HTM                 |character |                                                                      |
+#'    |VTM                 |character |                                                                      |
 #'
 #'    **ShotChartLineupLeagueAverage**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GRID_TYPE       |character |
-#'    |SHOT_ZONE_BASIC |character |
-#'    |SHOT_ZONE_AREA  |character |
-#'    |SHOT_ZONE_RANGE |character |
-#'    |FGA             |character |
-#'    |FGM             |character |
-#'    |FG_PCT          |character |
+#'    Columns as documented in the shared [wnba_shotchartdetail_league_averages_schema] table.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -345,7 +325,7 @@ NULL
 #' @family WNBA Lineup Functions
 #' @details
 #' ```r
-#'  wnba_shotchartlineupdetail(group_id = '-100720-202250-204319-1627668-1628931-', season = most_recent_wnba_season())
+#'  wnba_shotchartlineupdetail(group_id = '-1628899-1629481-1630096-1631019-1642784-', opponent_team_id = '1611661324', season = most_recent_wnba_season())
 #' ```
 wnba_shotchartlineupdetail <- function(
     ahead_behind = '',
@@ -360,7 +340,7 @@ wnba_shotchartlineupdetail <- function(
     division = '',
     end_period = '10',
     end_range = '28800',
-    group_id = '-100720-202250-204319-1627668-1628931-',
+    group_id = '-1628899-1629481-1630096-1631019-1642784-',
     game_event_id = '',
     game_id = '',
     game_segment = '',
@@ -394,7 +374,7 @@ wnba_shotchartlineupdetail <- function(
     start_period = '1',
     start_range = '0',
     starter_bench = '',
-    team_id = '1611661328',
+    team_id = '1611661321',
     vs_conference = '',
     vs_division = '',
     vs_player_id1 = '',
@@ -404,6 +384,7 @@ wnba_shotchartlineupdetail <- function(
     vs_player_id5 = '',
     vs_team_id = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -470,6 +451,8 @@ wnba_shotchartlineupdetail <- function(
     VsTeamID = vs_team_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -478,16 +461,14 @@ wnba_shotchartlineupdetail <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no shot chart lineup data available for {season}! (group_id: {group_id})")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no shot chart lineup data available for {season}! (group_id: {group_id})",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
   return(df_list)
 }
-

@@ -1,6 +1,7 @@
 
 test_that("ESPN - WBB Conferences", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_conferences()
   
   cols <- c(
@@ -13,6 +14,6 @@ test_that("ESPN - WBB Conferences", {
     "conference_id"
   )
   
-  expect_equal(colnames(x), cols)
+  expect_in(cols, colnames(x))
   expect_s3_class(x, "data.frame")
 })

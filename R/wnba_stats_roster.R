@@ -14,25 +14,27 @@ NULL
 #'    **CommonAllPlayers** 
 #'    
 #'    
-#'    |col_name                 |types     |
-#'    |:------------------------|:---------|
-#'    |PERSON_ID                |character |
-#'    |DISPLAY_LAST_COMMA_FIRST |character |
-#'    |DISPLAY_FIRST_LAST       |character |
-#'    |ROSTERSTATUS             |character |
-#'    |FROM_YEAR                |character |
-#'    |TO_YEAR                  |character |
-#'    |PLAYERCODE               |character |
-#'    |PLAYER_SLUG              |character |
-#'    |TEAM_ID                  |character |
-#'    |TEAM_CITY                |character |
-#'    |TEAM_NAME                |character |
-#'    |TEAM_ABBREVIATION        |character |
-#'    |TEAM_CODE                |character |
-#'    |TEAM_SLUG                |character |
-#'    |IS_NBA_ASSIGNED          |character |
-#'    |NBA_ASSIGNED_TEAM_ID     |character |
-#'    |GAMES_PLAYED_FLAG        |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       DISPLAY_LAST_COMMA_FIRST \tab character \tab  \cr
+#'       DISPLAY_FIRST_LAST \tab character \tab  \cr
+#'       ROSTERSTATUS \tab character \tab  \cr
+#'       FROM_YEAR \tab character \tab  \cr
+#'       TO_YEAR \tab character \tab  \cr
+#'       PLAYERCODE \tab character \tab  \cr
+#'       PLAYER_SLUG \tab character \tab URL-safe player identifier. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_CODE \tab character \tab  \cr
+#'       TEAM_SLUG \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+#'       IS_NBA_ASSIGNED \tab character \tab  \cr
+#'       NBA_ASSIGNED_TEAM_ID \tab character \tab  \cr
+#'       GAMES_PLAYED_FLAG \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -48,6 +50,7 @@ wnba_commonallplayers <- function(
     league_id = '10',
     season = most_recent_wnba_season() - 1,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "commonallplayers"
   endpoint <- wnba_endpoint(version)
@@ -59,6 +62,8 @@ wnba_commonallplayers <- function(
     Season = season
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -67,13 +72,12 @@ wnba_commonallplayers <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or common all players data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or common all players data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -96,61 +100,63 @@ NULL
 #'    **CommonPlayerInfo** 
 #'    
 #'    
-#'    |col_name                         |types     |
-#'    |:--------------------------------|:---------|
-#'    |PERSON_ID                        |character |
-#'    |FIRST_NAME                       |character |
-#'    |LAST_NAME                        |character |
-#'    |DISPLAY_FIRST_LAST               |character |
-#'    |DISPLAY_LAST_COMMA_FIRST         |character |
-#'    |DISPLAY_FI_LAST                  |character |
-#'    |PLAYER_SLUG                      |character |
-#'    |BIRTHDATE                        |character |
-#'    |SCHOOL                           |character |
-#'    |COUNTRY                          |character |
-#'    |LAST_AFFILIATION                 |character |
-#'    |HEIGHT                           |character |
-#'    |WEIGHT                           |character |
-#'    |SEASON_EXP                       |character |
-#'    |JERSEY                           |character |
-#'    |POSITION                         |character |
-#'    |ROSTERSTATUS                     |character |
-#'    |GAMES_PLAYED_CURRENT_SEASON_FLAG |character |
-#'    |TEAM_ID                          |character |
-#'    |TEAM_NAME                        |character |
-#'    |TEAM_ABBREVIATION                |character |
-#'    |TEAM_CODE                        |character |
-#'    |TEAM_CITY                        |character |
-#'    |PLAYERCODE                       |character |
-#'    |FROM_YEAR                        |character |
-#'    |TO_YEAR                          |character |
-#'    |DLEAGUE_FLAG                     |character |
-#'    |NBA_FLAG                         |character |
-#'    |GAMES_PLAYED_FLAG                |character |
-#'    |DRAFT_YEAR                       |character |
-#'    |DRAFT_ROUND                      |character |
-#'    |DRAFT_NUMBER                     |character |
-#'    |GREATEST_75_FLAG                 |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       DISPLAY_FIRST_LAST \tab character \tab  \cr
+#'       DISPLAY_LAST_COMMA_FIRST \tab character \tab  \cr
+#'       DISPLAY_FI_LAST \tab character \tab  \cr
+#'       PLAYER_SLUG \tab character \tab URL-safe player identifier. \cr
+#'       BIRTHDATE \tab character \tab  \cr
+#'       SCHOOL \tab character \tab Player's school / college (when distinct from 'college'). \cr
+#'       COUNTRY \tab character \tab Country (full name or code). \cr
+#'       LAST_AFFILIATION \tab character \tab  \cr
+#'       HEIGHT \tab character \tab Player height (string e.g. '6-2' or inches). \cr
+#'       WEIGHT \tab character \tab Player weight in pounds. \cr
+#'       SEASON_EXP \tab character \tab  \cr
+#'       JERSEY \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'       ROSTERSTATUS \tab character \tab  \cr
+#'       GAMES_PLAYED_CURRENT_SEASON_FLAG \tab character \tab  \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_CODE \tab character \tab  \cr
+#'       TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+#'       PLAYERCODE \tab character \tab  \cr
+#'       FROM_YEAR \tab character \tab  \cr
+#'       TO_YEAR \tab character \tab  \cr
+#'       DLEAGUE_FLAG \tab character \tab  \cr
+#'       NBA_FLAG \tab character \tab  \cr
+#'       GAMES_PLAYED_FLAG \tab character \tab  \cr
+#'       DRAFT_YEAR \tab character \tab Draft year (4-digit). \cr
+#'       DRAFT_ROUND \tab character \tab Round of the draft selection. \cr
+#'       DRAFT_NUMBER \tab character \tab  \cr
+#'       GREATEST_75_FLAG \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **PlayerHeadlineStats** 
 #'    
 #'    
-#'    |col_name             |types     |
-#'    |:--------------------|:---------|
-#'    |PLAYER_ID            |character |
-#'    |PLAYER_NAME          |character |
-#'    |TimeFrame            |character |
-#'    |PTS                  |character |
-#'    |AST                  |character |
-#'    |REB                  |character |
-#'    |ALL_STAR_APPEARANCES |character |
+#'    |col_name             |types     |description               |
+#'    |:--------------------|:---------|:-------------------------|
+#'    |PLAYER_ID            |character |Unique player identifier. |
+#'    |PLAYER_NAME          |character |Player name.              |
+#'    |TimeFrame            |character |                          |
+#'    |PTS                  |character |Points scored.            |
+#'    |AST                  |character |Assists.                  |
+#'    |REB                  |character |Total rebounds.           |
+#'    |ALL_STAR_APPEARANCES |character |                          |
 #'    
 #'    **AvailableSeasons** 
 #'    
 #'    
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |SEASON_ID |character |
+#'    |col_name  |types     |description               |
+#'    |:---------|:---------|:-------------------------|
+#'    |SEASON_ID |character |Unique season identifier. |
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -165,6 +171,7 @@ wnba_commonplayerinfo <- function(
     league_id = '10',
     player_id = '1628932',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "commonplayerinfo"
   endpoint <- wnba_endpoint(version)
@@ -176,6 +183,8 @@ wnba_commonplayerinfo <- function(
     PlayerID = player_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -184,13 +193,12 @@ wnba_commonplayerinfo <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or common player info data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or common player info data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -213,13 +221,13 @@ NULL
 #'    **PlayoffSeries**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GAME_ID         |character |
-#'    |HOME_TEAM_ID    |character |
-#'    |VISITOR_TEAM_ID |character |
-#'    |SERIES_ID       |character |
-#'    |GAME_NUM        |character |
+#'    |col_name        |types     |description                          |
+#'    |:---------------|:---------|:------------------------------------|
+#'    |GAME_ID         |character |Unique game identifier.              |
+#'    |HOME_TEAM_ID    |character |Unique identifier for the home team. |
+#'    |VISITOR_TEAM_ID |character |Unique identifier for visitor team.  |
+#'    |SERIES_ID       |character |                                     |
+#'    |GAME_NUM        |character |                                     |
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -234,6 +242,7 @@ wnba_commonplayoffseries <- function(
     season = most_recent_wnba_season() - 2,
     series_id = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "commonplayoffseries"
   endpoint <- wnba_endpoint(version)
@@ -245,6 +254,8 @@ wnba_commonplayoffseries <- function(
     SeriesID = series_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -253,13 +264,12 @@ wnba_commonplayoffseries <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or common playoff series data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or common playoff series data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -282,40 +292,44 @@ NULL
 #'    **CommonTeamRoster**
 #'
 #'
-#'    |col_name     |types     |
-#'    |:------------|:---------|
-#'    |TeamID       |character |
-#'    |SEASON       |character |
-#'    |LeagueID     |character |
-#'    |PLAYER       |character |
-#'    |NICKNAME     |character |
-#'    |PLAYER_SLUG  |character |
-#'    |NUM          |character |
-#'    |POSITION     |character |
-#'    |HEIGHT       |character |
-#'    |WEIGHT       |character |
-#'    |BIRTH_DATE   |character |
-#'    |AGE          |character |
-#'    |EXP          |character |
-#'    |SCHOOL       |character |
-#'    |PLAYER_ID    |character |
-#'    |HOW_ACQUIRED |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       TeamID \tab character \tab  \cr
+#'       SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       LeagueID \tab character \tab  \cr
+#'       PLAYER \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       PLAYER_SLUG \tab character \tab URL-safe player identifier. \cr
+#'       NUM \tab character \tab  \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'       HEIGHT \tab character \tab Player height (string e.g. '6-2' or inches). \cr
+#'       WEIGHT \tab character \tab Player weight in pounds. \cr
+#'       BIRTH_DATE \tab character \tab Date of birth (YYYY-MM-DD). \cr
+#'       AGE \tab character \tab Player age (in years). \cr
+#'       EXP \tab character \tab  \cr
+#'       SCHOOL \tab character \tab Player's school / college (when distinct from 'college'). \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       HOW_ACQUIRED \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **Coaches**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |TEAM_ID           |character |
-#'    |SEASON            |character |
-#'    |COACH_ID          |character |
-#'    |FIRST_NAME        |character |
-#'    |LAST_NAME         |character |
-#'    |COACH_NAME        |character |
-#'    |IS_ASSISTANT      |character |
-#'    |COACH_TYPE        |character |
-#'    |SORT_SEQUENCE     |character |
-#'    |SUB_SORT_SEQUENCE |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       COACH_ID \tab character \tab Unique identifier for coach. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       COACH_NAME \tab character \tab  \cr
+#'       IS_ASSISTANT \tab character \tab  \cr
+#'       COACH_TYPE \tab character \tab  \cr
+#'       SORT_SEQUENCE \tab character \tab  \cr
+#'       SUB_SORT_SEQUENCE \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -331,6 +345,7 @@ wnba_commonteamroster <- function(
     season = most_recent_wnba_season() - 1,
     team_id = '1611661317',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "commonteamroster"
   endpoint <- wnba_endpoint(version)
@@ -342,6 +357,8 @@ wnba_commonteamroster <- function(
     TeamID = team_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -350,13 +367,12 @@ wnba_commonteamroster <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or common team roster data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or common team roster data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

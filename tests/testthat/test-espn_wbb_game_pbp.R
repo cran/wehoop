@@ -1,6 +1,7 @@
 
 test_that("ESPN - WBB Play-by-Play", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_pbp(game_id = 401276115)
   
   cols <- c(
@@ -57,6 +58,6 @@ test_that("ESPN - WBB Play-by-Play", {
     "game_date_time"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

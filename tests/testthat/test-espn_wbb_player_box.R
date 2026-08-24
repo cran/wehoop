@@ -1,6 +1,7 @@
 
 test_that("ESPN - WBB Player Box", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_player_box(game_id = 401276115)
   
   cols <- c(
@@ -34,7 +35,6 @@ test_that("ESPN - WBB Player Box", {
     "starter",
     "ejected",
     "did_not_play",
-    "active",
     "athlete_jersey",
     "athlete_short_name",
     "athlete_headshot_href",

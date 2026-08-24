@@ -1,5 +1,17 @@
 
-# wehoop <a href='https://wehoop.sportsdataverse.org'><img src="https://raw.githubusercontent.com/sportsdataverse/wehoop/main/logo.png" align="right"  width="20%" min-width="100px"/></a>
+  - [wehoop
+    <a href='https://wehoop.sportsdataverse.org'><img src="https://raw.githubusercontent.com/sportsdataverse/wehoop/main/logo.png" align="right"  width="20%" min-width="100px" alt="wehoop logo"/></a>](#wehoop-)
+      - [**Installation**](#installation)
+      - [**Quick Start**](#quick-start)
+      - [**Documentation**](#documentation)
+      - [**Breaking Changes**](#breaking-changes)
+      - [Follow the SportsDataverse (@SportsDataverse) on X and star
+        this
+        repo](#follow-the-sportsdataverse-sportsdataverse-on-x-and-star-this-repo)
+  - [**Our Authors**](#our-authors)
+      - [**Citations**](#citations)
+
+# wehoop <a href='https://wehoop.sportsdataverse.org'><img src="https://raw.githubusercontent.com/sportsdataverse/wehoop/main/logo.png" align="right"  width="20%" min-width="100px" alt="wehoop logo"/></a>
 
 <!-- badges: start -->
 
@@ -10,9 +22,13 @@ downloads](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=s
 [![Version-Number](https://img.shields.io/github/r-package/v/sportsdataverse/wehoop?label=wehoop&logo=R&style=for-the-badge)](https://github.com/sportsdataverse/wehoop)
 [![R-CMD-check](https://img.shields.io/github/actions/workflow/status/sportsdataverse/wehoop/R-CMD-check.yaml?branch=main&label=R-CMD-Check&logo=R&logoColor=white&style=for-the-badge)](https://github.com/sportsdataverse/wehoop/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)](https://github.com/sportsdataverse/wehoop)
+[![X
+Follow](https://img.shields.io/twitter/follow/SaiemGilani?label=%40SaiemGilani&logo=x&style=for-the-badge)](https://x.com/SaiemGilani)
+[![X
+Follow](https://img.shields.io/twitter/follow/hutchngo?label=%40hutchngo&logo=x&style=for-the-badge)](https://x.com/hutchngo)
+[![X
+Follow](https://img.shields.io/twitter/follow/sportsdataverse?label=%40SportsDataverse&logo=x&style=for-the-badge)](https://x.com/sportsdataverse)
 
-<!-- [![Twitter Follow](https://img.shields.io/twitter/follow/SaiemGilani?color=blue&label=%40SaiemGilani&logo=twitter&style=for-the-badge)](https://twitter.com/SaiemGilani) -->
-<!-- [![Twitter Follow](https://img.shields.io/twitter/follow/hutchngo?color=blue&label=%40hutchngo&logo=twitter&style=for-the-badge)](https://twitter.com/hutchngo) [![Twitter Follow](https://img.shields.io/twitter/follow/sportsdataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/sportsdataverse)  -->
 <!-- badges: end -->
 
 `wehoop` is an R package for working with women’s college and
@@ -34,35 +50,46 @@ You can install the CRAN version of
 install.packages("wehoop")
 ```
 
-You can install the released version of
-[**`wehoop`**](https://github.com/sportsdataverse/wehoop) from
-[GitHub](https://github.com/sportsdataverse/wehoop) with:
+This documentation describes **wehoop 3.0.0**. If the CRAN release hasn't
+caught up yet, install the GitHub development version instead:
 
 ``` r
-# You can install using the pacman package using the following code:
-if (!requireNamespace('pacman', quietly = TRUE)){
-  install.packages('pacman')
+# You can install using the pak package using the following code:
+if (!requireNamespace('pak', quietly = TRUE)){
+  install.packages('pak')
 }
-pacman::p_load_current_gh("sportsdataverse/wehoop", dependencies = TRUE, update = TRUE)
+pak::pak("sportsdataverse/wehoop")
 ```
 
 ## **Quick Start**
 
-### **WNBA full play-by-play seasons (2002-2023) ~ 1-2 minutes**
+### **WNBA full play-by-play seasons (2002-2026) \~ 1-2 minutes**
 
 ``` r
 tictoc::tic()
 progressr::with_progress({
   wnba_pbp <- wehoop::load_wnba_pbp()
 })
+```
+
+    ## Warning in readRDS(con): cannot open URL
+    ## 'https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_pbp/play_by_play_2026.rds':
+    ## HTTP status was '404 Not Found'
+
+    ## Warning: Failed to readRDS from
+    ## <https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_pbp/play_by_play_2026.rds>
+
+``` r
 tictoc::toc()
 ```
 
-    ## 1.39 sec elapsed
+    ## 0.3 sec elapsed
 
-    ## 102191 rows of WNBA play-by-play data from 262 games.
+    ## Warning: Unknown or uninitialised column: `game_id`.
 
-### **Women’s college basketball full play-by-play seasons (2004-2024) ~ 2-3 minutes**
+    ## 0 rows of WNBA play-by-play data from 0 games.
+
+### **Women’s college basketball full play-by-play seasons (2004-2026) \~ 2-3 minutes**
 
 ``` r
 tictoc::tic()
@@ -72,9 +99,9 @@ progressr::with_progress({
 tictoc::toc()
 ```
 
-    ## 1.7 sec elapsed
+    ## 10.58 sec elapsed
 
-    ## 328507 rows of women's college basketball play-by-play data from 959 games.
+    ## 2824090 rows of women's college basketball play-by-play data from 6011 games.
 
 ## **Documentation**
 
@@ -82,28 +109,50 @@ For more information on the package and function reference, please see
 the [**`wehoop`** documentation
 website](https://wehoop.sportsdataverse.org).
 
+`wehoop` 3.0.0 ships **180 ESPN basketball endpoint wrappers** (88
+`espn_wbb_*` + 92 `espn_wnba_*`) covering reference and catalog data,
+team detail, athlete coverage, event-level enrichments (odds, win
+probability, officials, broadcasts), WNBA-only artifacts (draft, free
+agents, transactions), and league-wide catalogs. See the [ESPN
+basketball endpoints
+vignette](https://wehoop.sportsdataverse.org/articles/espn-endpoints.html)
+for a full walkthrough.
+
+Beyond the live ESPN scrapers, `wehoop` ships **90 `load_*()` release-dataset
+loaders** that pull pre-built season parquet/rds instead of hitting the
+source APIs: `load_wnba_*` / `load_wbb_*` (ESPN-backed pbp, box scores,
+rosters, standings, crosswalks), `load_wnba_stats_*` (WNBA Stats API,
+including `load_wnba_stats_possessions()`), and the **`load_ncaa_wbb_*`
+family** (`pbp`, `shots`, `lineups`, `matchup_stints`, `possessions`,
+`rapm_within_team`, `rapm` (league-wide), `player_box`, `team_box`, `rosters`,
+`team_rosters`, `schedule`, `team_ids`; seasons 2010-2026, `shots` 2019-2026,
+`rapm` 2011-2026) backed by the sportsdataverse-py NCAA engine. Model-dataset
+loaders round out the surface: `load_wnba_player_impact()`,
+`load_wbb_player_value()`, and `load_wbb_ratings()`.
+
 ## **Breaking Changes**
 
 [**Full News on
 Releases**](https://wehoop.sportsdataverse.org/news/index.html)
 
-## Follow the SportsDataverse (@SportsDataverse) on Twitter and star this repo
+## Follow the SportsDataverse (@SportsDataverse) on X and star this repo
 
-<!-- [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse)  -->
+[![X
+Follow](https://img.shields.io/twitter/follow/SportsDataverse?style=for-the-badge&logo=x&label=%40SportsDataverse)](https://x.com/SportsDataverse)
 
 [![GitHub
-stars](https://img.shields.io/github/stars/sportsdataverse/wehoop.svg?color=eee&logo=github&style=for-the-badge&label=Star%20wehoop&maxAge=2592000)](https://github.com/sportsdataverse/wehoop/stargazers/)
+stars](https://img.shields.io/github/stars/sportsdataverse/wehoop.svg?color=eee&logo=github&style=for-the-badge&label=Star%20wehoop&maxAge=2592000)](https://github.com/sportsdataverse/wehoop)
 
 # **Our Authors**
 
-- Saiem Gilani (@saiemgilani)  
-  <!-- <a href="https://twitter.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=twitter&style=for-the-badge" alt="@saiemgilani" /></a> -->
+  - [Saiem Gilani](https://x.com/saiemgilani)
 
+<a href="https://x.com/saiemgilani" target="blank"><img  alt="@SaiemGilani" src="https://img.shields.io/twitter/follow/SaiemGilani?style=for-the-badge&logo=x&label=%40SaiemGilani"></a>
 <a href="https://github.com/saiemgilani" target="blank"><img src="https://img.shields.io/github/followers/saiemgilani?color=eee&logo=Github&style=for-the-badge" alt="@saiemgilani" /></a>
 
-- Geoff Hutchinson (@HutchNGo)  
-  <!-- <a href="https://twitter.com/HutchNGo" target="blank"><img src="https://img.shields.io/twitter/follow/HutchNGo?color=blue&label=%40hutchngo&logo=twitter&style=for-the-badge" alt="@HutchNGo" /></a> -->
+  - [Geoff Hutchinson - RIP](https://x.com/hutchngo)
 
+<a href="https://x.com/HutchNGo" target="blank"><img src="https://img.shields.io/twitter/follow/HutchNGo?label=%40hutchngo&logo=x&style=for-the-badge" alt="@HutchNGo" /></a>
 <a href="https://github.com/hutchngo" target="blank"><img src="https://img.shields.io/github/followers/hutchngo?color=eee&logo=Github&style=for-the-badge" alt="@hutchngo" /></a>
 
 ## **Citations**
@@ -115,9 +164,13 @@ BibTex Citation
 
 ``` bibtex
 @misc{hutchinson_gilani_2021_wehoop,
-  author = {Saiem Gilani and Geoff Hutchinson},
-  title = {wehoop: The SportsDataverse's R Package for Women's Basketball Data.},
-  url = {https://wehoop.sportsdataverse.org},
-  year = {2021}
+  title = {wehoop: Access Women’s Basketball Play by Play Data},
+  url = {http://doi.org/10.32614/CRAN.package.wehoop},
+  DOI = {10.32614/cran.package.wehoop},
+  journal = {CRAN: Contributed Packages},
+  publisher = {The R Foundation},
+  author = {Gilani,  Saiem and Hutchinson,  Geoffery},
+  year = {2021},
+  month = nov
 }
 ```

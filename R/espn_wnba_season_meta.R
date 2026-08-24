@@ -1,0 +1,193 @@
+# espn_wnba_season_meta.R
+# Public WNBA shims for ESPN season-metadata endpoints: types, leaders, rankings.
+
+# ---------------------------------------------------------------------------
+# espn_wnba_season_types
+# ---------------------------------------------------------------------------
+
+#' **Get ESPN WNBA Season Types Index**
+#' @name espn_wnba_season_types
+NULL
+#' @title
+#' **Get ESPN WNBA Season Types Index**
+#' @rdname espn_wnba_season_types
+#' @author Saiem Gilani
+#' @description
+#' Returns the index of season-type IDs that exist for one WNBA season
+#' (typically 1 = preseason, 2 = regular, 3 = postseason, 4 = off-season).
+#' Pass an ID to [espn_wnba_season_type()] for the start/end dates and
+#' whether that type carries groups, standings, or legs.
+#'
+#' @param season Season year (numeric). Defaults to the most recent WNBA season.
+#' @param ... Additional arguments; currently unused.
+#' @return A tibble with one row per season type.
+#'
+#'    |col_name    |types     |description                       |
+#'    |:-----------|:---------|:---------------------------------|
+#'    |league      |character |League slug (`"wnba"`).            |
+#'    |season      |integer   |Season year.                      |
+#'    |season_type |integer   |Season-type id (1/2/3/4).         |
+#'    |ref         |character |`$ref` URL for the type detail.   |
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @export
+#' @family ESPN WNBA Functions
+#' @examples
+#' \donttest{
+#'   espn_wnba_season_types(season = 2025)
+#' }
+espn_wnba_season_types <- function(season = most_recent_wnba_season(), ...) {
+  .espn_basketball_season_types(league = "wnba", season = season, ...)
+}
+
+# ---------------------------------------------------------------------------
+# espn_wnba_season_type
+# ---------------------------------------------------------------------------
+
+#' **Get ESPN WNBA Season-Type Detail**
+#' @name espn_wnba_season_type
+#' @title
+#' **Get ESPN WNBA Season-Type Detail**
+#' @rdname espn_wnba_season_type
+#' @author Saiem Gilani
+#' @description
+#' Returns metadata for one season-type within an WNBA season: name,
+#' abbreviation, start / end dates, and whether it carries groups,
+#' standings, or playoff legs.
+#'
+#' @param season_type Season-type id (1 = preseason, 2 = regular (default),
+#'   3 = postseason, 4 = off-season).
+#' @param season Season year. Defaults to most recent WNBA season.
+#' @param ... Additional arguments; currently unused.
+#' @return A single-row tibble.
+#'
+#'    Columns as documented in the shared [espn_basketball_season_type_schema] table.
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @export
+#' @family ESPN WNBA Functions
+#' @examples
+#' \donttest{
+#'   espn_wnba_season_type(season_type = 2, season = 2025)
+#' }
+espn_wnba_season_type <- function(season_type = 2L,
+                                  season = most_recent_wnba_season(),
+                                  ...) {
+  .espn_basketball_season_type(league = "wnba", season = season,
+                                 season_type = season_type, ...)
+}
+
+# ---------------------------------------------------------------------------
+# espn_wnba_season_leaders
+# ---------------------------------------------------------------------------
+
+#' **Get ESPN WNBA Season Leaders (Long Format)**
+#' @name espn_wnba_season_leaders
+#' @title
+#' **Get ESPN WNBA Season Leaders (Long Format)**
+#' @rdname espn_wnba_season_leaders
+#' @author Saiem Gilani
+#' @description
+#' Returns the per-category leaderboard for one (WNBA season x season-type),
+#' in long format. Each row is one (category x rank) entry, e.g.
+#' "Points Per Game x rank 1 x LeBron James".
+#'
+#' @param season Season year. Defaults to most recent WNBA season.
+#' @param season_type Season-type id (2 = regular (default), 3 = postseason).
+#' @param ... Additional arguments; currently unused.
+#' @return A long tibble with one row per (category x leader).
+#'
+#'    Columns as documented in the shared [espn_basketball_season_leaders_schema] table.
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @export
+#' @family ESPN WNBA Functions
+#' @examples
+#' \donttest{
+#'   espn_wnba_season_leaders(season = 2025)
+#' }
+espn_wnba_season_leaders <- function(season = most_recent_wnba_season(),
+                                     season_type = c(2L, 3L), ...) {
+  .espn_basketball_season_leaders(league = "wnba", season = season,
+                                    season_type = season_type, ...)
+}
+
+# ---------------------------------------------------------------------------
+# espn_wnba_season_rankings
+# ---------------------------------------------------------------------------
+
+#' **Get ESPN WNBA Season Rankings Index**
+#' @name espn_wnba_season_rankings
+#' @title
+#' **Get ESPN WNBA Season Rankings Index**
+#' @rdname espn_wnba_season_rankings
+#' @author Saiem Gilani
+#' @description
+#' Returns the index of season-level rankings recorded for one WNBA season.
+#' WNBA typically returns zero rankings (ranking polls are a college
+#' concept); the wrapper is provided for symmetry across leagues. For
+#' WBB use the matching `espn_wbb_season_rankings()`.
+#'
+#' @param season Season year. Defaults to most recent WNBA season.
+#' @param ... Additional arguments; currently unused.
+#' @return A tibble with one row per ranking source.
+#'
+#'    |col_name   |types     |description                          |
+#'    |:----------|:---------|:------------------------------------|
+#'    |league     |character |League slug.                         |
+#'    |season     |integer   |Season year.                         |
+#'    |ranking_id |character |ESPN ranking id.                     |
+#'    |ref        |character |`$ref` URL for the ranking detail.   |
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @export
+#' @family ESPN WNBA Functions
+#' @examples
+#' \donttest{
+#'   espn_wnba_season_rankings(season = 2025)
+#' }
+espn_wnba_season_rankings <- function(season = most_recent_wnba_season(), ...) {
+  .espn_basketball_season_rankings(league = "wnba", season = season, ...)
+}
+
+# ---------------------------------------------------------------------------
+# espn_wnba_season_ranking
+# ---------------------------------------------------------------------------
+
+#' **Get ESPN WNBA Season Ranking Detail**
+#' @name espn_wnba_season_ranking
+#' @title
+#' **Get ESPN WNBA Season Ranking Detail**
+#' @rdname espn_wnba_season_ranking
+#' @author Saiem Gilani
+#' @description
+#' Returns the per-week snapshot index for one ranking source (e.g. AP
+#' Top 25). Each row is one weekly snapshot; the `ref` URL resolves to
+#' the actual ranked teams for that (season-type x week) and will be
+#' wrapped by a forthcoming `espn_LOWERWNBA_week_ranking()`.
+#'
+#' @param ranking_id ESPN ranking identifier (character or numeric).
+#' @param season Season year. Defaults to most recent WNBA season.
+#' @param ... Additional arguments; currently unused.
+#' @return A tibble with one row per weekly snapshot.
+#'
+#'    Columns as documented in the shared [espn_basketball_season_ranking_schema] table.
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @export
+#' @family ESPN WNBA Functions
+#' @examples
+#' \donttest{
+#'   espn_wnba_season_ranking(ranking_id = 1, season = 2025)
+#' }
+espn_wnba_season_ranking <- function(ranking_id,
+                                     season = most_recent_wnba_season(),
+                                     ...) {
+  .espn_basketball_season_ranking(league = "wnba", season = season,
+                                    ranking_id = ranking_id, ...)
+}

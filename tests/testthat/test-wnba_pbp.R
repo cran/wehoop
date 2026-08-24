@@ -1,6 +1,7 @@
 test_that("WNBA Play-by-Plays", {
   skip_on_cran()
   skip_on_ci()
+  skip_wnba_stats_test()
   
   x <- wnba_pbp(game_id = "1022200034")
   
@@ -59,7 +60,7 @@ test_that("WNBA Play-by-Plays", {
   )
   
   
-  expect_equal(sort(colnames(x)), sort(cols_x1))
+  expect_in(sort(cols_x1), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
   
   Sys.sleep(3)

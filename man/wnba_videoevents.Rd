@@ -22,14 +22,15 @@ Return a list of tibbles: videoUrls, playlist
 \strong{Get WNBA Stats API Video Events}
 }
 \details{
+(Possibly Defunct)
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{  wnba_videoevents(game_id = '1022200075', game_event_id = '10')
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Video Functions: 
-\code{\link{wnba_videodetailsasset}()},
-\code{\link{wnba_videodetails}()},
-\code{\link{wnba_videostatus}()}
+Other WNBA Video Functions:
+\code{\link[=wnba_videodetailsasset]{wnba_videodetailsasset()}},
+\code{\link[=wnba_videostatus]{wnba_videostatus()}}
 }
 \author{
 Saiem Gilani

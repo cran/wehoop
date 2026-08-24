@@ -98,63 +98,9 @@ wnba_leaguedashteamstats(
 \value{
 Returns a named list of data frames: LeagueDashTeamStats
 
-\strong{LeagueDashTeamStats}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   TEAM_NAME \tab character \cr
-   GP \tab character \cr
-   W \tab character \cr
-   L \tab character \cr
-   W_PCT \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   TOV \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   BLKA \tab character \cr
-   PF \tab character \cr
-   PFD \tab character \cr
-   PTS \tab character \cr
-   PLUS_MINUS \tab character \cr
-   GP_RANK \tab character \cr
-   W_RANK \tab character \cr
-   L_RANK \tab character \cr
-   W_PCT_RANK \tab character \cr
-   MIN_RANK \tab character \cr
-   FGM_RANK \tab character \cr
-   FGA_RANK \tab character \cr
-   FG_PCT_RANK \tab character \cr
-   FG3M_RANK \tab character \cr
-   FG3A_RANK \tab character \cr
-   FG3_PCT_RANK \tab character \cr
-   FTM_RANK \tab character \cr
-   FTA_RANK \tab character \cr
-   FT_PCT_RANK \tab character \cr
-   OREB_RANK \tab character \cr
-   DREB_RANK \tab character \cr
-   REB_RANK \tab character \cr
-   AST_RANK \tab character \cr
-   TOV_RANK \tab character \cr
-   STL_RANK \tab character \cr
-   BLK_RANK \tab character \cr
-   BLKA_RANK \tab character \cr
-   PF_RANK \tab character \cr
-   PFD_RANK \tab character \cr
-   PTS_RANK \tab character \cr
-   PLUS_MINUS_RANK \tab character \cr
-}
+\strong{LeagueDashTeamStats}
+
+Columns as documented in the shared \link{wnba_leaguedashteamclutch_league_dash_team_clutch_schema} table.
 }
 \description{
 \strong{Get WNBA Stats API League Dashboard Team Stats}
@@ -166,44 +112,36 @@ Returns a named list of data frames: LeagueDashTeamStats
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA League Functions: 
-\code{\link{wnba_leaguedashlineups}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leaguedashteamclutch}()},
-\code{\link{wnba_leaguedashteamshotlocations}()},
-\code{\link{wnba_leaguegamefinder}()},
-\code{\link{wnba_leaguegamelog}()},
-\code{\link{wnba_leaguelineupviz}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_leaguestandingsv3}()},
-\code{\link{wnba_shotchartleaguewide}()}
+Other WNBA League Functions:
+\code{\link[=wnba_leaguedashlineups]{wnba_leaguedashlineups()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leaguedashteamclutch]{wnba_leaguedashteamclutch()}},
+\code{\link[=wnba_leaguedashteamshotlocations]{wnba_leaguedashteamshotlocations()}},
+\code{\link[=wnba_leaguegamefinder]{wnba_leaguegamefinder()}},
+\code{\link[=wnba_leaguegamelog]{wnba_leaguegamelog()}},
+\code{\link[=wnba_leaguelineupviz]{wnba_leaguelineupviz()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_leaguestandingsv3]{wnba_leaguestandingsv3()}},
+\code{\link[=wnba_shotchartleaguewide]{wnba_shotchartleaguewide()}}
 
-Other WNBA Team Functions: 
-\code{\link{wnba_teamdashboardbyclutch}()},
-\code{\link{wnba_teamdashboardbygamesplits}()},
-\code{\link{wnba_teamdashboardbygeneralsplits}()},
-\code{\link{wnba_teamdashboardbylastngames}()},
-\code{\link{wnba_teamdashboardbyopponent}()},
-\code{\link{wnba_teamdashboardbyshootingsplits}()},
-\code{\link{wnba_teamdashboardbyteamperformance}()},
-\code{\link{wnba_teamdashboardbyyearoveryear}()},
-\code{\link{wnba_teamdashlineups}()},
-\code{\link{wnba_teamdetails}()},
-\code{\link{wnba_teamestimatedmetrics}()},
-\code{\link{wnba_teamgamelogs}()},
-\code{\link{wnba_teamgamelog}()},
-\code{\link{wnba_teamgamestreakfinder}()},
-\code{\link{wnba_teamhistoricalleaders}()},
-\code{\link{wnba_teamplayerdashboard}()},
-\code{\link{wnba_teamplayeronoffdetails}()},
-\code{\link{wnba_teamplayeronoffsummary}()},
-\code{\link{wnba_teams}()},
-\code{\link{wnba_teamvsplayer}()},
-\code{\link{wnba_teamyearbyyearstats}()}
+Other WNBA Team Functions:
+\code{\link[=wnba_teamdashboardbyclutch]{wnba_teamdashboardbyclutch()}},
+\code{\link[=wnba_teamdashlineups]{wnba_teamdashlineups()}},
+\code{\link[=wnba_teamdetails]{wnba_teamdetails()}},
+\code{\link[=wnba_teamestimatedmetrics]{wnba_teamestimatedmetrics()}},
+\code{\link[=wnba_teamgamelog]{wnba_teamgamelog()}},
+\code{\link[=wnba_teamgamelogs]{wnba_teamgamelogs()}},
+\code{\link[=wnba_teamgamestreakfinder]{wnba_teamgamestreakfinder()}},
+\code{\link[=wnba_teamhistoricalleaders]{wnba_teamhistoricalleaders()}},
+\code{\link[=wnba_teaminfocommon]{wnba_teaminfocommon()}},
+\code{\link[=wnba_teamplayeronoffdetails]{wnba_teamplayeronoffdetails()}},
+\code{\link[=wnba_teams]{wnba_teams()}},
+\code{\link[=wnba_teamvsplayer]{wnba_teamvsplayer()}},
+\code{\link[=wnba_teamyearbyyearstats]{wnba_teamyearbyyearstats()}}
 }
 \author{
 Saiem Gilani

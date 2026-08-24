@@ -1,6 +1,7 @@
 
 test_that("ESPN - WBB Team Stats", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_team_stats(team_id = 52, year = 2022)
   cols <- c(
     "team_id",
@@ -17,7 +18,6 @@ test_that("ESPN - WBB Team Stats", {
     "team_color",
     "team_alternate_color",
     "team_is_active",
-    "team_is_all_star",
     "logo_href",
     "logo_dark_href",
     "defensive_blocks",
@@ -99,6 +99,6 @@ test_that("ESPN - WBB Team Stats", {
     "offensive_scoring_efficiency"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

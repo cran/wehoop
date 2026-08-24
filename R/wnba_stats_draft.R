@@ -6,119 +6,153 @@ NULL
 #' **Get WNBA Stats API Draft Board**
 #' @rdname wnba_draftboard
 #' @author Saiem Gilani
-#' @param season season
+#' @param season Draft year as numeric or character (e.g. `2026`).
 #' @param ... Additional arguments passed to an underlying function like httr.
-#' @return Returns a named list of data frames: teams,draft_info, picks
-#' 
-#'    **teams** 
-#'    
-#'    
-#'    |col_name      |types     |
-#'    |:-------------|:---------|
-#'    |id            |integer   |
-#'    |external-id   |character |
-#'    |slug          |character |
-#'    |name          |character |
-#'    |city          |character |
-#'    |state         |character |
-#'    |url           |character |
-#'    |primarycolor  |character |
-#'    |seconarycolor |character |
-#'    
-#'    **draft_info** 
-#'    
-#'    
-#'    |col_name              |types     |
-#'    |:---------------------|:---------|
-#'    |draft_status          |character |
-#'    |draft_modified        |integer   |
-#'    |draft_title           |character |
-#'    |draft_show_players    |character |
-#'    |draft_id              |integer   |
-#'    |draft_url             |character |
-#'    |draft_location        |character |
-#'    |sponsor_logo          |character |
-#'    |header_image          |character |
-#'    |sponsor_link          |character |
-#'    |draft_date            |character |
-#'    |draft_time_hh         |character |
-#'    |draft_time_mm         |character |
-#'    |draft_time_am         |character |
-#'    |draft_time_tz         |character |
-#'    |draft_round_1_channel |character |
-#'    |draft_round_2_channel |character |
-#'    |draft_round_3_channel |character |
-#'    |draft_interval        |character |
-#'    
-#'    **picks** 
-#'    
-#'    
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |team            |character |
-#'    |details         |character |
-#'    |player_name     |character |
-#'    |player_id       |integer   |
-#'    |player_college  |character |
-#'    |player_position |character |
-#'    |player_ppg      |character |
-#'    |player_rpg      |character |
-#'    |player_apg      |character |
-#'    |player_fg       |character |
-#'    |player_headshot |character |
-#'    |player_url      |character |
-#'    |round           |integer   |
-#' 
-#' @importFrom jsonlite fromJSON toJSON
-#' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
-#' @import rvest
+#' @return Returns a named list of tibbles: `board`, `picks`.
+#'
+#'    **board**
+#'
+#'    |col_name     |types     |description                                           |
+#'    |:------------|:---------|:-----------------------------------------------------|
+#'    |draft_id     |integer   |Unique identifier for draft.                          |
+#'    |title        |character |Title or label for the record.                        |
+#'    |season       |integer   |Season identifier (4-digit year or 'YYYY-YY' string). |
+#'    |status       |character |Status label.                                         |
+#'    |on_the_clock |character |On the clock.                                         |
+#'    |draft_date   |character |Date in YYYY-MM-DD format.                            |
+#'    |modified     |character |Modified.                                             |
+#'
+#'    **picks**
+#'
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       round \tab integer \tab Tournament / playoff round. \cr
+#'       pick \tab integer \tab Pick. \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       team_external_id \tab integer \tab Unique identifier for team external. \cr
+#'       team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       prospect_id \tab integer \tab Unique identifier for prospect. \cr
+#'       first_name \tab character \tab Player's first name. \cr
+#'       last_name \tab character \tab Player's last name. \cr
+#'       position \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'       country \tab character \tab Country (full name or code). \cr
+#'       college \tab character \tab College or school attended. \cr
+#'       ppg \tab character \tab Points per game. \cr
+#'       rpg \tab character \tab Rebounds per game. \cr
+#'       apg \tab character \tab Assists per game. \cr
+#'       spg \tab character \tab Steals per game. \cr
+#'       bpg \tab character \tab Blocks per game. \cr
+#'       fg_pct \tab character \tab Field goal percentage (0-1). \cr
+#'       description \tab character \tab Long-form description text. \cr
+#'       headshot_url \tab character \tab URL for headshot. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr as_tibble
+#' @importFrom purrr map_dfr
+#' @importFrom rlang %||%
 #' @export
 #' @family WNBA Draft Functions
 #' @details
 #' ```r
-#'   wnba_draftboard(season = most_recent_wnba_season() - 1)
+#'   wnba_draftboard(season = most_recent_wnba_season())
 #' ```
 wnba_draftboard <- function(
-    season = most_recent_wnba_season() - 1,
+    season = most_recent_wnba_season(),
     ...){
-  
-  
-  version <- "draftboard"
-  endpoint <- "https://www.wnba.com/wp-json/api/v1/get_draft_board"
-  full_url <- endpoint
-  
-  params <- list(
-    season = season
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  endpoint <- sprintf(
+    "https://content-api-prod.nba.com/public/1/leagues/wnba/draft/%s/board",
+    season
   )
+
+  headers <- c(
+    "accept" = "*/*",
+    "accept-language" = "en-US,en;q=0.9",
+    "origin" = "https://www.wnba.com",
+    "referer" = "https://www.wnba.com/",
+    "user-agent" = paste(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "AppleWebKit/537.36 (KHTML, like Gecko)",
+      "Chrome/146.0.0.0 Safari/537.36"
+    )
+  )
+
+  df_list <- list()
+
   tryCatch(
     expr = {
-      res <- httr::RETRY("GET", full_url, query = params, ...)
-      resp <-  res %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
-        jsonlite::fromJSON()
-      
-      teams <- data.table::rbindlist(resp$teams) 
-      draft <- dplyr::bind_rows(resp$draft) 
-      rounds <- resp$rounds
-      rounds$draft_lineup <- NULL
-      rounds_df <- purrr::map_df(1:length(rounds),function(x){
-        rounds[[x]] %>% 
-          tidyr::unnest("player", names_sep = "_") %>% 
-          dplyr::mutate(round = x)
-      })
-      df_list <- c(list(teams),list(draft),list(rounds_df))
-      names(df_list) <- c("teams","draft_info","picks")
-      
+      res <- .retry_request(endpoint, headers = headers)
+
+      resp <- res %>%
+        .resp_text() %>%
+        jsonlite::fromJSON(simplifyDataFrame = FALSE)
+
+      board <- resp$results$board
+
+      board_df <- data.frame(
+        draft_id = as.integer(board$id %||% NA_integer_),
+        title = as.character(board$title %||% NA_character_),
+        season = as.integer(season),
+        status = as.character(board$draftInformation$status %||% NA_character_),
+        on_the_clock = as.character(board$draftInformation$onTheClock %||% NA_character_),
+        draft_date = as.character(board$draftInformation$date %||% NA_character_),
+        modified = as.character(board$modified %||% NA_character_),
+        stringsAsFactors = FALSE
+      ) %>%
+        dplyr::as_tibble() %>%
+        make_wehoop_data(
+          "WNBA Draft Board information from content-api-prod.nba.com",
+          Sys.time()
+        )
+
+      picks_df <- purrr::map_dfr(board$draftRounds, function(rnd) {
+        purrr::map_dfr(rnd$picks, function(p) {
+          career <- p$career %||% list()
+          data.frame(
+            round = as.integer(rnd$round %||% NA_integer_),
+            pick = as.integer(p$pick %||% NA_integer_),
+            team_id = as.integer(p$teamId %||% NA_integer_),
+            team_external_id = as.integer(p$teamExternalId %||% NA_integer_),
+            team_name = as.character(p$teamName %||% NA_character_),
+            prospect_id = as.integer(p$prospectId %||% NA_integer_),
+            first_name = as.character(p$firstName %||% NA_character_),
+            last_name = as.character(p$lastName %||% NA_character_),
+            position = as.character(p$position %||% NA_character_),
+            country = as.character(p$country %||% NA_character_),
+            college = as.character(p$college %||% NA_character_),
+            ppg = as.character(career$ppg %||% NA_character_),
+            rpg = as.character(career$rpg %||% NA_character_),
+            apg = as.character(career$apg %||% NA_character_),
+            spg = as.character(career$spg %||% NA_character_),
+            bpg = as.character(career$bpg %||% NA_character_),
+            fg_pct = as.character(career[["fg%"]] %||% NA_character_),
+            description = as.character(career$description %||% NA_character_),
+            headshot_url = as.character(p$headshot$url %||% NA_character_),
+            stringsAsFactors = FALSE
+          )
+        })
+      }) %>%
+        dplyr::as_tibble() %>%
+        make_wehoop_data(
+          "WNBA Draft Board picks from content-api-prod.nba.com",
+          Sys.time()
+        )
+
+      df_list <- list(
+        board = board_df,
+        picks = picks_df
+      )
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft board data available for {season}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
-    finally = {
-    }
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft board data available for {season}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
+    finally = {}
   )
   return(df_list)
 }
@@ -139,55 +173,57 @@ NULL
 #'    **DraftCombineStats** 
 #'    
 #'    
-#'    |col_name                     |types     |
-#'    |:----------------------------|:---------|
-#'    |SEASON                       |character |
-#'    |PLAYER_ID                    |character |
-#'    |FIRST_NAME                   |character |
-#'    |LAST_NAME                    |character |
-#'    |PLAYER_NAME                  |character |
-#'    |POSITION                     |character |
-#'    |HEIGHT_WO_SHOES              |character |
-#'    |HEIGHT_WO_SHOES_FT_IN        |character |
-#'    |HEIGHT_W_SHOES               |character |
-#'    |HEIGHT_W_SHOES_FT_IN         |character |
-#'    |WEIGHT                       |character |
-#'    |WINGSPAN                     |character |
-#'    |WINGSPAN_FT_IN               |character |
-#'    |STANDING_REACH               |character |
-#'    |STANDING_REACH_FT_IN         |character |
-#'    |BODY_FAT_PCT                 |character |
-#'    |HAND_LENGTH                  |character |
-#'    |HAND_WIDTH                   |character |
-#'    |STANDING_VERTICAL_LEAP       |character |
-#'    |MAX_VERTICAL_LEAP            |character |
-#'    |LANE_AGILITY_TIME            |character |
-#'    |MODIFIED_LANE_AGILITY_TIME   |character |
-#'    |THREE_QUARTER_SPRINT         |character |
-#'    |BENCH_PRESS                  |character |
-#'    |SPOT_FIFTEEN_CORNER_LEFT     |character |
-#'    |SPOT_FIFTEEN_BREAK_LEFT      |character |
-#'    |SPOT_FIFTEEN_TOP_KEY         |character |
-#'    |SPOT_FIFTEEN_BREAK_RIGHT     |character |
-#'    |SPOT_FIFTEEN_CORNER_RIGHT    |character |
-#'    |SPOT_COLLEGE_CORNER_LEFT     |character |
-#'    |SPOT_COLLEGE_BREAK_LEFT      |character |
-#'    |SPOT_COLLEGE_TOP_KEY         |character |
-#'    |SPOT_COLLEGE_BREAK_RIGHT     |character |
-#'    |SPOT_COLLEGE_CORNER_RIGHT    |character |
-#'    |SPOT_NBA_CORNER_LEFT         |character |
-#'    |SPOT_NBA_BREAK_LEFT          |character |
-#'    |SPOT_NBA_TOP_KEY             |character |
-#'    |SPOT_NBA_BREAK_RIGHT         |character |
-#'    |SPOT_NBA_CORNER_RIGHT        |character |
-#'    |OFF_DRIB_FIFTEEN_BREAK_LEFT  |character |
-#'    |OFF_DRIB_FIFTEEN_TOP_KEY     |character |
-#'    |OFF_DRIB_FIFTEEN_BREAK_RIGHT |character |
-#'    |OFF_DRIB_COLLEGE_BREAK_LEFT  |character |
-#'    |OFF_DRIB_COLLEGE_TOP_KEY     |character |
-#'    |OFF_DRIB_COLLEGE_BREAK_RIGHT |character |
-#'    |ON_MOVE_FIFTEEN              |character |
-#'    |ON_MOVE_COLLEGE              |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'       HEIGHT_WO_SHOES \tab character \tab  \cr
+#'       HEIGHT_WO_SHOES_FT_IN \tab character \tab  \cr
+#'       HEIGHT_W_SHOES \tab character \tab  \cr
+#'       HEIGHT_W_SHOES_FT_IN \tab character \tab  \cr
+#'       WEIGHT \tab character \tab Player weight in pounds. \cr
+#'       WINGSPAN \tab character \tab  \cr
+#'       WINGSPAN_FT_IN \tab character \tab  \cr
+#'       STANDING_REACH \tab character \tab  \cr
+#'       STANDING_REACH_FT_IN \tab character \tab  \cr
+#'       BODY_FAT_PCT \tab character \tab  \cr
+#'       HAND_LENGTH \tab character \tab  \cr
+#'       HAND_WIDTH \tab character \tab  \cr
+#'       STANDING_VERTICAL_LEAP \tab character \tab  \cr
+#'       MAX_VERTICAL_LEAP \tab character \tab  \cr
+#'       LANE_AGILITY_TIME \tab character \tab  \cr
+#'       MODIFIED_LANE_AGILITY_TIME \tab character \tab  \cr
+#'       THREE_QUARTER_SPRINT \tab character \tab  \cr
+#'       BENCH_PRESS \tab character \tab  \cr
+#'       SPOT_FIFTEEN_CORNER_LEFT \tab character \tab  \cr
+#'       SPOT_FIFTEEN_BREAK_LEFT \tab character \tab  \cr
+#'       SPOT_FIFTEEN_TOP_KEY \tab character \tab  \cr
+#'       SPOT_FIFTEEN_BREAK_RIGHT \tab character \tab  \cr
+#'       SPOT_FIFTEEN_CORNER_RIGHT \tab character \tab  \cr
+#'       SPOT_COLLEGE_CORNER_LEFT \tab character \tab  \cr
+#'       SPOT_COLLEGE_BREAK_LEFT \tab character \tab  \cr
+#'       SPOT_COLLEGE_TOP_KEY \tab character \tab  \cr
+#'       SPOT_COLLEGE_BREAK_RIGHT \tab character \tab  \cr
+#'       SPOT_COLLEGE_CORNER_RIGHT \tab character \tab  \cr
+#'       SPOT_NBA_CORNER_LEFT \tab character \tab  \cr
+#'       SPOT_NBA_BREAK_LEFT \tab character \tab  \cr
+#'       SPOT_NBA_TOP_KEY \tab character \tab  \cr
+#'       SPOT_NBA_BREAK_RIGHT \tab character \tab  \cr
+#'       SPOT_NBA_CORNER_RIGHT \tab character \tab  \cr
+#'       OFF_DRIB_FIFTEEN_BREAK_LEFT \tab character \tab  \cr
+#'       OFF_DRIB_FIFTEEN_TOP_KEY \tab character \tab  \cr
+#'       OFF_DRIB_FIFTEEN_BREAK_RIGHT \tab character \tab  \cr
+#'       OFF_DRIB_COLLEGE_BREAK_LEFT \tab character \tab  \cr
+#'       OFF_DRIB_COLLEGE_TOP_KEY \tab character \tab  \cr
+#'       OFF_DRIB_COLLEGE_BREAK_RIGHT \tab character \tab  \cr
+#'       ON_MOVE_FIFTEEN \tab character \tab  \cr
+#'       ON_MOVE_COLLEGE \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -202,6 +238,7 @@ wnba_draftcombinestats <- function(
     league_id = '10',
     season_year = most_recent_wnba_season() - 1,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "draftcombinestats"
   endpoint <- wnba_endpoint(version)
@@ -212,6 +249,8 @@ wnba_draftcombinestats <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -220,13 +259,12 @@ wnba_draftcombinestats <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft combine stats data available for {season_year}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft combine stats data available for {season_year}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -234,12 +272,9 @@ wnba_draftcombinestats <- function(
 }
 
 
-#' **Get WNBA Stats API Draft Combine Drill Results**
-#' @name wnba_draftcombinedrillresults
-NULL
 #' @title
 #' **Get WNBA Stats API Draft Combine Drill Results**
-#' @rdname wnba_draftcombinedrillresults
+#' @rdname wnba_draftcombinestats
 #' @author Saiem Gilani
 #' @param league_id league_id
 #' @param season_year season_year
@@ -259,8 +294,14 @@ wnba_draftcombinedrillresults <- function(
     league_id = '10',
     season_year = most_recent_wnba_season() - 1,
     ...){
-  
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_warn(
+    when = "3.0.0",
+    what = "wnba_draftcombinedrillresults()",
+    details = "The draftcombinedrillresults endpoint returns HTTP 200 with zero result sets (2026-08-23 probe sweep, wehoop#75) -- no WNBA combine data. The endpoint no longer serves WNBA data; no replacement exists. This is a soft warning -- the call still proceeds."
+  )
+
   version <- "draftcombinedrillresults"
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
@@ -270,6 +311,8 @@ wnba_draftcombinedrillresults <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -278,13 +321,12 @@ wnba_draftcombinedrillresults <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft combine drill results data available for {season_year}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft combine drill results data available for {season_year}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -292,12 +334,9 @@ wnba_draftcombinedrillresults <- function(
 }
 
 
-#' **Get WNBA Stats API Draft Combine Non-Stationary Shooting**
-#' @name wnba_draftcombinenonstationaryshooting
-NULL
 #' @title
 #' **Get WNBA Stats API Draft Combine Non-Stationary Shooting**
-#' @rdname wnba_draftcombinenonstationaryshooting
+#' @rdname wnba_draftcombinestats
 #' @author Saiem Gilani
 #' @param league_id league_id
 #' @param season_year season_year
@@ -317,8 +356,14 @@ wnba_draftcombinenonstationaryshooting <- function(
     league_id = '10',
     season_year = most_recent_wnba_season() - 1,
     ...){
-  
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_warn(
+    when = "3.0.0",
+    what = "wnba_draftcombinenonstationaryshooting()",
+    details = "The draftcombinenonstationaryshooting endpoint returns HTTP 200 with zero result sets (2026-08-23 probe sweep, wehoop#75) -- no WNBA combine data. The endpoint no longer serves WNBA data; no replacement exists. This is a soft warning -- the call still proceeds."
+  )
+
   version <- "draftcombinenonstationaryshooting"
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
@@ -328,6 +373,8 @@ wnba_draftcombinenonstationaryshooting <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -336,13 +383,12 @@ wnba_draftcombinenonstationaryshooting <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft combine stationary shooting data available for {season_year}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft combine stationary shooting data available for {season_year}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -350,12 +396,9 @@ wnba_draftcombinenonstationaryshooting <- function(
 }
 
 
-#' **Get WNBA Stats API Draft Combine Player Anthropological Measurements**
-#' @name wnba_draftcombineplayeranthro
-NULL
 #' @title
 #' **Get WNBA Stats API Draft Combine Player Anthropological Measurements**
-#' @rdname wnba_draftcombineplayeranthro
+#' @rdname wnba_draftcombinestats
 #' @author Saiem Gilani
 #' @param league_id league_id
 #' @param season_year season_year
@@ -375,8 +418,14 @@ wnba_draftcombineplayeranthro <- function(
     league_id = '10',
     season_year = most_recent_wnba_season() - 1,
     ...){
-  
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_warn(
+    when = "3.0.0",
+    what = "wnba_draftcombineplayeranthro()",
+    details = "The draftcombineplayeranthro endpoint returns HTTP 200 with zero result sets (2026-08-23 probe sweep, wehoop#75) -- no WNBA combine data. The endpoint no longer serves WNBA data; no replacement exists. This is a soft warning -- the call still proceeds."
+  )
+
   version <- "draftcombineplayeranthro"
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
@@ -386,6 +435,8 @@ wnba_draftcombineplayeranthro <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -394,25 +445,21 @@ wnba_draftcombineplayeranthro <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft combine player anthropological data available for {season_year}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft combine player anthropological data available for {season_year}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
   return(df_list)
 }
 
-#' **Get WNBA Stats API Draft Combine - Spot Shooting**
-#' @name wnba_draftcombinespotshooting
-NULL
 #' @title
 #' **Get WNBA Stats API Draft Combine - Spot Shooting**
-#' @rdname wnba_draftcombinespotshooting
+#' @rdname wnba_draftcombinestats
 #' @author Saiem Gilani
 #' @param league_id league_id
 #' @param season_year season_year
@@ -432,8 +479,14 @@ wnba_draftcombinespotshooting <- function(
     league_id = '10',
     season_year = most_recent_wnba_season() - 1,
     ...){
-  
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_warn(
+    when = "3.0.0",
+    what = "wnba_draftcombinespotshooting()",
+    details = "The draftcombinespotshooting endpoint returns HTTP 200 with zero result sets (2026-08-23 probe sweep, wehoop#75) -- no WNBA combine data. The endpoint no longer serves WNBA data; no replacement exists. This is a soft warning -- the call still proceeds."
+  )
+
   version <- "draftcombinespotshooting"
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
@@ -443,6 +496,8 @@ wnba_draftcombinespotshooting <- function(
     SeasonYear = season_year
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -451,13 +506,12 @@ wnba_draftcombinespotshooting <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft combine spot shooting data available for {season_year}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft combine spot shooting data available for {season_year}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -482,22 +536,24 @@ wnba_draftcombinespotshooting <- function(
 #'    **DraftHistory** 
 #'    
 #'    
-#'    |col_name            |types     |
-#'    |:-------------------|:---------|
-#'    |PERSON_ID           |character |
-#'    |PLAYER_NAME         |character |
-#'    |SEASON              |character |
-#'    |ROUND_NUMBER        |character |
-#'    |ROUND_PICK          |character |
-#'    |OVERALL_PICK        |character |
-#'    |DRAFT_TYPE          |character |
-#'    |TEAM_ID             |character |
-#'    |TEAM_CITY           |character |
-#'    |TEAM_NAME           |character |
-#'    |TEAM_ABBREVIATION   |character |
-#'    |ORGANIZATION        |character |
-#'    |ORGANIZATION_TYPE   |character |
-#'    |PLAYER_PROFILE_FLAG |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       ROUND_NUMBER \tab character \tab Numeric round. \cr
+#'       ROUND_PICK \tab character \tab Round pick. \cr
+#'       OVERALL_PICK \tab character \tab Overall pick. \cr
+#'       DRAFT_TYPE \tab character \tab  \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       ORGANIZATION \tab character \tab Organization. \cr
+#'       ORGANIZATION_TYPE \tab character \tab Organization type. \cr
+#'       PLAYER_PROFILE_FLAG \tab character \tab Player profile flag. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -518,6 +574,7 @@ wnba_drafthistory <- function(
     team_id = '',
     top_x = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   
   version <- "drafthistory"
@@ -535,6 +592,8 @@ wnba_drafthistory <- function(
     TopX = top_x
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -543,13 +602,12 @@ wnba_drafthistory <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no draft history data available for {season}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no draft history data available for {season}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

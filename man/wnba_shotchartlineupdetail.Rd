@@ -17,7 +17,7 @@ wnba_shotchartlineupdetail(
   division = "",
   end_period = "10",
   end_range = "28800",
-  group_id = "-100720-202250-204319-1627668-1628931-",
+  group_id = "-1628899-1629481-1630096-1631019-1642784-",
   game_event_id = "",
   game_id = "",
   game_segment = "",
@@ -51,7 +51,7 @@ wnba_shotchartlineupdetail(
   start_period = "1",
   start_range = "0",
   starter_bench = "",
-  team_id = "1611661328",
+  team_id = "1611661321",
   vs_conference = "",
   vs_division = "",
   vs_player_id1 = "",
@@ -179,47 +179,40 @@ wnba_shotchartlineupdetail(
 \value{
 Return a named list of data frames: ShotChartLineupDetail, ShotChartLineupLeagueAverage
 
-\strong{ShotChartLineupDetail}\tabular{ll}{
-   col_name \tab types \cr
-   GRID_TYPE \tab character \cr
-   GAME_ID \tab character \cr
-   GAME_EVENT_ID \tab character \cr
-   GROUP_ID \tab character \cr
-   GROUP_NAME \tab character \cr
-   PLAYER_ID \tab character \cr
-   PLAYER_NAME \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_NAME \tab character \cr
-   PERIOD \tab character \cr
-   MINUTES_REMAINING \tab character \cr
-   SECONDS_REMAINING \tab character \cr
-   EVENT_TYPE \tab character \cr
-   ACTION_TYPE \tab character \cr
-   SHOT_TYPE \tab character \cr
-   SHOT_ZONE_BASIC \tab character \cr
-   SHOT_ZONE_AREA \tab character \cr
-   SHOT_ZONE_RANGE \tab character \cr
-   SHOT_DISTANCE \tab character \cr
-   LOC_X \tab character \cr
-   LOC_Y \tab character \cr
-   SHOT_ATTEMPTED_FLAG \tab character \cr
-   SHOT_MADE_FLAG \tab character \cr
-   GAME_DATE \tab character \cr
-   HTM \tab character \cr
-   VTM \tab character \cr
+\strong{ShotChartLineupDetail}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   GRID_TYPE \tab character \tab  \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
+   GAME_EVENT_ID \tab character \tab Unique identifier for game event. \cr
+   GROUP_ID \tab character \tab Group identifier (e.g. conference group_id). \cr
+   GROUP_NAME \tab character \tab Group name. \cr
+   PLAYER_ID \tab character \tab Unique player identifier. \cr
+   PLAYER_NAME \tab character \tab Player name. \cr
+   TEAM_ID \tab character \tab Unique team identifier. \cr
+   TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+   PERIOD \tab character \tab Period of the game (1-4 quarters; 5+ for OT). \cr
+   MINUTES_REMAINING \tab character \tab Minutes remaining. \cr
+   SECONDS_REMAINING \tab character \tab Seconds remaining in the period. \cr
+   EVENT_TYPE \tab character \tab Event / play type code (V2 PBP). \cr
+   ACTION_TYPE \tab character \tab Action type label (e.g. 'Made Shot', 'Substitution'). \cr
+   SHOT_TYPE \tab character \tab Shot type label (e.g. 'Jump Shot', 'Layup'). \cr
+   SHOT_ZONE_BASIC \tab character \tab Shot zone (e.g. 'Restricted Area', 'Mid-Range', 'Above the Break 3'). \cr
+   SHOT_ZONE_AREA \tab character \tab Shot zone area ('Left Side', 'Right Side', 'Center'). \cr
+   SHOT_ZONE_RANGE \tab character \tab Shot zone range ('Less Than 8 ft.', '8-16 ft.', '16-24 ft.', etc.). \cr
+   SHOT_DISTANCE \tab character \tab Shot distance from the basket, in feet. \cr
+   LOC_X \tab character \tab X coordinate on the court (units of inches; 0 = basket center). \cr
+   LOC_Y \tab character \tab Y coordinate on the court (units of inches; baseline at 0). \cr
+   SHOT_ATTEMPTED_FLAG \tab character \tab 1 if a shot was attempted on this event. \cr
+   SHOT_MADE_FLAG \tab character \tab 1 if the shot was made; 0 if missed. \cr
+   GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+   HTM \tab character \tab  \cr
+   VTM \tab character \tab  \cr
 }
 
 
-\strong{ShotChartLineupLeagueAverage}\tabular{ll}{
-   col_name \tab types \cr
-   GRID_TYPE \tab character \cr
-   SHOT_ZONE_BASIC \tab character \cr
-   SHOT_ZONE_AREA \tab character \cr
-   SHOT_ZONE_RANGE \tab character \cr
-   FGA \tab character \cr
-   FGM \tab character \cr
-   FG_PCT \tab character \cr
-}
+\strong{ShotChartLineupLeagueAverage}
+
+Columns as documented in the shared \link{wnba_shotchartdetail_league_averages_schema} table.
 }
 \description{
 \strong{Get WNBA Stats API Shot Chart for Lineups}
@@ -227,23 +220,26 @@ Return a named list of data frames: ShotChartLineupDetail, ShotChartLineupLeague
 \strong{Get WNBA Stats API Shot Chart for Lineups}
 }
 \details{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{ wnba_shotchartlineupdetail(group_id = '-100720-202250-204319-1627668-1628931-', season = most_recent_wnba_season())
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{ wnba_shotchartlineupdetail(group_id = '-1628899-1629481-1630096-1631019-1642784-', opponent_team_id = '1611661324', season = most_recent_wnba_season())
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Shooting Functions: 
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashteamshotlocations}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_shotchartdetail}()},
-\code{\link{wnba_shotchartleaguewide}()},
-\code{\link{wnba_teamdashboardbyshootingsplits}()}
+Other WNBA Shooting Functions:
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashteamshotlocations]{wnba_leaguedashteamshotlocations()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_shotchartdetail]{wnba_shotchartdetail()}},
+\code{\link[=wnba_shotchartleaguewide]{wnba_shotchartleaguewide()}},
+\code{\link[=wnba_teamdashboardbyclutch]{wnba_teamdashboardbyclutch()}}
 
-Other WNBA Lineup Functions: 
-\code{\link{wnba_gamerotation}()},
-\code{\link{wnba_leaguedashlineups}()},
-\code{\link{wnba_leaguelineupviz}()},
-\code{\link{wnba_teamdashlineups}()}
+Other WNBA Lineup Functions:
+\code{\link[=wnba_gamerotation]{wnba_gamerotation()}},
+\code{\link[=wnba_leaguedashlineups]{wnba_leaguedashlineups()}},
+\code{\link[=wnba_leaguelineupviz]{wnba_leaguelineupviz()}},
+\code{\link[=wnba_possession_lineups]{wnba_possession_lineups()}},
+\code{\link[=wnba_rapm]{wnba_rapm()}},
+\code{\link[=wnba_shot_zones]{wnba_shot_zones()}},
+\code{\link[=wnba_teamdashlineups]{wnba_teamdashlineups()}}
 }
 \author{
 Saiem Gilani

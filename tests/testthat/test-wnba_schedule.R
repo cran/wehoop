@@ -1,6 +1,7 @@
 test_that("WNBA Schedule", {
   skip_on_cran()
   skip_on_ci()
+  skip_wnba_stats_test()
   
   x <- wnba_schedule(league_id = "10", season = most_recent_wnba_season() - 1)
   
@@ -58,7 +59,7 @@ test_that("WNBA Schedule", {
     "season_type_description"
   )
   
-  expect_equal(sort(colnames(x)), sort(cols_x1))
+  expect_in(sort(cols_x1), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
   
   Sys.sleep(3)

@@ -13,24 +13,26 @@ NULL
 #'    **FranchiseLeaders** 
 #'    
 #'    
-#'    |col_name      |types     |
-#'    |:-------------|:---------|
-#'    |TEAM_ID       |character |
-#'    |PTS           |character |
-#'    |PTS_PERSON_ID |character |
-#'    |PTS_PLAYER    |character |
-#'    |AST           |character |
-#'    |AST_PERSON_ID |character |
-#'    |AST_PLAYER    |character |
-#'    |REB           |character |
-#'    |REB_PERSON_ID |character |
-#'    |REB_PLAYER    |character |
-#'    |BLK           |character |
-#'    |BLK_PERSON_ID |character |
-#'    |BLK_PLAYER    |character |
-#'    |STL           |character |
-#'    |STL_PERSON_ID |character |
-#'    |STL_PLAYER    |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PTS_PERSON_ID \tab character \tab  \cr
+#'       PTS_PLAYER \tab character \tab  \cr
+#'       AST \tab character \tab Assists. \cr
+#'       AST_PERSON_ID \tab character \tab  \cr
+#'       AST_PLAYER \tab character \tab  \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       REB_PERSON_ID \tab character \tab  \cr
+#'       REB_PLAYER \tab character \tab  \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLK_PERSON_ID \tab character \tab  \cr
+#'       BLK_PLAYER \tab character \tab  \cr
+#'       STL \tab character \tab Steals. \cr
+#'       STL_PERSON_ID \tab character \tab  \cr
+#'       STL_PLAYER \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -46,6 +48,7 @@ wnba_franchiseleaders <- function(
     league_id = '10',
     team_id = '1611661324',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "franchiseleaders"
   endpoint <- wnba_endpoint(version)
@@ -56,6 +59,8 @@ wnba_franchiseleaders <- function(
     TeamID = team_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -64,13 +69,12 @@ wnba_franchiseleaders <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no franchise leaders data available for {team_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no franchise leaders data available for {team_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -94,55 +98,57 @@ NULL
 #'    **FranchiseLeaderswRank**
 #'
 #'
-#'    |col_name         |types     |
-#'    |:----------------|:---------|
-#'    |LEAGUE_ID        |character |
-#'    |TEAM_ID          |character |
-#'    |TEAM             |character |
-#'    |PERSON_ID        |character |
-#'    |PLAYER           |character |
-#'    |SEASON_TYPE      |character |
-#'    |ACTIVE_WITH_TEAM |character |
-#'    |GP               |character |
-#'    |MINUTES          |character |
-#'    |FGM              |character |
-#'    |FGA              |character |
-#'    |FG_PCT           |character |
-#'    |FG3M             |character |
-#'    |FG3A             |character |
-#'    |FG3_PCT          |character |
-#'    |FTM              |character |
-#'    |FTA              |character |
-#'    |FT_PCT           |character |
-#'    |OREB             |character |
-#'    |DREB             |character |
-#'    |REB              |character |
-#'    |AST              |character |
-#'    |PF               |character |
-#'    |STL              |character |
-#'    |TOV              |character |
-#'    |BLK              |character |
-#'    |PTS              |character |
-#'    |F_RANK_GP        |character |
-#'    |F_RANK_MINUTES   |character |
-#'    |F_RANK_FGM       |character |
-#'    |F_RANK_FGA       |character |
-#'    |F_RANK_FG_PCT    |character |
-#'    |F_RANK_FG3M      |character |
-#'    |F_RANK_FG3A      |character |
-#'    |F_RANK_FG3_PCT   |character |
-#'    |F_RANK_FTM       |character |
-#'    |F_RANK_FTA       |character |
-#'    |F_RANK_FT_PCT    |character |
-#'    |F_RANK_OREB      |character |
-#'    |F_RANK_DREB      |character |
-#'    |F_RANK_REB       |character |
-#'    |F_RANK_AST       |character |
-#'    |F_RANK_PF        |character |
-#'    |F_RANK_STL       |character |
-#'    |F_RANK_TOV       |character |
-#'    |F_RANK_BLK       |character |
-#'    |F_RANK_PTS       |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       LEAGUE_ID \tab character \tab League identifier ('10' = WNBA). \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM \tab character \tab Team-side label or team identifier. \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       PLAYER \tab character \tab  \cr
+#'       SEASON_TYPE \tab character \tab Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). \cr
+#'       ACTIVE_WITH_TEAM \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       MINUTES \tab character \tab Minutes played, formatted MM:SS (V3 PT-duration parsed) or decimal minutes (V2). \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       F_RANK_GP \tab character \tab  \cr
+#'       F_RANK_MINUTES \tab character \tab  \cr
+#'       F_RANK_FGM \tab character \tab  \cr
+#'       F_RANK_FGA \tab character \tab  \cr
+#'       F_RANK_FG_PCT \tab character \tab  \cr
+#'       F_RANK_FG3M \tab character \tab  \cr
+#'       F_RANK_FG3A \tab character \tab  \cr
+#'       F_RANK_FG3_PCT \tab character \tab  \cr
+#'       F_RANK_FTM \tab character \tab  \cr
+#'       F_RANK_FTA \tab character \tab  \cr
+#'       F_RANK_FT_PCT \tab character \tab  \cr
+#'       F_RANK_OREB \tab character \tab  \cr
+#'       F_RANK_DREB \tab character \tab  \cr
+#'       F_RANK_REB \tab character \tab  \cr
+#'       F_RANK_AST \tab character \tab  \cr
+#'       F_RANK_PF \tab character \tab  \cr
+#'       F_RANK_STL \tab character \tab  \cr
+#'       F_RANK_TOV \tab character \tab  \cr
+#'       F_RANK_BLK \tab character \tab  \cr
+#'       F_RANK_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -160,6 +166,7 @@ wnba_franchiseleaderswrank <- function(
     season_type = 'Regular Season',
     team_id = '1611661324',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # season_type <- gsub(' ','+',season_type)
   version <- "franchiseleaderswrank"
@@ -173,6 +180,8 @@ wnba_franchiseleaderswrank <- function(
     TeamID = team_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -181,13 +190,12 @@ wnba_franchiseleaderswrank <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no franchise players data available for {team_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no franchise players data available for {team_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -212,34 +220,36 @@ NULL
 #'    **FranchisePlayers** 
 #'    
 #'    
-#'    |col_name         |types     |
-#'    |:----------------|:---------|
-#'    |LEAGUE_ID        |character |
-#'    |TEAM_ID          |character |
-#'    |TEAM             |character |
-#'    |PERSON_ID        |character |
-#'    |PLAYER           |character |
-#'    |SEASON_TYPE      |character |
-#'    |ACTIVE_WITH_TEAM |character |
-#'    |GP               |character |
-#'    |FGM              |character |
-#'    |FGA              |character |
-#'    |FG_PCT           |character |
-#'    |FG3M             |character |
-#'    |FG3A             |character |
-#'    |FG3_PCT          |character |
-#'    |FTM              |character |
-#'    |FTA              |character |
-#'    |FT_PCT           |character |
-#'    |OREB             |character |
-#'    |DREB             |character |
-#'    |REB              |character |
-#'    |AST              |character |
-#'    |PF               |character |
-#'    |STL              |character |
-#'    |TOV              |character |
-#'    |BLK              |character |
-#'    |PTS              |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       LEAGUE_ID \tab character \tab League identifier ('10' = WNBA). \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM \tab character \tab Team-side label or team identifier. \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       PLAYER \tab character \tab  \cr
+#'       SEASON_TYPE \tab character \tab Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). \cr
+#'       ACTIVE_WITH_TEAM \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -258,6 +268,7 @@ wnba_franchiseplayers <- function(
     season_type = 'Regular Season',
     team_id = '1611661319',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ','+',season_type)
@@ -272,6 +283,8 @@ wnba_franchiseplayers <- function(
     TeamID = team_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -280,13 +293,12 @@ wnba_franchiseplayers <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no franchise players data available for {team_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no franchise players data available for {team_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -308,44 +320,30 @@ NULL
 #'    **FranchiseHistory** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |LEAGUE_ID      |character |
-#'    |TEAM_ID        |character |
-#'    |TEAM_CITY      |character |
-#'    |TEAM_NAME      |character |
-#'    |START_YEAR     |character |
-#'    |END_YEAR       |character |
-#'    |YEARS          |character |
-#'    |GAMES          |character |
-#'    |WINS           |character |
-#'    |LOSSES         |character |
-#'    |WIN_PCT        |character |
-#'    |PO_APPEARANCES |character |
-#'    |DIV_TITLES     |character |
-#'    |CONF_TITLES    |character |
-#'    |LEAGUE_TITLES  |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       LEAGUE_ID \tab character \tab League identifier ('10' = WNBA). \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       START_YEAR \tab character \tab  \cr
+#'       END_YEAR \tab character \tab  \cr
+#'       YEARS \tab character \tab Years. \cr
+#'       GAMES \tab character \tab  \cr
+#'       WINS \tab character \tab Total wins. \cr
+#'       LOSSES \tab character \tab Total losses. \cr
+#'       WIN_PCT \tab character \tab Win percentage (0-1 decimal). \cr
+#'       PO_APPEARANCES \tab character \tab  \cr
+#'       DIV_TITLES \tab character \tab  \cr
+#'       CONF_TITLES \tab character \tab  \cr
+#'       LEAGUE_TITLES \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **DefunctTeams** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |LEAGUE_ID      |character |
-#'    |TEAM_ID        |character |
-#'    |TEAM_CITY      |character |
-#'    |TEAM_NAME      |character |
-#'    |START_YEAR     |character |
-#'    |END_YEAR       |character |
-#'    |YEARS          |character |
-#'    |GAMES          |character |
-#'    |WINS           |character |
-#'    |LOSSES         |character |
-#'    |WIN_PCT        |character |
-#'    |PO_APPEARANCES |character |
-#'    |DIV_TITLES     |character |
-#'    |CONF_TITLES    |character |
-#'    |LEAGUE_TITLES  |character |
+#'    Same columns as the **FranchiseHistory** table above.
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -360,6 +358,7 @@ NULL
 wnba_franchisehistory <- function(
     league_id = '10',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "franchisehistory"
   endpoint <- wnba_endpoint(version)
@@ -369,6 +368,8 @@ wnba_franchisehistory <- function(
     LeagueID = league_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -377,13 +378,12 @@ wnba_franchisehistory <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no franchise history data available for {team_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no franchise history data available for {team_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

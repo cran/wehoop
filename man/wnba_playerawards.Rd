@@ -14,23 +14,26 @@ wnba_playerawards(player_id, ...)
 \value{
 Return a named list of data frames: PlayerAwards
 
-\strong{PlayerAwards}\tabular{ll}{
-   col_name \tab types \cr
-   PERSON_ID \tab character \cr
-   FIRST_NAME \tab character \cr
-   LAST_NAME \tab character \cr
-   TEAM \tab character \cr
-   DESCRIPTION \tab character \cr
-   ALL_WNBA_TEAM_NUMBER \tab character \cr
-   SEASON \tab character \cr
-   MONTH \tab character \cr
-   WEEK \tab character \cr
-   CONFERENCE \tab character \cr
-   TYPE \tab character \cr
-   SUBTYPE1 \tab character \cr
-   SUBTYPE2 \tab character \cr
-   SUBTYPE3 \tab character \cr
-}
+\strong{PlayerAwards}
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+      FIRST_NAME \tab character \tab Player's first name. \cr
+      LAST_NAME \tab character \tab Player's last name. \cr
+      TEAM \tab character \tab Team-side label or team identifier. \cr
+      DESCRIPTION \tab character \tab Long-form description text. \cr
+      ALL_WNBA_TEAM_NUMBER \tab character \tab  \cr
+      SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+      MONTH \tab character \tab Month number. \cr
+      WEEK \tab character \tab Week number within the season. \cr
+      CONFERENCE \tab character \tab Filter players or teams by conference. \cr
+      TYPE \tab character \tab Record type / category. \cr
+      SUBTYPE1 \tab character \tab  \cr
+      SUBTYPE2 \tab character \tab  \cr
+      SUBTYPE3 \tab character \tab  \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API Player Awards}
@@ -44,37 +47,30 @@ Return a named list of data frames: PlayerAwards
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Player Functions: 
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_playercareerbycollegerollup}()},
-\code{\link{wnba_playercareerbycollege}()},
-\code{\link{wnba_playercareerstats}()},
-\code{\link{wnba_playercompare}()},
-\code{\link{wnba_playerdashboardbyclutch}()},
-\code{\link{wnba_playerdashboardbygamesplits}()},
-\code{\link{wnba_playerdashboardbygeneralsplits}()},
-\code{\link{wnba_playerdashboardbylastngames}()},
-\code{\link{wnba_playerdashboardbyopponent}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_playerdashboardbyteamperformance}()},
-\code{\link{wnba_playerdashboardbyyearoveryear}()},
-\code{\link{wnba_playerestimatedmetrics}()},
-\code{\link{wnba_playerfantasyprofilebargraph}()},
-\code{\link{wnba_playerfantasyprofile}()},
-\code{\link{wnba_playergamelogs}()},
-\code{\link{wnba_playergamelog}()},
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_playerheadshot}()},
-\code{\link{wnba_playerindex}()},
-\code{\link{wnba_playernextngames}()},
-\code{\link{wnba_playerprofilev2}()},
-\code{\link{wnba_playervsplayer}()}
+Other WNBA Player Functions:
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_playercareerbycollege]{wnba_playercareerbycollege()}},
+\code{\link[=wnba_playercareerbycollegerollup]{wnba_playercareerbycollegerollup()}},
+\code{\link[=wnba_playercareerstats]{wnba_playercareerstats()}},
+\code{\link[=wnba_playercompare]{wnba_playercompare()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_playerestimatedmetrics]{wnba_playerestimatedmetrics()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}},
+\code{\link[=wnba_playerfantasyprofilebargraph]{wnba_playerfantasyprofilebargraph()}},
+\code{\link[=wnba_playergamelog]{wnba_playergamelog()}},
+\code{\link[=wnba_playergamelogs]{wnba_playergamelogs()}},
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_playerheadshot]{wnba_playerheadshot()}},
+\code{\link[=wnba_playerindex]{wnba_playerindex()}},
+\code{\link[=wnba_playernextngames]{wnba_playernextngames()}},
+\code{\link[=wnba_playerprofilev2]{wnba_playerprofilev2()}},
+\code{\link[=wnba_playervsplayer]{wnba_playervsplayer()}}
 }
 \author{
 Saiem Gilani

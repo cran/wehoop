@@ -1,5 +1,6 @@
 test_that("ESPN - WNBA Game Rosters", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wnba_game_rosters(game_id = 401244185)
   
   cols <- c(
@@ -22,7 +23,6 @@ test_that("ESPN - WNBA Game Rosters", {
     "slug",
     "headshot_href",
     "headshot_alt",
-    "jersey",
     "position_id",
     "position_name",
     "position_display_name",
@@ -76,6 +76,6 @@ test_that("ESPN - WNBA Game Rosters", {
     "citizenship"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

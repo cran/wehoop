@@ -26,9 +26,9 @@ wnba_assisttracker(
 \value{
 Returns a named list of data frames: AssistTracker
 
-\strong{AssistTracker}\tabular{ll}{
-   col_name \tab types \cr
-   ASSISTS \tab numeric \cr
+\strong{AssistTracker}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   ASSISTS \tab numeric \tab Total assists. \cr
 }
 }
 \description{
@@ -41,11 +41,11 @@ Returns a named list of data frames: AssistTracker
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Leaders Functions: 
-\code{\link{wnba_alltimeleadersgrids}()},
-\code{\link{wnba_assistleaders}()},
-\code{\link{wnba_homepagewidget}()},
-\code{\link{wnba_leagueleaders}()}
+Other WNBA Leaders Functions:
+\code{\link[=wnba_alltimeleadersgrids]{wnba_alltimeleadersgrids()}},
+\code{\link[=wnba_assistleaders]{wnba_assistleaders()}},
+\code{\link[=wnba_homepagewidget]{wnba_homepagewidget()}},
+\code{\link[=wnba_leagueleaders]{wnba_leagueleaders()}}
 }
 \author{
 Saiem Gilani

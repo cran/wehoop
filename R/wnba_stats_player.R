@@ -24,34 +24,36 @@ NULL
 #'    **PlayerIndex**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PERSON_ID         |character |
-#'    |PLAYER_LAST_NAME  |character |
-#'    |PLAYER_FIRST_NAME |character |
-#'    |PLAYER_SLUG       |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_SLUG         |character |
-#'    |IS_DEFUNCT        |character |
-#'    |TEAM_CITY         |character |
-#'    |TEAM_NAME         |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |JERSEY_NUMBER     |character |
-#'    |POSITION          |character |
-#'    |HEIGHT            |character |
-#'    |WEIGHT            |character |
-#'    |COLLEGE           |character |
-#'    |COUNTRY           |character |
-#'    |DRAFT_YEAR        |character |
-#'    |DRAFT_ROUND       |character |
-#'    |DRAFT_NUMBER      |character |
-#'    |ROSTER_STATUS     |character |
-#'    |PTS               |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STATS_TIMEFRAME   |character |
-#'    |FROM_YEAR         |character |
-#'    |TO_YEAR           |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       PLAYER_LAST_NAME \tab character \tab  \cr
+#'       PLAYER_FIRST_NAME \tab character \tab  \cr
+#'       PLAYER_SLUG \tab character \tab URL-safe player identifier. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_SLUG \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+#'       IS_DEFUNCT \tab character \tab  \cr
+#'       TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       JERSEY_NUMBER \tab character \tab  \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'       HEIGHT \tab character \tab Player height (string e.g. '6-2' or inches). \cr
+#'       WEIGHT \tab character \tab Player weight in pounds. \cr
+#'       COLLEGE \tab character \tab College or school attended. \cr
+#'       COUNTRY \tab character \tab Country (full name or code). \cr
+#'       DRAFT_YEAR \tab character \tab Draft year (4-digit). \cr
+#'       DRAFT_ROUND \tab character \tab Round of the draft selection. \cr
+#'       DRAFT_NUMBER \tab character \tab  \cr
+#'       ROSTER_STATUS \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STATS_TIMEFRAME \tab character \tab  \cr
+#'       FROM_YEAR \tab character \tab  \cr
+#'       TO_YEAR \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -76,6 +78,7 @@ wnba_playerindex <- function(
     team_id = '0',
     weight = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -98,6 +101,8 @@ wnba_playerindex <- function(
     Weight = weight
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -106,13 +111,12 @@ wnba_playerindex <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player index data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player index data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -141,23 +145,25 @@ NULL
 wnba_playerheadshot <- function(
     player_id = '1628932',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   endpoint <- "https://cdn.wnba.com/headshots/wnba/latest/260x190/"
   
   full_url <- paste0(endpoint, player_id,".png")
   
+  resp <- NULL
+
   tryCatch(
     expr = {
       resp <- full_url
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player headshot for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player headshot for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -178,22 +184,24 @@ NULL
 #'    **PlayerAwards**
 #'
 #'
-#'    |col_name            |types     |
-#'    |:-------------------|:---------|
-#'    |PERSON_ID           |character |
-#'    |FIRST_NAME          |character |
-#'    |LAST_NAME           |character |
-#'    |TEAM                |character |
-#'    |DESCRIPTION         |character |
-#'    |ALL_WNBA_TEAM_NUMBER |character |
-#'    |SEASON              |character |
-#'    |MONTH               |character |
-#'    |WEEK                |character |
-#'    |CONFERENCE          |character |
-#'    |TYPE                |character |
-#'    |SUBTYPE1            |character |
-#'    |SUBTYPE2            |character |
-#'    |SUBTYPE3            |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       TEAM \tab character \tab Team-side label or team identifier. \cr
+#'       DESCRIPTION \tab character \tab Long-form description text. \cr
+#'       ALL_WNBA_TEAM_NUMBER \tab character \tab  \cr
+#'       SEASON \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       MONTH \tab character \tab Month number. \cr
+#'       WEEK \tab character \tab Week number within the season. \cr
+#'       CONFERENCE \tab character \tab Filter players or teams by conference. \cr
+#'       TYPE \tab character \tab Record type / category. \cr
+#'       SUBTYPE1 \tab character \tab  \cr
+#'       SUBTYPE2 \tab character \tab  \cr
+#'       SUBTYPE3 \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -208,6 +216,7 @@ NULL
 wnba_playerawards <- function(
     player_id,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "playerawards"
   endpoint <- wnba_endpoint(version)
@@ -217,6 +226,8 @@ wnba_playerawards <- function(
     PlayerID = player_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -225,13 +236,12 @@ wnba_playerawards <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player awards data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player awards data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -256,31 +266,33 @@ NULL
 #'    **PlayerCareerByCollege**
 #'
 #'
-#'    |col_name    |types     |
-#'    |:-----------|:---------|
-#'    |PLAYER_ID   |character |
-#'    |PLAYER_NAME |character |
-#'    |COLLEGE     |character |
-#'    |GP          |character |
-#'    |MIN         |character |
-#'    |FGM         |character |
-#'    |FGA         |character |
-#'    |FG_PCT      |character |
-#'    |FG3M        |character |
-#'    |FG3A        |character |
-#'    |FG3_PCT     |character |
-#'    |FTM         |character |
-#'    |FTA         |character |
-#'    |FT_PCT      |character |
-#'    |OREB        |character |
-#'    |DREB        |character |
-#'    |REB         |character |
-#'    |AST         |character |
-#'    |TOV         |character |
-#'    |STL         |character |
-#'    |BLK         |character |
-#'    |PF          |character |
-#'    |PTS         |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       COLLEGE \tab character \tab College or school attended. \cr
+#'       GP \tab character \tab Games played. \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -298,7 +310,14 @@ wnba_playercareerbycollege <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_stop(
+    when = "3.0.0",
+    what = "wnba_playercareerbycollege()",
+    details = "No direct replacement is available in wehoop for this unstable endpoint. Consider using `wnba_playercareerbycollegerollup()` or `wnba_leaguedashplayerbiostats()` for aggregated career stats by college instead."
+  )
+
   # college <- gsub(' ', '+', college)
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -314,6 +333,8 @@ wnba_playercareerbycollege <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -322,13 +343,12 @@ wnba_playercareerbycollege <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or player careers by college data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or player careers by college data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -353,122 +373,49 @@ NULL
 #'    **East**
 #'
 #'
-#'    |col_name |types     |
-#'    |:--------|:---------|
-#'    |REGION   |character |
-#'    |SEED     |character |
-#'    |COLLEGE  |character |
-#'    |PLAYERS  |character |
-#'    |GP       |character |
-#'    |MIN      |character |
-#'    |FGM      |character |
-#'    |FGA      |character |
-#'    |FG_PCT   |character |
-#'    |FG3M     |character |
-#'    |FG3A     |character |
-#'    |FG3_PCT  |character |
-#'    |FTM      |character |
-#'    |FTA      |character |
-#'    |FT_PCT   |character |
-#'    |OREB     |character |
-#'    |DREB     |character |
-#'    |REB      |character |
-#'    |AST      |character |
-#'    |STL      |character |
-#'    |BLK      |character |
-#'    |TOV      |character |
-#'    |PF       |character |
-#'    |PTS      |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       REGION \tab character \tab Region label. \cr
+#'       SEED \tab character \tab Tournament seed. \cr
+#'       COLLEGE \tab character \tab College or school attended. \cr
+#'       PLAYERS \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **South**
 #'
 #'
-#'    |col_name |types     |
-#'    |:--------|:---------|
-#'    |REGION   |character |
-#'    |SEED     |character |
-#'    |COLLEGE  |character |
-#'    |PLAYERS  |character |
-#'    |GP       |character |
-#'    |MIN      |character |
-#'    |FGM      |character |
-#'    |FGA      |character |
-#'    |FG_PCT   |character |
-#'    |FG3M     |character |
-#'    |FG3A     |character |
-#'    |FG3_PCT  |character |
-#'    |FTM      |character |
-#'    |FTA      |character |
-#'    |FT_PCT   |character |
-#'    |OREB     |character |
-#'    |DREB     |character |
-#'    |REB      |character |
-#'    |AST      |character |
-#'    |STL      |character |
-#'    |BLK      |character |
-#'    |TOV      |character |
-#'    |PF       |character |
-#'    |PTS      |character |
+#'    Same columns as the **East** table above.
 #'
 #'    **Midwest**
 #'
 #'
-#'    |col_name |types     |
-#'    |:--------|:---------|
-#'    |REGION   |character |
-#'    |SEED     |character |
-#'    |COLLEGE  |character |
-#'    |PLAYERS  |character |
-#'    |GP       |character |
-#'    |MIN      |character |
-#'    |FGM      |character |
-#'    |FGA      |character |
-#'    |FG_PCT   |character |
-#'    |FG3M     |character |
-#'    |FG3A     |character |
-#'    |FG3_PCT  |character |
-#'    |FTM      |character |
-#'    |FTA      |character |
-#'    |FT_PCT   |character |
-#'    |OREB     |character |
-#'    |DREB     |character |
-#'    |REB      |character |
-#'    |AST      |character |
-#'    |STL      |character |
-#'    |BLK      |character |
-#'    |TOV      |character |
-#'    |PF       |character |
-#'    |PTS      |character |
+#'    Same columns as the **East** table above.
 #'
 #'    **West**
 #'
 #'
-#'    |col_name |types     |
-#'    |:--------|:---------|
-#'    |REGION   |character |
-#'    |SEED     |character |
-#'    |COLLEGE  |character |
-#'    |PLAYERS  |character |
-#'    |GP       |character |
-#'    |MIN      |character |
-#'    |FGM      |character |
-#'    |FGA      |character |
-#'    |FG_PCT   |character |
-#'    |FG3M     |character |
-#'    |FG3A     |character |
-#'    |FG3_PCT  |character |
-#'    |FTM      |character |
-#'    |FTA      |character |
-#'    |FT_PCT   |character |
-#'    |OREB     |character |
-#'    |DREB     |character |
-#'    |REB      |character |
-#'    |AST      |character |
-#'    |STL      |character |
-#'    |BLK      |character |
-#'    |TOV      |character |
-#'    |PF       |character |
-#'    |PTS      |character |
+#'    Same columns as the **East** table above.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -485,6 +432,7 @@ wnba_playercareerbycollegerollup <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -499,6 +447,8 @@ wnba_playercareerbycollegerollup <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -507,13 +457,12 @@ wnba_playercareerbycollegerollup <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or player careers by college rollup data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or player careers by college rollup data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -541,191 +490,57 @@ NULL
 #'    **SeasonTotalsRegularSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsRegularSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |Team_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    |col_name  |types     |description                              |
+#'    |:---------|:---------|:----------------------------------------|
+#'    |PLAYER_ID |character |Unique player identifier.                |
+#'    |LEAGUE_ID |character |League identifier ('10' = WNBA).         |
+#'    |Team_ID   |character |Unique team identifier.                  |
+#'    |GP        |character |Games played.                            |
+#'    |GS        |character |Games started.                           |
+#'    |MIN       |character |Minutes played.                          |
+#'    |FGM       |character |Field goals made.                        |
+#'    |FGA       |character |Field goal attempts.                     |
+#'    |FG_PCT    |character |Field goal percentage (0-1).             |
+#'    |FG3M      |character |Three-point field goals made.            |
+#'    |FG3A      |character |Three-point field goal attempts.         |
+#'    |FG3_PCT   |character |Three-point field goal percentage (0-1). |
+#'    |FTM       |character |Free throws made.                        |
+#'    |FTA       |character |Free throw attempts.                     |
+#'    |FT_PCT    |character |Free throw percentage (0-1).             |
+#'    |OREB      |character |Offensive rebounds.                      |
+#'    |DREB      |character |Defensive rebounds.                      |
+#'    |REB       |character |Total rebounds.                          |
+#'    |AST       |character |Assists.                                 |
+#'    |STL       |character |Steals.                                  |
+#'    |BLK       |character |Blocks.                                  |
+#'    |TOV       |character |Turnovers.                               |
+#'    |PF        |character |Personal fouls.                          |
+#'    |PTS       |character |Points scored.                           |
 #'
 #'    **SeasonTotalsPostSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsPostSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |Team_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    Same columns as the **CareerTotalsRegularSeason** table above.
 #'
 #'    **SeasonTotalsAllStarSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsAllStarSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |Team_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    Same columns as the **CareerTotalsRegularSeason** table above.
 #'
 #'    **SeasonTotalsCollegeSeason**
 #'
@@ -738,68 +553,12 @@ NULL
 #'    **SeasonRankingsRegularSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |RANK_MIN          |character |
-#'    |RANK_FGM          |character |
-#'    |RANK_FGA          |character |
-#'    |RANK_FG_PCT       |character |
-#'    |RANK_FG3M         |character |
-#'    |RANK_FG3A         |character |
-#'    |RANK_FG3_PCT      |character |
-#'    |RANK_FTM          |character |
-#'    |RANK_FTA          |character |
-#'    |RANK_FT_PCT       |character |
-#'    |RANK_OREB         |character |
-#'    |RANK_DREB         |character |
-#'    |RANK_REB          |character |
-#'    |RANK_AST          |character |
-#'    |RANK_STL          |character |
-#'    |RANK_BLK          |character |
-#'    |RANK_TOV          |character |
-#'    |RANK_PTS          |character |
-#'    |RANK_EFF          |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_rankings_schema] table.
 #'
 #'    **SeasonRankingsPostSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |RANK_MIN          |character |
-#'    |RANK_FGM          |character |
-#'    |RANK_FGA          |character |
-#'    |RANK_FG_PCT       |character |
-#'    |RANK_FG3M         |character |
-#'    |RANK_FG3A         |character |
-#'    |RANK_FG3_PCT      |character |
-#'    |RANK_FTM          |character |
-#'    |RANK_FTA          |character |
-#'    |RANK_FT_PCT       |character |
-#'    |RANK_OREB         |character |
-#'    |RANK_DREB         |character |
-#'    |RANK_REB          |character |
-#'    |RANK_AST          |character |
-#'    |RANK_STL          |character |
-#'    |RANK_BLK          |character |
-#'    |RANK_TOV          |character |
-#'    |RANK_PTS          |character |
-#'    |RANK_EFF          |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_rankings_schema] table.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -815,6 +574,7 @@ wnba_playercareerstats <- function(
     per_mode = 'Totals',
     player_id = '1628932',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "playercareerstats"
   endpoint <- wnba_endpoint(version)
@@ -826,6 +586,8 @@ wnba_playercareerstats <- function(
     PlayerID = player_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -834,13 +596,12 @@ wnba_playercareerstats <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or player career stats data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or player career stats data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -861,41 +622,43 @@ NULL
 #'    **FanDuelPlayer**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_NAME         |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |JERSEY_NUM        |character |
-#'    |PLAYER_POSITION   |character |
-#'    |LOCATION          |character |
-#'    |FAN_DUEL_PTS      |character |
-#'    |WNBA_FANTASY_PTS   |character |
-#'    |USG_PCT           |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |TOV               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |BLKA              |character |
-#'    |PF                |character |
-#'    |PFD               |character |
-#'    |PTS               |character |
-#'    |PLUS_MINUS        |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       PLAYER_POSITION \tab character \tab  \cr
+#'       LOCATION \tab character \tab Filter results by game location. \cr
+#'       FAN_DUEL_PTS \tab character \tab  \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'       USG_PCT \tab character \tab Usage percentage (0-1). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -910,6 +673,7 @@ NULL
 wnba_infographicfanduelplayer <- function(
     game_id,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   version <- "infographicfanduelplayer"
   endpoint <- wnba_endpoint(version)
@@ -919,6 +683,8 @@ wnba_infographicfanduelplayer <- function(
     GameID = game_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -927,13 +693,12 @@ wnba_infographicfanduelplayer <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no FanDuel player infographic data for {game_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no FanDuel player infographic data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -962,193 +727,133 @@ NULL
 #'    **Overall**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |DD2             |character |
-#'    |TD3             |character |
-#'    |FAN_DUEL_PTS    |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       GROUP_VALUE \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       DD2 \tab character \tab  \cr
+#'       TD3 \tab character \tab  \cr
+#'       FAN_DUEL_PTS \tab character \tab  \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **Location**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |DD2             |character |
-#'    |TD3             |character |
-#'    |FAN_DUEL_PTS    |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    Same columns as the **Overall** table above.
 #'
 #'    **LastNGames**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |DD2             |character |
-#'    |TD3             |character |
-#'    |FAN_DUEL_PTS    |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    Same columns as the **Overall** table above.
 #'
 #'    **DaysRestModified**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |SEASON_YEAR     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |DD2             |character |
-#'    |TD3             |character |
-#'    |FAN_DUEL_PTS    |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       GROUP_VALUE \tab character \tab  \cr
+#'       SEASON_YEAR \tab character \tab Season year string ('YYYY-YY' format). \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       DD2 \tab character \tab  \cr
+#'       TD3 \tab character \tab  \cr
+#'       FAN_DUEL_PTS \tab character \tab  \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **Opponent**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |DD2             |character |
-#'    |TD3             |character |
-#'    |FAN_DUEL_PTS    |character |
-#'    |NBA_FANTASY_PTS|character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       GROUP_VALUE \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       DD2 \tab character \tab  \cr
+#'       TD3 \tab character \tab  \cr
+#'       FAN_DUEL_PTS \tab character \tab  \cr
+#'       NBA_FANTASY_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1171,6 +876,7 @@ wnba_playerfantasyprofile <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -1190,6 +896,8 @@ wnba_playerfantasyprofile <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1198,13 +906,12 @@ wnba_playerfantasyprofile <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player fantasy profile data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player fantasy profile data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1230,44 +937,30 @@ NULL
 #'    **SeasonAvg**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FAN_DUEL_PTS      |character |
-#'    |NBA_FANTASY_PTS   |character |
-#'    |PTS               |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |FG3M              |character |
-#'    |FT_PCT            |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |FG_PCT            |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       FAN_DUEL_PTS \tab character \tab  \cr
+#'       NBA_FANTASY_PTS \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **LastFiveGamesAvg**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FAN_DUEL_PTS      |character |
-#'    |NBA_FANTASY_PTS   |character |
-#'    |PTS               |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |FG3M              |character |
-#'    |FT_PCT            |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |FG_PCT            |character |
+#'    Same columns as the **SeasonAvg** table above.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1285,6 +978,7 @@ wnba_playerfantasyprofilebargraph <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -1299,6 +993,8 @@ wnba_playerfantasyprofilebargraph <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1307,13 +1003,12 @@ wnba_playerfantasyprofilebargraph <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player fantasy profile bar graph data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player fantasy profile bar graph data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1337,40 +1032,42 @@ NULL
 #'    **PlayerEstimatedMetrics**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |PLAYER_NAME       |character |
-#'    |GP                |character |
-#'    |W                 |character |
-#'    |L                 |character |
-#'    |W_PCT             |character |
-#'    |MIN               |character |
-#'    |E_OFF_RATING      |character |
-#'    |E_DEF_RATING      |character |
-#'    |E_NET_RATING      |character |
-#'    |E_AST_RATIO       |character |
-#'    |E_OREB_PCT        |character |
-#'    |E_DREB_PCT        |character |
-#'    |E_REB_PCT         |character |
-#'    |E_TOV_PCT         |character |
-#'    |E_USG_PCT         |character |
-#'    |E_PACE            |character |
-#'    |GP_RANK           |character |
-#'    |W_RANK            |character |
-#'    |L_RANK            |character |
-#'    |W_PCT_RANK        |character |
-#'    |MIN_RANK          |character |
-#'    |E_OFF_RATING_RANK |character |
-#'    |E_DEF_RATING_RANK |character |
-#'    |E_NET_RATING_RANK |character |
-#'    |E_AST_RATIO_RANK  |character |
-#'    |E_OREB_PCT_RANK   |character |
-#'    |E_DREB_PCT_RANK   |character |
-#'    |E_REB_PCT_RANK    |character |
-#'    |E_TOV_PCT_RANK    |character |
-#'    |E_USG_PCT_RANK    |character |
-#'    |E_PACE_RANK       |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       E_OFF_RATING \tab character \tab  \cr
+#'       E_DEF_RATING \tab character \tab  \cr
+#'       E_NET_RATING \tab character \tab  \cr
+#'       E_AST_RATIO \tab character \tab  \cr
+#'       E_OREB_PCT \tab character \tab  \cr
+#'       E_DREB_PCT \tab character \tab  \cr
+#'       E_REB_PCT \tab character \tab  \cr
+#'       E_TOV_PCT \tab character \tab  \cr
+#'       E_USG_PCT \tab character \tab  \cr
+#'       E_PACE \tab character \tab  \cr
+#'       GP_RANK \tab character \tab  \cr
+#'       W_RANK \tab character \tab  \cr
+#'       L_RANK \tab character \tab  \cr
+#'       W_PCT_RANK \tab character \tab  \cr
+#'       MIN_RANK \tab character \tab  \cr
+#'       E_OFF_RATING_RANK \tab character \tab  \cr
+#'       E_DEF_RATING_RANK \tab character \tab  \cr
+#'       E_NET_RATING_RANK \tab character \tab  \cr
+#'       E_AST_RATIO_RANK \tab character \tab  \cr
+#'       E_OREB_PCT_RANK \tab character \tab  \cr
+#'       E_DREB_PCT_RANK \tab character \tab  \cr
+#'       E_REB_PCT_RANK \tab character \tab  \cr
+#'       E_TOV_PCT_RANK \tab character \tab  \cr
+#'       E_USG_PCT_RANK \tab character \tab  \cr
+#'       E_PACE_RANK \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1386,6 +1083,7 @@ wnba_playerestimatedmetrics <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -1399,6 +1097,8 @@ wnba_playerestimatedmetrics <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1417,13 +1117,12 @@ wnba_playerestimatedmetrics <- function(
       names(df_list) <- resp$resultSet$name
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player estimated metrics data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player estimated metrics data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1450,35 +1149,37 @@ NULL
 #'    **PlayerGameLog**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |SEASON_ID       |character |
-#'    |Player_ID       |character |
-#'    |Game_ID         |character |
-#'    |GAME_DATE       |character |
-#'    |MATCHUP         |character |
-#'    |WL              |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |TOV             |character |
-#'    |PF              |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |VIDEO_AVAILABLE |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       SEASON_ID \tab character \tab Unique season identifier. \cr
+#'       Player_ID \tab character \tab Unique player identifier. \cr
+#'       Game_ID \tab character \tab Unique game identifier. \cr
+#'       GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+#'       MATCHUP \tab character \tab Matchup. \cr
+#'       WL \tab character \tab  \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       VIDEO_AVAILABLE \tab character \tab Video available. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1497,6 +1198,7 @@ wnba_playergamelog <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -1513,6 +1215,8 @@ wnba_playergamelog <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1521,13 +1225,12 @@ wnba_playergamelog <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player game log data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player game log data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1567,76 +1270,78 @@ NULL
 #'    **PlayerGameLogs**
 #'
 #'
-#'    |col_name              |types     |
-#'    |:---------------------|:---------|
-#'    |SEASON_YEAR           |character |
-#'    |PLAYER_ID             |character |
-#'    |PLAYER_NAME           |character |
-#'    |NICKNAME              |character |
-#'    |TEAM_ID               |character |
-#'    |TEAM_ABBREVIATION     |character |
-#'    |TEAM_NAME             |character |
-#'    |GAME_ID               |character |
-#'    |GAME_DATE             |character |
-#'    |MATCHUP               |character |
-#'    |WL                    |character |
-#'    |MIN                   |character |
-#'    |FGM                   |character |
-#'    |FGA                   |character |
-#'    |FG_PCT                |character |
-#'    |FG3M                  |character |
-#'    |FG3A                  |character |
-#'    |FG3_PCT               |character |
-#'    |FTM                   |character |
-#'    |FTA                   |character |
-#'    |FT_PCT                |character |
-#'    |OREB                  |character |
-#'    |DREB                  |character |
-#'    |REB                   |character |
-#'    |AST                   |character |
-#'    |TOV                   |character |
-#'    |STL                   |character |
-#'    |BLK                   |character |
-#'    |BLKA                  |character |
-#'    |PF                    |character |
-#'    |PFD                   |character |
-#'    |PTS                   |character |
-#'    |PLUS_MINUS            |character |
-#'    |WNBA_FANTASY_PTS       |character |
-#'    |DD2                   |character |
-#'    |TD3                   |character |
-#'    |WWNBA_FANTASY_PTS      |character |
-#'    |GP_RANK               |character |
-#'    |W_RANK                |character |
-#'    |L_RANK                |character |
-#'    |W_PCT_RANK            |character |
-#'    |MIN_RANK              |character |
-#'    |FGM_RANK              |character |
-#'    |FGA_RANK              |character |
-#'    |FG_PCT_RANK           |character |
-#'    |FG3M_RANK             |character |
-#'    |FG3A_RANK             |character |
-#'    |FG3_PCT_RANK          |character |
-#'    |FTM_RANK              |character |
-#'    |FTA_RANK              |character |
-#'    |FT_PCT_RANK           |character |
-#'    |OREB_RANK             |character |
-#'    |DREB_RANK             |character |
-#'    |REB_RANK              |character |
-#'    |AST_RANK              |character |
-#'    |TOV_RANK              |character |
-#'    |STL_RANK              |character |
-#'    |BLK_RANK              |character |
-#'    |BLKA_RANK             |character |
-#'    |PF_RANK               |character |
-#'    |PFD_RANK              |character |
-#'    |PTS_RANK              |character |
-#'    |PLUS_MINUS_RANK       |character |
-#'    |WNBA_FANTASY_PTS_RANK  |character |
-#'    |DD2_RANK              |character |
-#'    |TD3_RANK              |character |
-#'    |WWNBA_FANTASY_PTS_RANK |character |
-#'    |VIDEO_AVAILABLE_FLAG  |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       SEASON_YEAR \tab character \tab Season year string ('YYYY-YY' format). \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'       GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+#'       MATCHUP \tab character \tab Matchup. \cr
+#'       WL \tab character \tab  \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'       DD2 \tab character \tab  \cr
+#'       TD3 \tab character \tab  \cr
+#'       WWNBA_FANTASY_PTS \tab character \tab  \cr
+#'       GP_RANK \tab character \tab  \cr
+#'       W_RANK \tab character \tab  \cr
+#'       L_RANK \tab character \tab  \cr
+#'       W_PCT_RANK \tab character \tab  \cr
+#'       MIN_RANK \tab character \tab  \cr
+#'       FGM_RANK \tab character \tab  \cr
+#'       FGA_RANK \tab character \tab  \cr
+#'       FG_PCT_RANK \tab character \tab  \cr
+#'       FG3M_RANK \tab character \tab  \cr
+#'       FG3A_RANK \tab character \tab  \cr
+#'       FG3_PCT_RANK \tab character \tab  \cr
+#'       FTM_RANK \tab character \tab  \cr
+#'       FTA_RANK \tab character \tab  \cr
+#'       FT_PCT_RANK \tab character \tab  \cr
+#'       OREB_RANK \tab character \tab  \cr
+#'       DREB_RANK \tab character \tab  \cr
+#'       REB_RANK \tab character \tab  \cr
+#'       AST_RANK \tab character \tab  \cr
+#'       TOV_RANK \tab character \tab  \cr
+#'       STL_RANK \tab character \tab  \cr
+#'       BLK_RANK \tab character \tab  \cr
+#'       BLKA_RANK \tab character \tab  \cr
+#'       PF_RANK \tab character \tab  \cr
+#'       PFD_RANK \tab character \tab  \cr
+#'       PTS_RANK \tab character \tab  \cr
+#'       PLUS_MINUS_RANK \tab character \tab  \cr
+#'       WNBA_FANTASY_PTS_RANK \tab character \tab  \cr
+#'       DD2_RANK \tab character \tab  \cr
+#'       TD3_RANK \tab character \tab  \cr
+#'       WWNBA_FANTASY_PTS_RANK \tab character \tab  \cr
+#'       VIDEO_AVAILABLE_FLAG \tab character \tab Video available flag. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1669,6 +1374,7 @@ wnba_playergamelogs <- function(
     vs_conference = '',
     vs_division = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -1700,6 +1406,8 @@ wnba_playergamelogs <- function(
   )
   
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1708,13 +1416,12 @@ wnba_playergamelogs <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player game logs data for {player_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player game logs data for {player_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1824,17 +1531,19 @@ NULL
 #'    **PlayerGameStreakFinderResults**
 #'
 #'
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |PLAYER_ID              |character |
-#'    |GAMESTREAK             |character |
-#'    |STARTDATE              |character |
-#'    |ENDDATE                |character |
-#'    |ACTIVESTREAK           |character |
-#'    |NUMSEASONS             |character |
-#'    |LASTSEASON             |character |
-#'    |FIRSTSEASON            |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       GAMESTREAK \tab character \tab  \cr
+#'       STARTDATE \tab character \tab  \cr
+#'       ENDDATE \tab character \tab  \cr
+#'       ACTIVESTREAK \tab character \tab  \cr
+#'       NUMSEASONS \tab character \tab  \cr
+#'       LASTSEASON \tab character \tab  \cr
+#'       FIRSTSEASON \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1938,6 +1647,7 @@ wnba_playergamestreakfinder <- function(
     vs_team_id = '',
     years_experience = '',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -2037,6 +1747,8 @@ wnba_playergamestreakfinder <- function(
     YearsExperience = years_experience
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -2045,13 +1757,12 @@ wnba_playergamestreakfinder <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player streak finder data available for the parameters selected!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player streak finder data available for the parameters selected!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -2077,21 +1788,23 @@ NULL
 #'    **NextNGames**
 #'
 #'
-#'    |col_name                  |types     |
-#'    |:-------------------------|:---------|
-#'    |GAME_ID                   |character |
-#'    |GAME_DATE                 |character |
-#'    |HOME_TEAM_ID              |character |
-#'    |VISITOR_TEAM_ID           |character |
-#'    |HOME_TEAM_NAME            |character |
-#'    |VISITOR_TEAM_NAME         |character |
-#'    |HOME_TEAM_ABBREVIATION    |character |
-#'    |VISITOR_TEAM_ABBREVIATION |character |
-#'    |HOME_TEAM_NICKNAME        |character |
-#'    |VISITOR_TEAM_NICKNAME     |character |
-#'    |GAME_TIME                 |character |
-#'    |HOME_WL                   |character |
-#'    |VISITOR_WL                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'       GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+#'       HOME_TEAM_ID \tab character \tab Unique identifier for the home team. \cr
+#'       VISITOR_TEAM_ID \tab character \tab Unique identifier for visitor team. \cr
+#'       HOME_TEAM_NAME \tab character \tab Home team name. \cr
+#'       VISITOR_TEAM_NAME \tab character \tab  \cr
+#'       HOME_TEAM_ABBREVIATION \tab character \tab  \cr
+#'       VISITOR_TEAM_ABBREVIATION \tab character \tab  \cr
+#'       HOME_TEAM_NICKNAME \tab character \tab  \cr
+#'       VISITOR_TEAM_NICKNAME \tab character \tab  \cr
+#'       GAME_TIME \tab character \tab Game start time. \cr
+#'       HOME_WL \tab character \tab  \cr
+#'       VISITOR_WL \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -2109,6 +1822,7 @@ wnba_playernextngames <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -2124,6 +1838,8 @@ wnba_playernextngames <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -2132,13 +1848,12 @@ wnba_playernextngames <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player next n games data available for {player_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player next n games data available for {player_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -2166,191 +1881,57 @@ NULL
 #'    **SeasonTotalsRegularSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsRegularSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |TEAM_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    |col_name  |types     |description                              |
+#'    |:---------|:---------|:----------------------------------------|
+#'    |PLAYER_ID |character |Unique player identifier.                |
+#'    |LEAGUE_ID |character |League identifier ('10' = WNBA).         |
+#'    |TEAM_ID   |character |Unique team identifier.                  |
+#'    |GP        |character |Games played.                            |
+#'    |GS        |character |Games started.                           |
+#'    |MIN       |character |Minutes played.                          |
+#'    |FGM       |character |Field goals made.                        |
+#'    |FGA       |character |Field goal attempts.                     |
+#'    |FG_PCT    |character |Field goal percentage (0-1).             |
+#'    |FG3M      |character |Three-point field goals made.            |
+#'    |FG3A      |character |Three-point field goal attempts.         |
+#'    |FG3_PCT   |character |Three-point field goal percentage (0-1). |
+#'    |FTM       |character |Free throws made.                        |
+#'    |FTA       |character |Free throw attempts.                     |
+#'    |FT_PCT    |character |Free throw percentage (0-1).             |
+#'    |OREB      |character |Offensive rebounds.                      |
+#'    |DREB      |character |Defensive rebounds.                      |
+#'    |REB       |character |Total rebounds.                          |
+#'    |AST       |character |Assists.                                 |
+#'    |STL       |character |Steals.                                  |
+#'    |BLK       |character |Blocks.                                  |
+#'    |TOV       |character |Turnovers.                               |
+#'    |PF        |character |Personal fouls.                          |
+#'    |PTS       |character |Points scored.                           |
 #'
 #'    **SeasonTotalsPostSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsPostSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |TEAM_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    Same columns as the **CareerTotalsRegularSeason** table above.
 #'
 #'    **SeasonTotalsAllStarSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsAllStarSeason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |TEAM_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    Same columns as the **CareerTotalsRegularSeason** table above.
 #'
 #'    **SeasonTotalsCollegeSeason**
 #'
@@ -2359,183 +1940,62 @@ NULL
 #'    **SeasonTotalsPreseason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |MIN               |character |
-#'    |FGM               |character |
-#'    |FGA               |character |
-#'    |FG_PCT            |character |
-#'    |FG3M              |character |
-#'    |FG3A              |character |
-#'    |FG3_PCT           |character |
-#'    |FTM               |character |
-#'    |FTA               |character |
-#'    |FT_PCT            |character |
-#'    |OREB              |character |
-#'    |DREB              |character |
-#'    |REB               |character |
-#'    |AST               |character |
-#'    |STL               |character |
-#'    |BLK               |character |
-#'    |TOV               |character |
-#'    |PF                |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_totals_schema] table.
 #'
 #'    **CareerTotalsPreseason**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |LEAGUE_ID |character |
-#'    |TEAM_ID   |character |
-#'    |GP        |character |
-#'    |GS        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
+#'    Same columns as the **CareerTotalsRegularSeason** table above.
 #'
 #'    **SeasonRankingsRegularSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |RANK_MIN          |character |
-#'    |RANK_FGM          |character |
-#'    |RANK_FGA          |character |
-#'    |RANK_FG_PCT       |character |
-#'    |RANK_FG3M         |character |
-#'    |RANK_FG3A         |character |
-#'    |RANK_FG3_PCT      |character |
-#'    |RANK_FTM          |character |
-#'    |RANK_FTA          |character |
-#'    |RANK_FT_PCT       |character |
-#'    |RANK_OREB         |character |
-#'    |RANK_DREB         |character |
-#'    |RANK_REB          |character |
-#'    |RANK_AST          |character |
-#'    |RANK_STL          |character |
-#'    |RANK_BLK          |character |
-#'    |RANK_TOV          |character |
-#'    |RANK_PTS          |character |
-#'    |RANK_EFF          |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_rankings_schema] table.
 #'
 #'    **SeasonRankingsPostSeason**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |PLAYER_ID         |character |
-#'    |SEASON_ID         |character |
-#'    |LEAGUE_ID         |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PLAYER_AGE        |character |
-#'    |GP                |character |
-#'    |GS                |character |
-#'    |RANK_MIN          |character |
-#'    |RANK_FGM          |character |
-#'    |RANK_FGA          |character |
-#'    |RANK_FG_PCT       |character |
-#'    |RANK_FG3M         |character |
-#'    |RANK_FG3A         |character |
-#'    |RANK_FG3_PCT      |character |
-#'    |RANK_FTM          |character |
-#'    |RANK_FTA          |character |
-#'    |RANK_FT_PCT       |character |
-#'    |RANK_OREB         |character |
-#'    |RANK_DREB         |character |
-#'    |RANK_REB          |character |
-#'    |RANK_AST          |character |
-#'    |RANK_STL          |character |
-#'    |RANK_BLK          |character |
-#'    |RANK_TOV          |character |
-#'    |RANK_PTS          |character |
-#'    |RANK_EFF          |character |
+#'    Columns as documented in the shared [wnba_playercareerstats_season_rankings_schema] table.
 #'
 #'    **SeasonHighs**
 #'
 #'
-#'    |col_name             |types     |
-#'    |:--------------------|:---------|
-#'    |PLAYER_ID            |character |
-#'    |GAME_ID              |character |
-#'    |GAME_DATE            |character |
-#'    |VS_TEAM_ID           |character |
-#'    |VS_TEAM_CITY         |character |
-#'    |VS_TEAM_NAME         |character |
-#'    |VS_TEAM_ABBREVIATION |character |
-#'    |STAT                 |character |
-#'    |STAT_VALUE           |character |
-#'    |STAT_ORDER           |character |
-#'    |DATE_EST             |character |
+#'    |col_name             |types     |description               |
+#'    |:--------------------|:---------|:-------------------------|
+#'    |PLAYER_ID            |character |Unique player identifier. |
+#'    |GAME_ID              |character |Unique game identifier.   |
+#'    |GAME_DATE            |character |Game date (YYYY-MM-DD).   |
+#'    |VS_TEAM_ID           |character |                          |
+#'    |VS_TEAM_CITY         |character |                          |
+#'    |VS_TEAM_NAME         |character |                          |
+#'    |VS_TEAM_ABBREVIATION |character |                          |
+#'    |STAT                 |character |                          |
+#'    |STAT_VALUE           |character |Stat value.               |
+#'    |STAT_ORDER           |character |                          |
+#'    |DATE_EST             |character |                          |
 #'
 #'    **CareerHighs**
 #'
 #'
-#'    |col_name             |types     |
-#'    |:--------------------|:---------|
-#'    |PLAYER_ID            |character |
-#'    |GAME_ID              |character |
-#'    |GAME_DATE            |character |
-#'    |VS_TEAM_ID           |character |
-#'    |VS_TEAM_CITY         |character |
-#'    |VS_TEAM_NAME         |character |
-#'    |VS_TEAM_ABBREVIATION |character |
-#'    |STAT                 |character |
-#'    |STAT_VALUE           |character |
-#'    |STAT_ORDER           |character |
-#'    |DATE_EST             |character |
+#'    Same columns as the **SeasonHighs** table above.
 #'
 #'    **NextGame**
 #'
 #'
-#'    |col_name                 |types     |
-#'    |:------------------------|:---------|
-#'    |GAME_ID                  |character |
-#'    |GAME_DATE                |character |
-#'    |GAME_TIME                |character |
-#'    |LOCATION                 |character |
-#'    |PLAYER_TEAM_ID           |character |
-#'    |PLAYER_TEAM_CITY         |character |
-#'    |PLAYER_TEAM_NICKNAME     |character |
-#'    |PLAYER_TEAM_ABBREVIATION |character |
-#'    |VS_TEAM_ID               |character |
-#'    |VS_TEAM_CITY             |character |
-#'    |VS_TEAM_NICKNAME         |character |
-#'    |VS_TEAM_ABBREVIATION     |character |
+#'    |col_name                 |types     |description                      |
+#'    |:------------------------|:---------|:--------------------------------|
+#'    |GAME_ID                  |character |Unique game identifier.          |
+#'    |GAME_DATE                |character |Game date (YYYY-MM-DD).          |
+#'    |GAME_TIME                |character |Game start time.                 |
+#'    |LOCATION                 |character |Filter results by game location. |
+#'    |PLAYER_TEAM_ID           |character |                                 |
+#'    |PLAYER_TEAM_CITY         |character |                                 |
+#'    |PLAYER_TEAM_NICKNAME     |character |                                 |
+#'    |PLAYER_TEAM_ABBREVIATION |character |                                 |
+#'    |VS_TEAM_ID               |character |                                 |
+#'    |VS_TEAM_CITY             |character |                                 |
+#'    |VS_TEAM_NICKNAME         |character |                                 |
+#'    |VS_TEAM_ABBREVIATION     |character |                                 |
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -2547,11 +2007,18 @@ NULL
 #'   wnba_playerprofilev2(player_id = '1628932')
 #' ```
 wnba_playerprofilev2 <- function(
-    league_id = '',
+    league_id = '10',
     per_mode = 'Totals',
     player_id = '1628932',
     ...){
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  # Restored in 3.0.0 after the upstream endpoint resumed publishing populated
+  # SeasonTotals*/CareerTotals*/SeasonRankings*/SeasonHighs/CareerHighs/NextGame
+  # tables for WNBA players. Verified 2026-05-16 against PLAYER_ID 1628932
+  # (A'ja Wilson): 9 regular seasons + career totals + 22 career highs + next
+  # game info returned.
+
   version <- "playerprofilev2"
   endpoint <- wnba_endpoint(version)
   full_url <- endpoint
@@ -2562,6 +2029,8 @@ wnba_playerprofilev2 <- function(
     PlayerID = player_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -2570,13 +2039,12 @@ wnba_playerprofilev2 <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no player profile v2 data available for {player_id}!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no player profile v2 data available for {player_id}!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -2621,200 +2089,156 @@ NULL
 #'    **Overall**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |GROUP_VALUE     |character |
-#'    |PLAYER_ID       |character |
-#'    |PLAYER_NAME     |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       GROUP_VALUE \tab character \tab  \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **OnOffCourt**
 #'
 #'
-#'    |col_name        |types     |
-#'    |:---------------|:---------|
-#'    |GROUP_SET       |character |
-#'    |PLAYER_ID       |character |
-#'    |PLAYER_NAME     |character |
-#'    |VS_PLAYER_ID    |character |
-#'    |VS_PLAYER_NAME  |character |
-#'    |COURT_STATUS    |character |
-#'    |GP              |character |
-#'    |W               |character |
-#'    |L               |character |
-#'    |W_PCT           |character |
-#'    |MIN             |character |
-#'    |FGM             |character |
-#'    |FGA             |character |
-#'    |FG_PCT          |character |
-#'    |FG3M            |character |
-#'    |FG3A            |character |
-#'    |FG3_PCT         |character |
-#'    |FTM             |character |
-#'    |FTA             |character |
-#'    |FT_PCT          |character |
-#'    |OREB            |character |
-#'    |DREB            |character |
-#'    |REB             |character |
-#'    |AST             |character |
-#'    |TOV             |character |
-#'    |STL             |character |
-#'    |BLK             |character |
-#'    |BLKA            |character |
-#'    |PF              |character |
-#'    |PFD             |character |
-#'    |PTS             |character |
-#'    |PLUS_MINUS      |character |
-#'    |WNBA_FANTASY_PTS |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       VS_PLAYER_ID \tab character \tab  \cr
+#'       VS_PLAYER_NAME \tab character \tab  \cr
+#'       COURT_STATUS \tab character \tab  \cr
+#'       GP \tab character \tab Games played. \cr
+#'       W \tab character \tab Wins. \cr
+#'       L \tab character \tab Losses. \cr
+#'       W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'       WNBA_FANTASY_PTS \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **ShotDistanceOverall**
 #'
 #'
-#'    |col_name    |types     |
-#'    |:-----------|:---------|
-#'    |GROUP_SET   |character |
-#'    |GROUP_VALUE |character |
-#'    |PLAYER_ID   |character |
-#'    |PLAYER_NAME |character |
-#'    |FGM         |character |
-#'    |FGA         |character |
-#'    |FG_PCT      |character |
+#'    |col_name    |types     |description                  |
+#'    |:-----------|:---------|:----------------------------|
+#'    |GROUP_SET   |character |                             |
+#'    |GROUP_VALUE |character |                             |
+#'    |PLAYER_ID   |character |Unique player identifier.    |
+#'    |PLAYER_NAME |character |Player name.                 |
+#'    |FGM         |character |Field goals made.            |
+#'    |FGA         |character |Field goal attempts.         |
+#'    |FG_PCT      |character |Field goal percentage (0-1). |
 #'
 #'    **ShotDistanceOnCourt**
 #'
 #'
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |GROUP_SET      |character |
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |VS_PLAYER_ID   |character |
-#'    |VS_PLAYER_NAME |character |
-#'    |COURT_STATUS   |character |
-#'    |GROUP_VALUE    |character |
-#'    |FGM            |character |
-#'    |FGA            |character |
-#'    |FG_PCT         |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       VS_PLAYER_ID \tab character \tab  \cr
+#'       VS_PLAYER_NAME \tab character \tab  \cr
+#'       COURT_STATUS \tab character \tab  \cr
+#'       GROUP_VALUE \tab character \tab  \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **ShotDistanceOffCourt**
 #'
 #'
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |GROUP_SET      |character |
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |VS_PLAYER_ID   |character |
-#'    |VS_PLAYER_NAME |character |
-#'    |COURT_STATUS   |character |
-#'    |GROUP_VALUE    |character |
-#'    |FGM            |character |
-#'    |FGA            |character |
-#'    |FG_PCT         |character |
+#'    Same columns as the **ShotDistanceOnCourt** table above.
 #'
 #'    **ShotAreaOverall**
 #'
 #'
-#'    |col_name    |types     |
-#'    |:-----------|:---------|
-#'    |GROUP_SET   |character |
-#'    |GROUP_VALUE |character |
-#'    |PLAYER_ID   |character |
-#'    |PLAYER_NAME |character |
-#'    |FGM         |character |
-#'    |FGA         |character |
-#'    |FG_PCT      |character |
+#'    Same columns as the **ShotDistanceOverall** table above.
 #'
 #'    **ShotAreaOnCourt**
 #'
 #'
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |GROUP_SET      |character |
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |VS_PLAYER_ID   |character |
-#'    |VS_PLAYER_NAME |character |
-#'    |COURT_STATUS   |character |
-#'    |GROUP_VALUE    |character |
-#'    |FGM            |character |
-#'    |FGA            |character |
-#'    |FG_PCT         |character |
+#'    Same columns as the **ShotDistanceOnCourt** table above.
 #'
 #'    **ShotAreaOffCourt**
 #'
 #'
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |GROUP_SET      |character |
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |VS_PLAYER_ID   |character |
-#'    |VS_PLAYER_NAME |character |
-#'    |COURT_STATUS   |character |
-#'    |GROUP_VALUE    |character |
-#'    |FGM            |character |
-#'    |FGA            |character |
-#'    |FG_PCT         |character |
+#'    Same columns as the **ShotDistanceOnCourt** table above.
 #'
 #'    **PlayerInfo**
 #'
 #'
-#'    |col_name                 |types     |
-#'    |:------------------------|:---------|
-#'    |PERSON_ID                |character |
-#'    |FIRST_NAME               |character |
-#'    |LAST_NAME                |character |
-#'    |DISPLAY_FIRST_LAST       |character |
-#'    |DISPLAY_LAST_COMMA_FIRST |character |
-#'    |DISPLAY_FI_LAST          |character |
-#'    |BIRTHDATE                |character |
-#'    |SCHOOL                   |character |
-#'    |COUNTRY                  |character |
-#'    |LAST_AFFILIATION         |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PERSON_ID \tab character \tab Unique player identifier (V3 endpoints). \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       DISPLAY_FIRST_LAST \tab character \tab  \cr
+#'       DISPLAY_LAST_COMMA_FIRST \tab character \tab  \cr
+#'       DISPLAY_FI_LAST \tab character \tab  \cr
+#'       BIRTHDATE \tab character \tab  \cr
+#'       SCHOOL \tab character \tab Player's school / college (when distinct from 'college'). \cr
+#'       COUNTRY \tab character \tab Country (full name or code). \cr
+#'       LAST_AFFILIATION \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **VsPlayerInfo**
 #'
 #'
-#'    |col_name                 |types     |
-#'    |:------------------------|:---------|
-#'    |PERSON_ID                |character |
-#'    |FIRST_NAME               |character |
-#'    |LAST_NAME                |character |
-#'    |DISPLAY_FIRST_LAST       |character |
-#'    |DISPLAY_LAST_COMMA_FIRST |character |
-#'    |DISPLAY_FI_LAST          |character |
-#'    |BIRTHDATE                |character |
-#'    |SCHOOL                   |character |
-#'    |COUNTRY                  |character |
-#'    |LAST_AFFILIATION         |character |
+#'    Same columns as the **PlayerInfo** table above.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -2849,6 +2273,7 @@ wnba_playervsplayer <- function(
     vs_division = '',
     vs_player_id = '1629488',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -2881,6 +2306,8 @@ wnba_playervsplayer <- function(
     VsPlayerID = vs_player_id
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -2889,13 +2316,12 @@ wnba_playervsplayer <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or player vs player data unavailable for the parameters selected!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or player vs player data unavailable for the parameters selected!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -2940,62 +2366,39 @@ NULL
 #'    **OverallCompare**
 #'
 #'
-#'    |col_name    |types     |
-#'    |:-----------|:---------|
-#'    |GROUP_SET   |character |
-#'    |DESCRIPTION |character |
-#'    |MIN         |character |
-#'    |FGM         |character |
-#'    |FGA         |character |
-#'    |FG_PCT      |character |
-#'    |FG3M        |character |
-#'    |FG3A        |character |
-#'    |FG3_PCT     |character |
-#'    |FTM         |character |
-#'    |FTA         |character |
-#'    |FT_PCT      |character |
-#'    |OREB        |character |
-#'    |DREB        |character |
-#'    |REB         |character |
-#'    |AST         |character |
-#'    |TOV         |character |
-#'    |STL         |character |
-#'    |BLK         |character |
-#'    |BLKA        |character |
-#'    |PF          |character |
-#'    |PFD         |character |
-#'    |PTS         |character |
-#'    |PLUS_MINUS  |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       GROUP_SET \tab character \tab  \cr
+#'       DESCRIPTION \tab character \tab Long-form description text. \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       BLKA \tab character \tab  \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PFD \tab character \tab  \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'    **Individual**
 #'
 #'
-#'    |col_name    |types     |
-#'    |:-----------|:---------|
-#'    |GROUP_SET   |character |
-#'    |DESCRIPTION |character |
-#'    |MIN         |character |
-#'    |FGM         |character |
-#'    |FGA         |character |
-#'    |FG_PCT      |character |
-#'    |FG3M        |character |
-#'    |FG3A        |character |
-#'    |FG3_PCT     |character |
-#'    |FTM         |character |
-#'    |FTA         |character |
-#'    |FT_PCT      |character |
-#'    |OREB        |character |
-#'    |DREB        |character |
-#'    |REB         |character |
-#'    |AST         |character |
-#'    |TOV         |character |
-#'    |STL         |character |
-#'    |BLK         |character |
-#'    |BLKA        |character |
-#'    |PF          |character |
-#'    |PFD         |character |
-#'    |PTS         |character |
-#'    |PLUS_MINUS  |character |
+#'    Same columns as the **OverallCompare** table above.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -3032,6 +2435,7 @@ wnba_playercompare <- function(
     vs_division = '',
     vs_player_id_list = '202252,203399,1631022,1628878,204333',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -3066,6 +2470,8 @@ wnba_playercompare <- function(
     VsPlayerIDList = URLencode(vs_player_id_list)
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -3074,13 +2480,12 @@ wnba_playercompare <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or player comparison data unavailable for the parameters selected!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or player comparison data unavailable for the parameters selected!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

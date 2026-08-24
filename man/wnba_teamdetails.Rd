@@ -16,80 +16,73 @@ Return a named list of data frames: TeamAwardsChampionships,
 TeamAwardsConf, TeamAwardsDiv, TeamBackground,
 TeamHistory, TeamHof, TeamRetired, TeamSocialSites
 
-\strong{TeamBackground}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   ABBREVIATION \tab character \cr
-   NICKNAME \tab character \cr
-   YEARFOUNDED \tab character \cr
-   CITY \tab character \cr
-   ARENA \tab character \cr
-   ARENACAPACITY \tab character \cr
-   OWNER \tab character \cr
-   GENERALMANAGER \tab character \cr
-   HEADCOACH \tab character \cr
-   DLEAGUEAFFILIATION \tab character \cr
+\strong{TeamBackground}
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      TEAM_ID \tab character \tab Unique team identifier. \cr
+      ABBREVIATION \tab character \tab Short abbreviation. \cr
+      NICKNAME \tab character \tab Team or athlete nickname. \cr
+      YEARFOUNDED \tab character \tab  \cr
+      CITY \tab character \tab City. \cr
+      ARENA \tab character \tab  \cr
+      ARENACAPACITY \tab character \tab  \cr
+      OWNER \tab character \tab  \cr
+      GENERALMANAGER \tab character \tab  \cr
+      HEADCOACH \tab character \tab  \cr
+      DLEAGUEAFFILIATION \tab character \tab  \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
+
+\strong{TeamHistory}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   TEAM_ID \tab character \tab Unique team identifier. \cr
+   CITY \tab character \tab City. \cr
+   NICKNAME \tab character \tab Team or athlete nickname. \cr
+   YEARFOUNDED \tab character \tab  \cr
+   YEARACTIVETILL \tab character \tab  \cr
 }
 
 
-\strong{TeamHistory}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   CITY \tab character \cr
-   NICKNAME \tab character \cr
-   YEARFOUNDED \tab character \cr
-   YEARACTIVETILL \tab character \cr
+\strong{TeamSocialSites}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   ACCOUNTTYPE \tab character \tab  \cr
+   WEBSITE_LINK \tab character \tab  \cr
 }
 
 
-\strong{TeamSocialSites}\tabular{ll}{
-   col_name \tab types \cr
-   ACCOUNTTYPE \tab character \cr
-   WEBSITE_LINK \tab character \cr
+\strong{TeamAwardsChampionships}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   YEARAWARDED \tab character \tab  \cr
+   OPPOSITETEAM \tab character \tab  \cr
 }
 
 
-\strong{TeamAwardsChampionships}\tabular{ll}{
-   col_name \tab types \cr
-   YEARAWARDED \tab character \cr
-   OPPOSITETEAM \tab character \cr
+\strong{TeamAwardsConf}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   YEARAWARDED \tab integer \tab  \cr
+   OPPOSITETEAM \tab integer \tab  \cr
 }
 
 
-\strong{TeamAwardsConf}\tabular{ll}{
-   col_name \tab types \cr
-   YEARAWARDED \tab integer \cr
-   OPPOSITETEAM \tab integer \cr
+\strong{TeamAwardsDiv}
+
+Same columns as the \strong{TeamAwardsConf} table above.
+
+\strong{TeamHof}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   PLAYERID \tab character \tab  \cr
+   PLAYER \tab character \tab  \cr
+   POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+   JERSEY \tab character \tab Jersey number worn by the player. \cr
+   SEASONSWITHTEAM \tab character \tab  \cr
+   YEAR \tab character \tab 4-digit year. \cr
 }
 
 
-\strong{TeamAwardsDiv}\tabular{ll}{
-   col_name \tab types \cr
-   YEARAWARDED \tab integer \cr
-   OPPOSITETEAM \tab integer \cr
-}
+\strong{TeamRetired}
 
-
-\strong{TeamHof}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYERID \tab character \cr
-   PLAYER \tab character \cr
-   POSITION \tab character \cr
-   JERSEY \tab character \cr
-   SEASONSWITHTEAM \tab character \cr
-   YEAR \tab character \cr
-}
-
-
-\strong{TeamRetired}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYERID \tab character \cr
-   PLAYER \tab character \cr
-   POSITION \tab character \cr
-   JERSEY \tab character \cr
-   SEASONSWITHTEAM \tab character \cr
-   YEAR \tab character \cr
-}
+Same columns as the \strong{TeamHof} table above.
 }
 \description{
 \strong{Get WNBA Stats API Team Details}
@@ -101,28 +94,20 @@ TeamHistory, TeamHof, TeamRetired, TeamSocialSites
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Team Functions: 
-\code{\link{wnba_leaguedashteamstats}()},
-\code{\link{wnba_teamdashboardbyclutch}()},
-\code{\link{wnba_teamdashboardbygamesplits}()},
-\code{\link{wnba_teamdashboardbygeneralsplits}()},
-\code{\link{wnba_teamdashboardbylastngames}()},
-\code{\link{wnba_teamdashboardbyopponent}()},
-\code{\link{wnba_teamdashboardbyshootingsplits}()},
-\code{\link{wnba_teamdashboardbyteamperformance}()},
-\code{\link{wnba_teamdashboardbyyearoveryear}()},
-\code{\link{wnba_teamdashlineups}()},
-\code{\link{wnba_teamestimatedmetrics}()},
-\code{\link{wnba_teamgamelogs}()},
-\code{\link{wnba_teamgamelog}()},
-\code{\link{wnba_teamgamestreakfinder}()},
-\code{\link{wnba_teamhistoricalleaders}()},
-\code{\link{wnba_teamplayerdashboard}()},
-\code{\link{wnba_teamplayeronoffdetails}()},
-\code{\link{wnba_teamplayeronoffsummary}()},
-\code{\link{wnba_teams}()},
-\code{\link{wnba_teamvsplayer}()},
-\code{\link{wnba_teamyearbyyearstats}()}
+Other WNBA Team Functions:
+\code{\link[=wnba_leaguedashteamstats]{wnba_leaguedashteamstats()}},
+\code{\link[=wnba_teamdashboardbyclutch]{wnba_teamdashboardbyclutch()}},
+\code{\link[=wnba_teamdashlineups]{wnba_teamdashlineups()}},
+\code{\link[=wnba_teamestimatedmetrics]{wnba_teamestimatedmetrics()}},
+\code{\link[=wnba_teamgamelog]{wnba_teamgamelog()}},
+\code{\link[=wnba_teamgamelogs]{wnba_teamgamelogs()}},
+\code{\link[=wnba_teamgamestreakfinder]{wnba_teamgamestreakfinder()}},
+\code{\link[=wnba_teamhistoricalleaders]{wnba_teamhistoricalleaders()}},
+\code{\link[=wnba_teaminfocommon]{wnba_teaminfocommon()}},
+\code{\link[=wnba_teamplayeronoffdetails]{wnba_teamplayeronoffdetails()}},
+\code{\link[=wnba_teams]{wnba_teams()}},
+\code{\link[=wnba_teamvsplayer]{wnba_teamvsplayer()}},
+\code{\link[=wnba_teamyearbyyearstats]{wnba_teamyearbyyearstats()}}
 }
 \author{
 Saiem Gilani

@@ -278,37 +278,40 @@ wnba_leaguegamefinder(
 \value{
 Return a named list of data frames: LeagueGameFinderResults
 
-\strong{LeagueGameFinderResults}\tabular{ll}{
-   col_name \tab types \cr
-   SEASON_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   TEAM_NAME \tab character \cr
-   GAME_ID \tab character \cr
-   GAME_DATE \tab character \cr
-   MATCHUP \tab character \cr
-   WL \tab character \cr
-   MIN \tab character \cr
-   PTS \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PLUS_MINUS \tab character \cr
-}
+\strong{LeagueGameFinderResults}
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      SEASON_ID \tab character \tab Unique season identifier. \cr
+      TEAM_ID \tab character \tab Unique team identifier. \cr
+      TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+      TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+      GAME_ID \tab character \tab Unique game identifier. \cr
+      GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+      MATCHUP \tab character \tab Matchup. \cr
+      WL \tab character \tab  \cr
+      MIN \tab character \tab Minutes played. \cr
+      PTS \tab character \tab Points scored. \cr
+      FGM \tab character \tab Field goals made. \cr
+      FGA \tab character \tab Field goal attempts. \cr
+      FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+      FG3M \tab character \tab Three-point field goals made. \cr
+      FG3A \tab character \tab Three-point field goal attempts. \cr
+      FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+      FTM \tab character \tab Free throws made. \cr
+      FTA \tab character \tab Free throw attempts. \cr
+      FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+      OREB \tab character \tab Offensive rebounds. \cr
+      DREB \tab character \tab Defensive rebounds. \cr
+      REB \tab character \tab Total rebounds. \cr
+      AST \tab character \tab Assists. \cr
+      STL \tab character \tab Steals. \cr
+      BLK \tab character \tab Blocks. \cr
+      TOV \tab character \tab Turnovers. \cr
+      PF \tab character \tab Personal fouls. \cr
+      PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API League Game Streak Finder}
@@ -320,25 +323,25 @@ Return a named list of data frames: LeagueGameFinderResults
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA League Functions: 
-\code{\link{wnba_leaguedashlineups}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leaguedashteamclutch}()},
-\code{\link{wnba_leaguedashteamshotlocations}()},
-\code{\link{wnba_leaguedashteamstats}()},
-\code{\link{wnba_leaguegamelog}()},
-\code{\link{wnba_leaguelineupviz}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_leaguestandingsv3}()},
-\code{\link{wnba_shotchartleaguewide}()}
+Other WNBA League Functions:
+\code{\link[=wnba_leaguedashlineups]{wnba_leaguedashlineups()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leaguedashteamclutch]{wnba_leaguedashteamclutch()}},
+\code{\link[=wnba_leaguedashteamshotlocations]{wnba_leaguedashteamshotlocations()}},
+\code{\link[=wnba_leaguedashteamstats]{wnba_leaguedashteamstats()}},
+\code{\link[=wnba_leaguegamelog]{wnba_leaguegamelog()}},
+\code{\link[=wnba_leaguelineupviz]{wnba_leaguelineupviz()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_leaguestandingsv3]{wnba_leaguestandingsv3()}},
+\code{\link[=wnba_shotchartleaguewide]{wnba_shotchartleaguewide()}}
 
-Other WNBA Game Finder Functions: 
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_teamgamestreakfinder}()}
+Other WNBA Game Finder Functions:
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_teamgamestreakfinder]{wnba_teamgamestreakfinder()}}
 }
 \author{
 Saiem Gilani

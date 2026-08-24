@@ -46,12 +46,43 @@ rds_from_url <- function(url) {
   con <- url(url)
   on.exit(close(con))
   load <- try(readRDS(con), silent = TRUE)
-  
+
   if (inherits(load, "try-error")) {
     warning(paste0("Failed to readRDS from <", url, ">"), call. = FALSE)
     return(data.table::data.table())
   }
-  
+
+  data.table::setDT(load)
+  return(load)
+}
+
+#' @title
+#' **Load .parquet file from a remote connection**
+#' @description
+#' Sibling of [`rds_from_url()`] for release assets published as parquet
+#' (e.g. the `wnba_stats_leaguedash` / `nba_stats_leaguedash` cube tags).
+#' 404-safe: an unpublished asset returns an empty `data.table` + a warning,
+#' matching `rds_from_url()`'s contract, instead of raising.
+#' @param url a character url
+#' @keywords Internal
+#' @return a dataframe as created by [`arrow::read_parquet()`]
+#' @importFrom data.table data.table setDT
+parquet_from_url <- function(url) {
+  tmp <- tempfile(fileext = ".parquet")
+  on.exit(unlink(tmp), add = TRUE)
+  dl <- try(utils::download.file(url, tmp, mode = "wb", quiet = TRUE), silent = TRUE)
+
+  if (inherits(dl, "try-error") || !file.exists(tmp) || file.size(tmp) == 0) {
+    warning(paste0("Failed to download parquet from <", url, ">"), call. = FALSE)
+    return(data.table::data.table())
+  }
+
+  load <- try(arrow::read_parquet(tmp), silent = TRUE)
+  if (inherits(load, "try-error")) {
+    warning(paste0("Failed to read_parquet from <", url, ">"), call. = FALSE)
+    return(data.table::data.table())
+  }
+
   data.table::setDT(load)
   return(load)
 }
@@ -89,8 +120,18 @@ custom_mode <- function(x, na.rm = TRUE) {
 }
 
 
-#' @title
-#' **Most Recent Women's College Basketball Season**
+#' Most Recent Women's College Basketball Season
+#'
+#' Returns the most recent women's college basketball season year as an
+#' integer based on the current system date. The NCAA WBB season spans two
+#' calendar years; this helper rolls over to the next season starting in
+#' October. For example, calls made on 2025-11-15 return `2026`, while
+#' calls made on 2025-03-15 return `2025`.
+#'
+#' @return An integer giving the season-ending year (e.g. `2025` for the
+#'   2024-25 season).
+#' @examples
+#' most_recent_wbb_season()
 #' @export
 most_recent_wbb_season <- function() {
   ifelse(
@@ -100,8 +141,16 @@ most_recent_wbb_season <- function() {
   )
 }
 
-#' @title
-#' **Most Recent WNBA Season**
+#' Most Recent WNBA Season
+#'
+#' Returns the most recent WNBA season year as an integer based on the
+#' current system date. The WNBA season runs from May through October
+#' within a single calendar year; this helper rolls forward to the new
+#' season starting in May.
+#'
+#' @return An integer giving the WNBA season year (e.g. `2025`).
+#' @examples
+#' most_recent_wnba_season()
 #' @export
 most_recent_wnba_season <- function() {
   ifelse(
@@ -111,19 +160,298 @@ most_recent_wnba_season <- function() {
   )
 }
 
+#' Most Recent WNBA Stats API Season
+#'
+#' Returns the most recent WNBA Stats API season year as an integer. This
+#' is a thin wrapper around [most_recent_wnba_season()] kept as a separate
+#' helper for naming symmetry with the `wnba_stats_*` family of loaders
+#' (mirrors the `most_recent_*_season()` convention used elsewhere in the
+#' package). The WNBA Stats API and ESPN's WNBA endpoints share the same
+#' calendar-year season identifier, so the returned value is identical
+#' to `most_recent_wnba_season()`.
+#'
+#' @return An integer giving the WNBA season year (e.g. `2025`).
+#' @examples
+#' most_recent_wnba_stats_season()
+#' @export
+most_recent_wnba_stats_season <- function() {
+  most_recent_wnba_season()
+}
+
 my_time <- function() strftime(Sys.time(), format = "%H:%M:%S")
 
 #' Check Status function
-#' @param res Response from API
+#' @param res Response from an httr2 request
 #' @keywords Internal
 #' @import rvest
 #'
 check_status <- function(res) {
-  
-  x = httr::status_code(res)
-  
+
+  x <- httr2::resp_status(res)
+
   if (x != 200) stop("The API returned an error", call. = FALSE)
-  
+
+}
+
+#' Retry an HTTP request with httr2
+#'
+#' Internal helper used by `request_with_proxy()` and other wrappers that
+#' previously called `httr::RETRY()`. Wraps `httr2` request building, header /
+#' query injection, timeout, and retry policy in a single call.
+#'
+#' @param url Base request URL.
+#' @param params Optional named list of query parameters.
+#' @param headers Optional named character vector of HTTP headers.
+#' @param timeout Request timeout in seconds.
+#' @return An `httr2_response` object.
+#' @keywords internal
+.retry_request <- function(url, params = list(), headers = NULL, timeout = 60,
+                           proxy = NULL) {
+  req <- httr2::request(url)
+  if (length(params) > 0) {
+    req <- req |> httr2::req_url_query(!!!params)
+  }
+  if (!is.null(headers)) {
+    req <- req |> httr2::req_headers(!!!as.list(headers))
+  }
+  # Optional proxy support. Resolution order:
+  #   1. `proxy` argument (caller-supplied, highest precedence).
+  #   2. `getOption("wehoop.proxy")` (session-level fallback — set once with
+  #      `options(wehoop.proxy = ...)` and every call picks it up; needed for
+  #      ESPN / NCAA wrappers that don't thread `...` to `.retry_request`).
+  #   3. `http_proxy` / `https_proxy` / `no_proxy` env vars (read by libcurl
+  #      automatically when the explicit `proxy` is NULL — no code path here).
+  #
+  # The `proxy` argument accepts:
+  #   - a single URL string                         -- e.g. "http://host:port",
+  #                                                    passed to
+  #                                                    `httr2::req_proxy(url=)`.
+  #   - a named list                                -- spread as keyword args
+  #                                                    into `httr2::req_proxy()`
+  #                                                    for full control
+  #                                                    (`url`, `port`,
+  #                                                    `username`, `password`,
+  #                                                    `auth`).
+  if (is.null(proxy)) {
+    proxy <- getOption("wehoop.proxy", default = NULL)
+  }
+  if (!is.null(proxy)) {
+    req <- if (is.list(proxy)) {
+      do.call(httr2::req_proxy, c(list(req = req), proxy))
+    } else {
+      httr2::req_proxy(req, url = proxy)
+    }
+  }
+  # Jittered exponential backoff. The fixed 2-second cadence in the default
+  # `httr2::req_retry()` synchronizes retries across users hitting the same
+  # rate-limited endpoint, which makes Cloudflare's anti-burst rules misfire
+  # against the whole user base. `runif(1, 0.5, 1.5)` spreads the wave.
+  req |>
+    httr2::req_timeout(timeout) |>
+    httr2::req_retry(
+      max_tries = 3,
+      backoff = function(i) stats::runif(1, 0.5, 1.5) * (2 ^ i)
+    ) |>
+    httr2::req_error(is_error = function(resp) FALSE) |>
+    httr2::req_perform()
+}
+
+#' Extract response body as text
+#'
+#' Replaces the `httr::content(res, as = "text", encoding = "UTF-8")` pattern.
+#'
+#' @param resp An `httr2_response` object.
+#' @return Character string of response body.
+#' @keywords internal
+.resp_text <- function(resp) {
+  httr2::resp_body_string(resp, encoding = "UTF-8")
+}
+
+#' Capture the calling function's formal arguments
+#'
+#' Returns a named list of the bound formal arguments (excluding `...`) of the
+#' calling function, suitable for passing to `.report_api_error()` /
+#' `.report_api_warning()`. Tolerates functions with empty or `...`-only
+#' formals (where `names(formals())` is `NULL`), unlike the inline
+#' `mget(setdiff(names(formals()), "..."))` pattern that errors with
+#' `mget: invalid first argument` for arg-less wrappers.
+#'
+#' Caller usage:
+#'
+#' ```r
+#' some_wrapper <- function(...) {
+#'   .args <- .capture_args()
+#'   ...
+#' }
+#' ```
+#'
+#' @return Named list. Empty list if the caller has no non-... formals.
+#' @keywords internal
+.capture_args <- function() {
+  parent_fn <- sys.function(sys.parent())
+  if (is.null(parent_fn)) return(list())
+  fmls <- formals(parent_fn)
+  if (length(fmls) == 0L) return(list())
+  nms <- setdiff(names(fmls), "...")
+  if (length(nms) == 0L) return(list())
+  mget(nms, envir = parent.frame(), ifnotfound = list(NULL))
+}
+
+#' Minimal brace-template interpolator
+#'
+#' Replaces `{expr}` tokens in `template` by evaluating `expr` in `envir`.
+#' Used in `.report_api_error()` / `.report_api_warning()` so callers can
+#' write hints like `"No data for {game_id}"` and have `{game_id}` resolve
+#' against the function's frame at the call-site.
+#'
+#' Per-token failures (unbound name, parse error) leave the literal
+#' `{expr}` in place rather than erroring, so partial interpolation still
+#' produces a useful message.
+#'
+#' @param template character(1).
+#' @param envir environment to evaluate expressions against.
+#' @return character(1).
+#' @keywords internal
+.interp_braces <- function(template, envir = parent.frame()) {
+  if (length(template) != 1L || !is.character(template) || is.na(template)) {
+    return(as.character(template))
+  }
+  m <- gregexpr("\\{([^{}]+)\\}", template, perl = TRUE)[[1]]
+  if (length(m) == 1L && m[1] == -1L) return(template)
+  starts <- as.integer(m)
+  lens <- attr(m, "match.length")
+  out <- character(0)
+  pos <- 1L
+  for (i in seq_along(starts)) {
+    s <- starts[i]; l <- lens[i]
+    if (s > pos) out <- c(out, substr(template, pos, s - 1L))
+    expr <- substr(template, s + 1L, s + l - 2L)
+    val <- tryCatch(
+      paste(as.character(eval(parse(text = expr), envir = envir)), collapse = ""),
+      error = function(.e) substr(template, s, s + l - 1L)
+    )
+    out <- c(out, val)
+    pos <- s + l
+  }
+  if (pos <= nchar(template)) out <- c(out, substr(template, pos, nchar(template)))
+  paste(out, collapse = "")
+}
+
+#' Report an API-call error with full context
+#'
+#' Internal helper that standardizes the message every WNBA / ESPN / NCAA
+#' wrapper emits inside its `tryCatch(error = ...)` block. Always emits, in
+#' order:
+#'
+#' 1. A timestamped friendly hint (brace-interpolated against the caller env),
+#' 2. A dump of the function call's arguments,
+#' 3. The actual error message (`conditionMessage(e)`).
+#'
+#' Functions opt in by capturing their formals once near the top —
+#' `.args <- mget(setdiff(names(formals()), "..."))` — and then calling
+#' `.report_api_error(e, hint = "...", args = .args)` from the error handler.
+#'
+#' @param e error condition (the `e` from `function(e)` in `tryCatch`).
+#' @param hint character. A friendly message with optional `{name}` tokens
+#'   that resolve against the *caller's* environment (so `{game_id}` etc.
+#'   pull from the wrapper's formals). If `NULL`, defaults to "Request
+#'   failed".
+#' @param args optional named list of caller arguments to dump (typically
+#'   `mget(setdiff(names(formals()), "..."))` captured at function entry).
+#' @return Invisibly `NULL`. Called for its side effects.
+#' @keywords internal
+.report_api_error <- function(e, hint = NULL, args = list()) {
+  caller_env <- parent.frame()
+
+  hint_text <- if (!is.null(hint)) {
+    .interp_braces(hint, envir = caller_env)
+  } else {
+    "Request failed"
+  }
+
+  cli::cli_alert_danger("{Sys.time()}: {hint_text}")
+
+  if (length(args) > 0) {
+    args_str <- paste0(
+      names(args), " = ",
+      vapply(args, function(a) {
+        s <- tryCatch(deparse(a, width.cutoff = 60)[1],
+                      error = function(...) "<?>")
+        if (nchar(s) > 60) paste0(substr(s, 1, 60), "...") else s
+      }, character(1)),
+      collapse = ", "
+    )
+    cli::cli_alert_danger("Args: {args_str}")
+  }
+
+  cli::cli_alert_danger("Error: {conditionMessage(e)}")
+  invisible(NULL)
+}
+
+#' Report an API-call warning with full context
+#'
+#' Mirrors `.report_api_error()` but for `tryCatch(warning = ...)` handlers.
+#' Emits, in order:
+#'
+#' 1. A timestamped friendly hint (brace-interpolated against the caller env),
+#' 2. A dump of the function call's arguments,
+#' 3. The actual warning message (`conditionMessage(w)`).
+#'
+#' @param w warning condition (the `w` from `function(w)` in `tryCatch`).
+#' @param hint character. Same semantics as `.report_api_error()`'s `hint`.
+#'   If `NULL`, defaults to "Request emitted a warning".
+#' @param args optional named list of caller arguments to dump.
+#' @return Invisibly `NULL`. Called for its side effects.
+#' @keywords internal
+.report_api_warning <- function(w, hint = NULL, args = list()) {
+  caller_env <- parent.frame()
+
+  hint_text <- if (!is.null(hint)) {
+    .interp_braces(hint, envir = caller_env)
+  } else {
+    "Request emitted a warning"
+  }
+
+  cli::cli_alert_warning("{Sys.time()}: {hint_text}")
+
+  if (length(args) > 0) {
+    args_str <- paste0(
+      names(args), " = ",
+      vapply(args, function(a) {
+        s <- tryCatch(deparse(a, width.cutoff = 60)[1],
+                      error = function(...) "<?>")
+        if (nchar(s) > 60) paste0(substr(s, 1, 60), "...") else s
+      }, character(1)),
+      collapse = ", "
+    )
+    cli::cli_alert_warning("Args: {args_str}")
+  }
+
+  cli::cli_alert_warning("Warning: {conditionMessage(w)}")
+  invisible(NULL)
+}
+
+#' @title
+#' **Convert a calendar year to a WNBA / NBA season string**
+#' @description
+#' Returns a season string of the form `YYYY-YY` (e.g. `2024 -> "2024-25"`).
+#' WNBA seasons span a single calendar year, but several Stats API endpoints
+#' (and several NBA-derived endpoints used in load helpers) accept the
+#' two-year season-string form, so this helper is provided for parity with
+#' the analogous helper in the `hoopR` package.
+#' @param year a four-digit calendar year (numeric or character).
+#' @return A character season string, e.g. `"2024-25"`.
+#' @keywords Internal
+#' @export
+year_to_season <- function(year) {
+  first_year <- substr(year, 3, 4)
+  next_year <- as.numeric(first_year) + 1
+  next_year <- dplyr::case_when(
+    next_year < 10 & first_year > 0 ~ paste0("0", next_year),
+    first_year == 99 ~ "00",
+    TRUE ~ as.character(next_year)
+  )
+  return(paste0(year, "-", next_year))
 }
 
 #' @importFrom magrittr %>%
@@ -156,11 +484,35 @@ NULL
 make_wehoop_data <- function(df, type, timestamp){
   out <- df %>%
     tidyr::as_tibble()
-  
+
   class(out) <- c("wehoop_data","tbl_df","tbl","data.table","data.frame")
   attr(out,"wehoop_timestamp") <- timestamp
   attr(out,"wehoop_type") <- type
   return(out)
+}
+
+# Echo a wrapper's input parameters back onto its returned tibble as
+# left-most columns so the result is self-describing (e.g. an athlete
+# gamelog carries athlete_id + season on every row). See the
+# rectangularization preference + "Returns must be self-describing".
+#
+# Preserves the wehoop_data class/attributes (dplyr verbs would strip
+# them, so we re-wrap via make_wehoop_data). No-ops on a non-data.frame,
+# a zero-row tibble (nothing to describe), NULL args, or args whose names
+# already exist on the frame (the response value wins).
+.echo_identity <- function(df, ...) {
+  if (!is.data.frame(df) || nrow(df) == 0L) return(df)
+  args <- list(...)
+  args <- args[!vapply(args, is.null, logical(1))]
+  args <- args[!names(args) %in% names(df)]
+  if (length(args) == 0L) return(df)
+
+  ts <- attr(df, "wehoop_timestamp")
+  ty <- attr(df, "wehoop_type")
+  for (nm in names(args)) df[[nm]] <- args[[nm]]
+  df <- df %>% dplyr::relocate(dplyr::any_of(names(args)))
+  if (!is.null(ty)) df <- make_wehoop_data(df, ty, ts %||% Sys.time())
+  df
 }
 
 #' @export

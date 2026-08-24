@@ -26,43 +26,46 @@ wnba_teamyearbyyearstats(
 \value{
 Return a named list of data frames: TeamStats
 
-\strong{TeamStats}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   TEAM_CITY \tab character \cr
-   TEAM_NAME \tab character \cr
-   YEAR \tab character \cr
-   GP \tab character \cr
-   WINS \tab character \cr
-   LOSSES \tab character \cr
-   WIN_PCT \tab character \cr
-   CONF_RANK \tab character \cr
-   DIV_RANK \tab character \cr
-   PO_WINS \tab character \cr
-   PO_LOSSES \tab character \cr
-   CONF_COUNT \tab character \cr
-   DIV_COUNT \tab character \cr
-   NBA_FINALS_APPEARANCE \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   PF \tab character \cr
-   STL \tab character \cr
-   TOV \tab character \cr
-   BLK \tab character \cr
-   PTS \tab character \cr
-   PTS_RANK \tab character \cr
-}
+\strong{TeamStats}
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      TEAM_ID \tab character \tab Unique team identifier. \cr
+      TEAM_CITY \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+      TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+      YEAR \tab character \tab 4-digit year. \cr
+      GP \tab character \tab Games played. \cr
+      WINS \tab character \tab Total wins. \cr
+      LOSSES \tab character \tab Total losses. \cr
+      WIN_PCT \tab character \tab Win percentage (0-1 decimal). \cr
+      CONF_RANK \tab character \tab  \cr
+      DIV_RANK \tab character \tab  \cr
+      PO_WINS \tab character \tab  \cr
+      PO_LOSSES \tab character \tab  \cr
+      CONF_COUNT \tab character \tab  \cr
+      DIV_COUNT \tab character \tab  \cr
+      NBA_FINALS_APPEARANCE \tab character \tab  \cr
+      FGM \tab character \tab Field goals made. \cr
+      FGA \tab character \tab Field goal attempts. \cr
+      FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+      FG3M \tab character \tab Three-point field goals made. \cr
+      FG3A \tab character \tab Three-point field goal attempts. \cr
+      FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+      FTM \tab character \tab Free throws made. \cr
+      FTA \tab character \tab Free throw attempts. \cr
+      FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+      OREB \tab character \tab Offensive rebounds. \cr
+      DREB \tab character \tab Defensive rebounds. \cr
+      REB \tab character \tab Total rebounds. \cr
+      AST \tab character \tab Assists. \cr
+      PF \tab character \tab Personal fouls. \cr
+      STL \tab character \tab Steals. \cr
+      TOV \tab character \tab Turnovers. \cr
+      BLK \tab character \tab Blocks. \cr
+      PTS \tab character \tab Points scored. \cr
+      PTS_RANK \tab character \tab  \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API Team Year by Year Stats}
@@ -74,28 +77,20 @@ Return a named list of data frames: TeamStats
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Team Functions: 
-\code{\link{wnba_leaguedashteamstats}()},
-\code{\link{wnba_teamdashboardbyclutch}()},
-\code{\link{wnba_teamdashboardbygamesplits}()},
-\code{\link{wnba_teamdashboardbygeneralsplits}()},
-\code{\link{wnba_teamdashboardbylastngames}()},
-\code{\link{wnba_teamdashboardbyopponent}()},
-\code{\link{wnba_teamdashboardbyshootingsplits}()},
-\code{\link{wnba_teamdashboardbyteamperformance}()},
-\code{\link{wnba_teamdashboardbyyearoveryear}()},
-\code{\link{wnba_teamdashlineups}()},
-\code{\link{wnba_teamdetails}()},
-\code{\link{wnba_teamestimatedmetrics}()},
-\code{\link{wnba_teamgamelogs}()},
-\code{\link{wnba_teamgamelog}()},
-\code{\link{wnba_teamgamestreakfinder}()},
-\code{\link{wnba_teamhistoricalleaders}()},
-\code{\link{wnba_teamplayerdashboard}()},
-\code{\link{wnba_teamplayeronoffdetails}()},
-\code{\link{wnba_teamplayeronoffsummary}()},
-\code{\link{wnba_teams}()},
-\code{\link{wnba_teamvsplayer}()}
+Other WNBA Team Functions:
+\code{\link[=wnba_leaguedashteamstats]{wnba_leaguedashteamstats()}},
+\code{\link[=wnba_teamdashboardbyclutch]{wnba_teamdashboardbyclutch()}},
+\code{\link[=wnba_teamdashlineups]{wnba_teamdashlineups()}},
+\code{\link[=wnba_teamdetails]{wnba_teamdetails()}},
+\code{\link[=wnba_teamestimatedmetrics]{wnba_teamestimatedmetrics()}},
+\code{\link[=wnba_teamgamelog]{wnba_teamgamelog()}},
+\code{\link[=wnba_teamgamelogs]{wnba_teamgamelogs()}},
+\code{\link[=wnba_teamgamestreakfinder]{wnba_teamgamestreakfinder()}},
+\code{\link[=wnba_teamhistoricalleaders]{wnba_teamhistoricalleaders()}},
+\code{\link[=wnba_teaminfocommon]{wnba_teaminfocommon()}},
+\code{\link[=wnba_teamplayeronoffdetails]{wnba_teamplayeronoffdetails()}},
+\code{\link[=wnba_teams]{wnba_teams()}},
+\code{\link[=wnba_teamvsplayer]{wnba_teamvsplayer()}}
 }
 \author{
 Saiem Gilani

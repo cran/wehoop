@@ -4,70 +4,53 @@
 \alias{wnba_draftboard}
 \title{\strong{Get WNBA Stats API Draft Board}}
 \usage{
-wnba_draftboard(season = most_recent_wnba_season() - 1, ...)
+wnba_draftboard(season = most_recent_wnba_season(), ...)
 }
 \arguments{
-\item{season}{season}
+\item{season}{Draft year as numeric or character (e.g. \code{2026}).}
 
 \item{...}{Additional arguments passed to an underlying function like httr.}
 }
 \value{
-Returns a named list of data frames: teams,draft_info, picks
+Returns a named list of tibbles: \code{board}, \code{picks}.
 
-\strong{teams}\tabular{ll}{
-   col_name \tab types \cr
-   id \tab integer \cr
-   external-id \tab character \cr
-   slug \tab character \cr
-   name \tab character \cr
-   city \tab character \cr
-   state \tab character \cr
-   url \tab character \cr
-   primarycolor \tab character \cr
-   seconarycolor \tab character \cr
+\strong{board}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   draft_id \tab integer \tab Unique identifier for draft. \cr
+   title \tab character \tab Title or label for the record. \cr
+   season \tab integer \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+   status \tab character \tab Status label. \cr
+   on_the_clock \tab character \tab On the clock. \cr
+   draft_date \tab character \tab Date in YYYY-MM-DD format. \cr
+   modified \tab character \tab Modified. \cr
 }
 
 
-\strong{draft_info}\tabular{ll}{
-   col_name \tab types \cr
-   draft_status \tab character \cr
-   draft_modified \tab integer \cr
-   draft_title \tab character \cr
-   draft_show_players \tab character \cr
-   draft_id \tab integer \cr
-   draft_url \tab character \cr
-   draft_location \tab character \cr
-   sponsor_logo \tab character \cr
-   header_image \tab character \cr
-   sponsor_link \tab character \cr
-   draft_date \tab character \cr
-   draft_time_hh \tab character \cr
-   draft_time_mm \tab character \cr
-   draft_time_am \tab character \cr
-   draft_time_tz \tab character \cr
-   draft_round_1_channel \tab character \cr
-   draft_round_2_channel \tab character \cr
-   draft_round_3_channel \tab character \cr
-   draft_interval \tab character \cr
-}
+\strong{picks}
 
-
-\strong{picks}\tabular{ll}{
-   col_name \tab types \cr
-   team \tab character \cr
-   details \tab character \cr
-   player_name \tab character \cr
-   player_id \tab integer \cr
-   player_college \tab character \cr
-   player_position \tab character \cr
-   player_ppg \tab character \cr
-   player_rpg \tab character \cr
-   player_apg \tab character \cr
-   player_fg \tab character \cr
-   player_headshot \tab character \cr
-   player_url \tab character \cr
-   round \tab integer \cr
-}
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      round \tab integer \tab Tournament / playoff round. \cr
+      pick \tab integer \tab Pick. \cr
+      team_id \tab integer \tab Unique team identifier. \cr
+      team_external_id \tab integer \tab Unique identifier for team external. \cr
+      team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+      prospect_id \tab integer \tab Unique identifier for prospect. \cr
+      first_name \tab character \tab Player's first name. \cr
+      last_name \tab character \tab Player's last name. \cr
+      position \tab character \tab Listed roster position (G, F, C, etc.). \cr
+      country \tab character \tab Country (full name or code). \cr
+      college \tab character \tab College or school attended. \cr
+      ppg \tab character \tab Points per game. \cr
+      rpg \tab character \tab Rebounds per game. \cr
+      apg \tab character \tab Assists per game. \cr
+      spg \tab character \tab Steals per game. \cr
+      bpg \tab character \tab Blocks per game. \cr
+      fg_pct \tab character \tab Field goal percentage (0-1). \cr
+      description \tab character \tab Long-form description text. \cr
+      headshot_url \tab character \tab URL for headshot. \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API Draft Board}
@@ -75,17 +58,13 @@ Returns a named list of data frames: teams,draft_info, picks
 \strong{Get WNBA Stats API Draft Board}
 }
 \details{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{  wnba_draftboard(season = most_recent_wnba_season() - 1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{  wnba_draftboard(season = most_recent_wnba_season())
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Draft Functions: 
-\code{\link{wnba_draftcombinedrillresults}()},
-\code{\link{wnba_draftcombinenonstationaryshooting}()},
-\code{\link{wnba_draftcombineplayeranthro}()},
-\code{\link{wnba_draftcombinespotshooting}()},
-\code{\link{wnba_draftcombinestats}()},
-\code{\link{wnba_drafthistory}()}
+Other WNBA Draft Functions:
+\code{\link[=wnba_draftcombinestats]{wnba_draftcombinestats()}},
+\code{\link[=wnba_drafthistory]{wnba_drafthistory()}}
 }
 \author{
 Saiem Gilani

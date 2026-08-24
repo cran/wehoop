@@ -131,76 +131,79 @@ wnba_leaguedashplayerclutch(
 \value{
 Returns a named list of data frames: LeagueDashPlayerClutch
 
-\strong{LeagueDashPlayerClutch}\tabular{ll}{
-   col_name \tab types \cr
-   GROUP_SET \tab character \cr
-   PLAYER_ID \tab character \cr
-   PLAYER_NAME \tab character \cr
-   NICKNAME \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   AGE \tab character \cr
-   GP \tab character \cr
-   W \tab character \cr
-   L \tab character \cr
-   W_PCT \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   TOV \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   BLKA \tab character \cr
-   PF \tab character \cr
-   PFD \tab character \cr
-   PTS \tab character \cr
-   PLUS_MINUS \tab character \cr
-   NBA_FANTASY_PTS \tab character \cr
-   DD2 \tab character \cr
-   TD3 \tab character \cr
-   WNBA_FANTASY_PTS \tab character \cr
-   GP_RANK \tab character \cr
-   W_RANK \tab character \cr
-   L_RANK \tab character \cr
-   W_PCT_RANK \tab character \cr
-   MIN_RANK \tab character \cr
-   FGM_RANK \tab character \cr
-   FGA_RANK \tab character \cr
-   FG_PCT_RANK \tab character \cr
-   FG3M_RANK \tab character \cr
-   FG3A_RANK \tab character \cr
-   FG3_PCT_RANK \tab character \cr
-   FTM_RANK \tab character \cr
-   FTA_RANK \tab character \cr
-   FT_PCT_RANK \tab character \cr
-   OREB_RANK \tab character \cr
-   DREB_RANK \tab character \cr
-   REB_RANK \tab character \cr
-   AST_RANK \tab character \cr
-   TOV_RANK \tab character \cr
-   STL_RANK \tab character \cr
-   BLK_RANK \tab character \cr
-   BLKA_RANK \tab character \cr
-   PF_RANK \tab character \cr
-   PFD_RANK \tab character \cr
-   PTS_RANK \tab character \cr
-   PLUS_MINUS_RANK \tab character \cr
-   NBA_FANTASY_PTS_RANK \tab character \cr
-   DD2_RANK \tab character \cr
-   TD3_RANK \tab character \cr
-   WNBA_FANTASY_PTS_RANK \tab character \cr
-}
+\strong{LeagueDashPlayerClutch}
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      GROUP_SET \tab character \tab  \cr
+      PLAYER_ID \tab character \tab Unique player identifier. \cr
+      PLAYER_NAME \tab character \tab Player name. \cr
+      NICKNAME \tab character \tab Team or athlete nickname. \cr
+      TEAM_ID \tab character \tab Unique team identifier. \cr
+      TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+      AGE \tab character \tab Player age (in years). \cr
+      GP \tab character \tab Games played. \cr
+      W \tab character \tab Wins. \cr
+      L \tab character \tab Losses. \cr
+      W_PCT \tab character \tab Wins percentage (0-1 decimal). \cr
+      MIN \tab character \tab Minutes played. \cr
+      FGM \tab character \tab Field goals made. \cr
+      FGA \tab character \tab Field goal attempts. \cr
+      FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+      FG3M \tab character \tab Three-point field goals made. \cr
+      FG3A \tab character \tab Three-point field goal attempts. \cr
+      FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+      FTM \tab character \tab Free throws made. \cr
+      FTA \tab character \tab Free throw attempts. \cr
+      FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+      OREB \tab character \tab Offensive rebounds. \cr
+      DREB \tab character \tab Defensive rebounds. \cr
+      REB \tab character \tab Total rebounds. \cr
+      AST \tab character \tab Assists. \cr
+      TOV \tab character \tab Turnovers. \cr
+      STL \tab character \tab Steals. \cr
+      BLK \tab character \tab Blocks. \cr
+      BLKA \tab character \tab  \cr
+      PF \tab character \tab Personal fouls. \cr
+      PFD \tab character \tab  \cr
+      PTS \tab character \tab Points scored. \cr
+      PLUS_MINUS \tab character \tab Plus/minus point differential while on court. \cr
+      NBA_FANTASY_PTS \tab character \tab  \cr
+      DD2 \tab character \tab  \cr
+      TD3 \tab character \tab  \cr
+      WNBA_FANTASY_PTS \tab character \tab  \cr
+      GP_RANK \tab character \tab  \cr
+      W_RANK \tab character \tab  \cr
+      L_RANK \tab character \tab  \cr
+      W_PCT_RANK \tab character \tab  \cr
+      MIN_RANK \tab character \tab  \cr
+      FGM_RANK \tab character \tab  \cr
+      FGA_RANK \tab character \tab  \cr
+      FG_PCT_RANK \tab character \tab  \cr
+      FG3M_RANK \tab character \tab  \cr
+      FG3A_RANK \tab character \tab  \cr
+      FG3_PCT_RANK \tab character \tab  \cr
+      FTM_RANK \tab character \tab  \cr
+      FTA_RANK \tab character \tab  \cr
+      FT_PCT_RANK \tab character \tab  \cr
+      OREB_RANK \tab character \tab  \cr
+      DREB_RANK \tab character \tab  \cr
+      REB_RANK \tab character \tab  \cr
+      AST_RANK \tab character \tab  \cr
+      TOV_RANK \tab character \tab  \cr
+      STL_RANK \tab character \tab  \cr
+      BLK_RANK \tab character \tab  \cr
+      BLKA_RANK \tab character \tab  \cr
+      PF_RANK \tab character \tab  \cr
+      PFD_RANK \tab character \tab  \cr
+      PTS_RANK \tab character \tab  \cr
+      PLUS_MINUS_RANK \tab character \tab  \cr
+      NBA_FANTASY_PTS_RANK \tab character \tab  \cr
+      DD2_RANK \tab character \tab  \cr
+      TD3_RANK \tab character \tab  \cr
+      WNBA_FANTASY_PTS_RANK \tab character \tab  \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API League Dashboard by Player Clutch Splits}
@@ -212,53 +215,46 @@ Returns a named list of data frames: LeagueDashPlayerClutch
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA League Functions: 
-\code{\link{wnba_leaguedashlineups}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leaguedashteamclutch}()},
-\code{\link{wnba_leaguedashteamshotlocations}()},
-\code{\link{wnba_leaguedashteamstats}()},
-\code{\link{wnba_leaguegamefinder}()},
-\code{\link{wnba_leaguegamelog}()},
-\code{\link{wnba_leaguelineupviz}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_leaguestandingsv3}()},
-\code{\link{wnba_shotchartleaguewide}()}
+Other WNBA League Functions:
+\code{\link[=wnba_leaguedashlineups]{wnba_leaguedashlineups()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leaguedashteamclutch]{wnba_leaguedashteamclutch()}},
+\code{\link[=wnba_leaguedashteamshotlocations]{wnba_leaguedashteamshotlocations()}},
+\code{\link[=wnba_leaguedashteamstats]{wnba_leaguedashteamstats()}},
+\code{\link[=wnba_leaguegamefinder]{wnba_leaguegamefinder()}},
+\code{\link[=wnba_leaguegamelog]{wnba_leaguegamelog()}},
+\code{\link[=wnba_leaguelineupviz]{wnba_leaguelineupviz()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_leaguestandingsv3]{wnba_leaguestandingsv3()}},
+\code{\link[=wnba_shotchartleaguewide]{wnba_shotchartleaguewide()}}
 
-Other WNBA Player Functions: 
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_playerawards}()},
-\code{\link{wnba_playercareerbycollegerollup}()},
-\code{\link{wnba_playercareerbycollege}()},
-\code{\link{wnba_playercareerstats}()},
-\code{\link{wnba_playercompare}()},
-\code{\link{wnba_playerdashboardbyclutch}()},
-\code{\link{wnba_playerdashboardbygamesplits}()},
-\code{\link{wnba_playerdashboardbygeneralsplits}()},
-\code{\link{wnba_playerdashboardbylastngames}()},
-\code{\link{wnba_playerdashboardbyopponent}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_playerdashboardbyteamperformance}()},
-\code{\link{wnba_playerdashboardbyyearoveryear}()},
-\code{\link{wnba_playerestimatedmetrics}()},
-\code{\link{wnba_playerfantasyprofilebargraph}()},
-\code{\link{wnba_playerfantasyprofile}()},
-\code{\link{wnba_playergamelogs}()},
-\code{\link{wnba_playergamelog}()},
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_playerheadshot}()},
-\code{\link{wnba_playerindex}()},
-\code{\link{wnba_playernextngames}()},
-\code{\link{wnba_playerprofilev2}()},
-\code{\link{wnba_playervsplayer}()}
+Other WNBA Player Functions:
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_playerawards]{wnba_playerawards()}},
+\code{\link[=wnba_playercareerbycollege]{wnba_playercareerbycollege()}},
+\code{\link[=wnba_playercareerbycollegerollup]{wnba_playercareerbycollegerollup()}},
+\code{\link[=wnba_playercareerstats]{wnba_playercareerstats()}},
+\code{\link[=wnba_playercompare]{wnba_playercompare()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_playerestimatedmetrics]{wnba_playerestimatedmetrics()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}},
+\code{\link[=wnba_playerfantasyprofilebargraph]{wnba_playerfantasyprofilebargraph()}},
+\code{\link[=wnba_playergamelog]{wnba_playergamelog()}},
+\code{\link[=wnba_playergamelogs]{wnba_playergamelogs()}},
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_playerheadshot]{wnba_playerheadshot()}},
+\code{\link[=wnba_playerindex]{wnba_playerindex()}},
+\code{\link[=wnba_playernextngames]{wnba_playernextngames()}},
+\code{\link[=wnba_playerprofilev2]{wnba_playerprofilev2()}},
+\code{\link[=wnba_playervsplayer]{wnba_playervsplayer()}}
 }
 \author{
 Saiem Gilani

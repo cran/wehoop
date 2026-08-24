@@ -3,8 +3,8 @@
            params = list(),
            ...,
            origin = "https://stats.wnba.com",
-           referer="https://www.wnba.com/") {
-    
+           referer = "https://www.wnba.com/") {
+
     headers <- c(
       `Host` = 'stats.wnba.com',
       `User-Agent` = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
@@ -19,28 +19,14 @@
       `Pragma` = 'no-cache',
       `Cache-Control` = 'no-cache'
     )
-    
-    dots <- rlang::dots_list(..., .named = TRUE)
-    proxy <- dots$proxy
-    if (length(params) >= 1) {
-      
-      res <-
-        httr::RETRY("GET", url,
-                    query = params,
-                    ...,
-                    httr::add_headers(.headers = headers))
-      json <- res$content %>%
-        rawToChar() %>%
-        jsonlite::fromJSON(simplifyVector = T)
-    } else {
-      res <- rvest::html_session(url, ..., httr::add_headers(.headers = headers))
-      json <- res$response %>% 
-        httr::content(as = "text", encoding = "UTF-8") %>% 
-        jsonlite::fromJSON()
-    }
-    
+
+    res <- .retry_request(url, params = params, headers = headers)
+
+    json <- res %>%
+      .resp_text() %>%
+      jsonlite::fromJSON(simplifyVector = TRUE)
+
     return(json)
-    
   }
 
 wnba_headers_params <- function(
@@ -64,25 +50,29 @@ wnba_headers_params <- function(
 }
 
 #' @title
-#' **Retry http request with proxy**
+#' **Retry http request with optional proxy**
 #' @description
-#' This is a thin wrapper on httr::RETRY
+#' This is a thin wrapper on `httr2::req_retry()` via the internal
+#' `.retry_request()` helper. It applies the WNBA Stats API headers (origin,
+#' referer, x-nba-stats-* tokens) and decodes the JSON response.
 #' @param url Request url
 #' @param params list of params
 #' @param origin Origin url
 #' @param referer Referer url
-#' @param ... passed to httr::RETRY
+#' @param proxy Optional proxy config. `NULL` (default) lets libcurl honor
+#'   the standard `http_proxy` / `https_proxy` / `no_proxy` environment
+#'   variables. A single URL string (e.g. `"http://host:port"`) is forwarded
+#'   to `httr2::req_proxy(url = proxy)`. A named list is spread as keyword
+#'   args into `httr2::req_proxy()` (`url`, `port`, `username`, `password`,
+#'   `auth`) for full control over authenticated proxies.
+#' @param ... currently unused (preserved for backwards compatibility).
 #' @keywords internal
-#' @import rvest
 request_with_proxy <- function(url,
                                params = list(),
                                origin = "https://stats.wnba.com",
-                               referer="https://www.wnba.com/",
+                               referer = "https://www.wnba.com/",
+                               proxy = NULL,
                                ...){
-  dots <- rlang::dots_list(..., .named = TRUE)
-  proxy <- dots$proxy
-  headers <- dots$headers
-  
   headers <- c(
     `Host` = 'stats.wnba.com',
     `User-Agent` = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0',
@@ -92,31 +82,23 @@ request_with_proxy <- function(url,
     `x-nba-stats-origin` = 'stats',
     `x-nba-stats-token` = 'true',
     `Connection` = 'keep-alive',
-    `Referer` = "https://www.wnba.com/",
+    `Origin` = origin,
+    `Referer` = referer,
     `Pragma` = 'no-cache',
     `Cache-Control` = 'no-cache'
   )
-  if (length(params) >= 1) {
-    url <- httr::modify_url({{url}}, query = params)
-    res <- rvest::session(url = url, ...,  httr::add_headers(.headers = headers), httr::timeout(60))
-    
-    json <- res$response %>%
-      httr::content(as = "text", encoding = "UTF-8") %>%
-      jsonlite::fromJSON()
-    
-  } else {
-    res <- rvest::session(url = {{url}}, ..., httr::add_headers(.headers = headers), httr::timeout(60))
-    
-    json <- res$response %>%
-      httr::content(as = "text", encoding = "UTF-8") %>%
-      jsonlite::fromJSON()
-  }
-  
+
+  resp <- .retry_request(url, params = params, headers = headers, proxy = proxy)
+
+  json <- resp %>%
+    .resp_text() %>%
+    jsonlite::fromJSON()
+
   return(json)
 }
 
 wnba_live_endpoint <- function(endpoint){
-  base_url = glue::glue('https://cdn.wnba.com/static/json/liveData/{endpoint}')
+  base_url = paste0("https://cdn.wnba.com/static/json/liveData/", endpoint)
   return(base_url)
 }
 
@@ -126,16 +108,25 @@ wnba_endpoint <- function(endpoint){
     'assistleaders',
     'assisttracker',
     'boxscoreadvancedv2',
+    'boxscoreadvancedv3',
     'boxscoredefensive',
     'boxscorefourfactorsv2',
+    'boxscorefourfactorsv3',
     'boxscorematchups',
+    'boxscorematchupsv3',
     'boxscoremiscv2',
+    'boxscoremiscv3',
     'boxscoreplayertrackv2',
+    'boxscoreplayertrackv3',
     'boxscorescoringv2',
+    'boxscorescoringv3',
     'boxscoresimilarityscore',
     'boxscoresummaryv2',
+    'boxscoresummaryv3',
     'boxscoretraditionalv2',
+    'boxscoretraditionalv3',
     'boxscoreusagev2',
+    'boxscoreusagev3',
     'commonallplayers',
     'commonplayerinfo',
     'commonplayoffseries',
@@ -188,6 +179,7 @@ wnba_endpoint <- function(endpoint){
     'matchupsrollup',
     'playbyplay',
     'playbyplayv2',
+    'playbyplayv3',
     'playerawards',
     'playercareerbycollege',
     'playercareerbycollegerollup',
@@ -251,7 +243,7 @@ wnba_endpoint <- function(endpoint){
     'videostatus',
     'winprobabilitypbp'
   )
-  base_url = glue::glue('https://stats.wnba.com/stats/{endpoint}')
+  base_url = paste0("https://stats.wnba.com/stats/", endpoint)
   return(base_url)
 }
 
@@ -286,28 +278,38 @@ wnba_stats_map_result_sets <- function(resp) {
 
 
 pad_id <- function(id = 1012100001) {
-  zeros <-
-    10 - nchar(id)
-  
+  zeros <- 10 - nchar(id)
+
   if (zeros == 0) {
-    return(id)
+    return(as.character(id))
   }
-  
-  start <-
-    rep("0", times = zeros) %>% stringr::str_c(collapse = "")
-  glue("{start}{id}") %>% as.character()
+
+  start <- strrep("0", zeros)
+  paste0(start, id)
 }
 
 
 .ncaa_headers <- function(url){
+  # `stats.ncaa.org` started blocking the previous Chrome/110 user-agent
+  # with HTTP 403. Bumped to a recent Chrome and added the Sec-Fetch-* and
+  # Upgrade-Insecure-Requests headers a real browser sends so the request
+  # looks like an interactive page load. Also drop the explicit `Host`
+  # entry — httr2 sets it from the URL and a duplicate trips some CDNs.
   headers <- c(
-    `Host` = 'stats.ncaa.org',
-    `User-Agent` = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-    `Accept` = 'application/json, text/html, text/plain, */*',
-    `Accept-Language` = 'en-US,en;q=0.5',
+    `User-Agent` = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+    `Accept` = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    `Accept-Language` = 'en-US,en;q=0.9',
     `Accept-Encoding` = 'gzip, deflate, br',
+    `Cache-Control` = 'no-cache',
     `Pragma` = 'no-cache',
-    `Cache-Control` = 'no-cache'
+    `Upgrade-Insecure-Requests` = '1',
+    `Sec-Fetch-Dest` = 'document',
+    `Sec-Fetch-Mode` = 'navigate',
+    `Sec-Fetch-Site` = 'none',
+    `Sec-Fetch-User` = '?1',
+    `sec-ch-ua` = '"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"',
+    `sec-ch-ua-mobile` = '?0',
+    `sec-ch-ua-platform` = '"Windows"'
   )
   return(headers)
 }

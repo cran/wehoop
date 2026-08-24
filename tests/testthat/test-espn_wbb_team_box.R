@@ -1,6 +1,7 @@
 
 test_that("ESPN - WBB Team Box", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_team_box(game_id = 401276115)
   
   cols <- c(
@@ -62,6 +63,6 @@ test_that("ESPN - WBB Team Box", {
     "opponent_team_score"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

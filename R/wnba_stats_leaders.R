@@ -18,211 +18,211 @@ NULL
 #'    **GPLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |GP             |character |
-#'    |GP_RANK        |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |GP             |character |Games played.             |
+#'    |GP_RANK        |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **PTSLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |PTS            |character |
-#'    |PTS_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |PTS            |character |Points scored.            |
+#'    |PTS_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **ASTLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |AST            |character |
-#'    |AST_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |AST            |character |Assists.                  |
+#'    |AST_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **STLLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |STL            |character |
-#'    |STL_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |STL            |character |Steals.                   |
+#'    |STL_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **OREBLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |OREB           |character |
-#'    |OREB_RANK      |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |OREB           |character |Offensive rebounds.       |
+#'    |OREB_RANK      |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **DREBLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |DREB           |character |
-#'    |DREB_RANK      |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |DREB           |character |Defensive rebounds.       |
+#'    |DREB_RANK      |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **REBLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |REB            |character |
-#'    |REB_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |REB            |character |Total rebounds.           |
+#'    |REB_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **BLKLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |BLK            |character |
-#'    |BLK_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |BLK            |character |Blocks.                   |
+#'    |BLK_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FGMLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FGM            |character |
-#'    |FGM_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |FGM            |character |Field goals made.         |
+#'    |FGM_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FGALeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FGA            |character |
-#'    |FGA_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |FGA            |character |Field goal attempts.      |
+#'    |FGA_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FG_PCTLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FG_PCT         |character |
-#'    |FG_PCT_RANK    |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description                  |
+#'    |:--------------|:---------|:----------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier.    |
+#'    |PLAYER_NAME    |character |Player name.                 |
+#'    |FG_PCT         |character |Field goal percentage (0-1). |
+#'    |FG_PCT_RANK    |character |                             |
+#'    |IS_ACTIVE_FLAG |character |                             |
 #'    
 #'    **TOVLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |TOV            |character |
-#'    |TOV_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |TOV            |character |Turnovers.                |
+#'    |TOV_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FG3MLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FG3M           |character |
-#'    |FG3M_RANK      |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description                   |
+#'    |:--------------|:---------|:-----------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier.     |
+#'    |PLAYER_NAME    |character |Player name.                  |
+#'    |FG3M           |character |Three-point field goals made. |
+#'    |FG3M_RANK      |character |                              |
+#'    |IS_ACTIVE_FLAG |character |                              |
 #'    
 #'    **FG3ALeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FG3A           |character |
-#'    |FG3A_RANK      |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description                      |
+#'    |:--------------|:---------|:--------------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier.        |
+#'    |PLAYER_NAME    |character |Player name.                     |
+#'    |FG3A           |character |Three-point field goal attempts. |
+#'    |FG3A_RANK      |character |                                 |
+#'    |IS_ACTIVE_FLAG |character |                                 |
 #'    
 #'    **FG3_PCTLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FG3_PCT        |character |
-#'    |FG3_PCT_RANK   |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description                              |
+#'    |:--------------|:---------|:----------------------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier.                |
+#'    |PLAYER_NAME    |character |Player name.                             |
+#'    |FG3_PCT        |character |Three-point field goal percentage (0-1). |
+#'    |FG3_PCT_RANK   |character |                                         |
+#'    |IS_ACTIVE_FLAG |character |                                         |
 #'    
 #'    **PFLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |PF             |character |
-#'    |PF_RANK        |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |PF             |character |Personal fouls.           |
+#'    |PF_RANK        |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FTMLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FTM            |character |
-#'    |FTM_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |FTM            |character |Free throws made.         |
+#'    |FTM_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FTALeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FTA            |character |
-#'    |FTA_RANK       |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description               |
+#'    |:--------------|:---------|:-------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier. |
+#'    |PLAYER_NAME    |character |Player name.              |
+#'    |FTA            |character |Free throw attempts.      |
+#'    |FTA_RANK       |character |                          |
+#'    |IS_ACTIVE_FLAG |character |                          |
 #'    
 #'    **FT_PCTLeaders** 
 #'    
 #'    
-#'    |col_name       |types     |
-#'    |:--------------|:---------|
-#'    |PLAYER_ID      |character |
-#'    |PLAYER_NAME    |character |
-#'    |FT_PCT         |character |
-#'    |FT_PCT_RANK    |character |
-#'    |IS_ACTIVE_FLAG |character |
+#'    |col_name       |types     |description                  |
+#'    |:--------------|:---------|:----------------------------|
+#'    |PLAYER_ID      |character |Unique player identifier.    |
+#'    |PLAYER_NAME    |character |Player name.                 |
+#'    |FT_PCT         |character |Free throw percentage (0-1). |
+#'    |FT_PCT_RANK    |character |                             |
+#'    |IS_ACTIVE_FLAG |character |                             |
 #'   
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -240,6 +240,7 @@ wnba_alltimeleadersgrids <- function(
     season_type = 'Regular Season',
     top_x = 10,
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # intentional
   # season_type <- gsub(' ', '+', season_type)
@@ -254,6 +255,8 @@ wnba_alltimeleadersgrids <- function(
     TopX = top_x
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -262,13 +265,12 @@ wnba_alltimeleadersgrids <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no all-time leaders grid data for {league_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no all-time leaders grid data for {league_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -294,17 +296,19 @@ NULL
 #'    **AssistLeaders** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |PLAYER_ID         |character |
-#'    |PLAYER            |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |PLAYER_POSITION   |character |
-#'    |AST               |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       RANK \tab character \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       PLAYER \tab character \tab  \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       PLAYER_POSITION \tab character \tab  \cr
+#'       AST \tab character \tab Assists. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -323,6 +327,7 @@ wnba_assistleaders <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ','+',season_type)
@@ -338,6 +343,8 @@ wnba_assistleaders <- function(
     SeasonType = season_type
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -346,13 +353,12 @@ wnba_assistleaders <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no assist leaders data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no assist leaders data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -374,9 +380,9 @@ NULL
 #'  
 #'    **AssistTracker** 
 #'    
-#'    |col_name |types   |
-#'    |:--------|:-------|
-#'    |ASSISTS  |numeric |
+#'    |col_name |types   |description    |
+#'    |:--------|:-------|:--------------|
+#'    |ASSISTS  |numeric |Total assists. |
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -393,6 +399,7 @@ wnba_assisttracker <- function(
     season = most_recent_wnba_season() - 1,
     season_type = 'Regular Season',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   # Intentional
   # season_type <- gsub(' ','+',season_type)
@@ -406,6 +413,8 @@ wnba_assisttracker <- function(
     Season = season,
     SeasonType = season_type)
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -414,13 +423,12 @@ wnba_assisttracker <- function(
       df_list <- wnba_stats_map_result_sets(resp)
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no assist tracker data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no assist tracker data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -447,47 +455,41 @@ NULL
 #'    **HomePageLeaders** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |PLAYERID          |character |
-#'    |PLAYER            |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |PTS               |character |
-#'    |FG_PCT            |character |
-#'    |FG3_PCT           |character |
-#'    |FT_PCT            |character |
-#'    |EFG_PCT           |character |
-#'    |TS_PCT            |character |
-#'    |PTS_PER48         |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       RANK \tab character \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYERID \tab character \tab  \cr
+#'       PLAYER \tab character \tab  \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       EFG_PCT \tab character \tab Effective field goal percentage (0-1). \cr
+#'       TS_PCT \tab character \tab True shooting percentage (0-1). \cr
+#'       PTS_PER48 \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **LeagueAverage** 
 #'    
 #'    
-#'    |col_name  |types   |
-#'    |:---------|:-------|
-#'    |PTS       |numeric |
-#'    |FG_PCT    |numeric |
-#'    |FG3_PCT   |numeric |
-#'    |FT_PCT    |numeric |
-#'    |EFG_PCT   |numeric |
-#'    |TS_PCT    |numeric |
-#'    |PTS_PER48 |numeric |
+#'    |col_name  |types   |description                              |
+#'    |:---------|:-------|:----------------------------------------|
+#'    |PTS       |numeric |Points scored.                           |
+#'    |FG_PCT    |numeric |Field goal percentage (0-1).             |
+#'    |FG3_PCT   |numeric |Three-point field goal percentage (0-1). |
+#'    |FT_PCT    |numeric |Free throw percentage (0-1).             |
+#'    |EFG_PCT   |numeric |Effective field goal percentage (0-1).   |
+#'    |TS_PCT    |numeric |True shooting percentage (0-1).          |
+#'    |PTS_PER48 |numeric |                                         |
 #'    
 #'    **LeagueMax** 
 #'    
 #'    
-#'    |col_name  |types   |
-#'    |:---------|:-------|
-#'    |PTS       |numeric |
-#'    |FG_PCT    |numeric |
-#'    |FG3_PCT   |numeric |
-#'    |FT_PCT    |numeric |
-#'    |EFG_PCT   |numeric |
-#'    |TS_PCT    |numeric |
-#'    |PTS_PER48 |numeric |
+#'    Same columns as the **LeagueAverage** table above.
 #' 
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -509,7 +511,13 @@ wnba_homepageleaders <- function(
     stat_category = 'Points',
     ...){
   
-  cli::cli_alert_danger("As of v2.1.0, `wnba_homepageleaders()` is deprecated due to changes from the WNBA Stats API. Please use `wnba_homepagewidget()` instead.")
+  .args <- .capture_args()
+
+  lifecycle::deprecate_stop(
+    when = "2.1.0",
+    what = "wnba_homepageleaders()",
+    with = "wnba_homepagewidget()"
+  )
   
   # player_scope <- gsub(' ','+',player_scope)
   # # Intentional
@@ -571,90 +579,84 @@ NULL
 #'    **HomePageStat1**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_homepagev2_home_page_stat1_schema] table.
 #'
 #'    **HomePageStat2**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |REB               |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |REB               |character |Total rebounds.                                             |
 #'
 #'    **HomePageStat3**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |AST               |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |AST               |character |Assists.                                                    |
 #'
 #'    **HomePageStat4**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |STL               |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |STL               |character |Steals.                                                     |
 #'
 #'    **HomePageStat5**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |FG_PCT            |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |FG_PCT            |character |Field goal percentage (0-1).                                |
 #'
 #'    **HomePageStat6**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |FT_PCT            |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |FT_PCT            |character |Free throw percentage (0-1).                                |
 #'
 #'    **HomePageStat7**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |FG3_PCT           |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |FG3_PCT           |character |Three-point field goal percentage (0-1).                    |
 #'
 #'    **HomePageStat8**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |BLK               |character |
+#'    |col_name          |types     |description                                                 |
+#'    |:-----------------|:---------|:-----------------------------------------------------------|
+#'    |RANK              |character |Whether to include statistical ranks in the returned table. |
+#'    |TEAM_ID           |character |Unique team identifier.                                     |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').                       |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces').             |
+#'    |BLK               |character |Blocks.                                                     |
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -676,7 +678,13 @@ wnba_homepagev2 <- function(
     season_type = 'Regular Season',
     stat_type = 'Traditional',
     ...){
-  cli::cli_alert_danger("As of v2.1.0, `wnba_homepagev2()` is deprecated due to changes from the WNBA Stats API. Please use `wnba_homepagewidget()` instead.")
+  .args <- .capture_args()
+
+  lifecycle::deprecate_stop(
+    when = "2.1.0",
+    what = "wnba_homepagev2()",
+    with = "wnba_homepagewidget()"
+  )
   
   # player_scope <- gsub(' ','+',player_scope)
   # # Intentional
@@ -735,489 +743,533 @@ NULL
 #'    **PTS** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |PTS               |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       PTS \tab numeric \tab Points scored. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **REB** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |REB               |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       REB \tab numeric \tab Total rebounds. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **AST** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |AST               |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       AST \tab numeric \tab Assists. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **BLK** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |BLK               |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       BLK \tab numeric \tab Blocks. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **STL** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |STL               |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       STL \tab numeric \tab Steals. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **FG_PCT** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FG_PCT            |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       FG_PCT \tab numeric \tab Field goal percentage (0-1). \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **FG3M** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FG3M              |integer   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       FG3M \tab integer \tab Three-point field goals made. \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **FG3_PCT** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |RANK              |integer   |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FG3_PCT           |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       RANK \tab integer \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       FG3_PCT \tab numeric \tab Three-point field goal percentage (0-1). \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **FANTASY_POINTS** 
 #'    
 #'    
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |title             |character |
-#'    |deep_link         |character |
-#'    |name              |character |
-#'    |timestamp         |character |
-#'    |season            |character |
-#'    |seasontype        |character |
-#'    |permode           |character |
-#'    |PLAYER_ID         |integer   |
-#'    |PLAYER_NAME       |character |
-#'    |TEAM_ID           |integer   |
-#'    |TEAM_ABBREVIATION |character |
-#'    |FANTASY_POINTS    |numeric   |
-#'    |FIRST_NAME        |character |
-#'    |NICKNAME          |character |
-#'    |LAST_NAME         |character |
-#'    |JERSEY_NUM        |character |
-#'    |POSITION          |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       FANTASY_POINTS \tab numeric \tab  \cr
+#'       FIRST_NAME \tab character \tab Player's first name. \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       LAST_NAME \tab character \tab Player's last name. \cr
+#'       JERSEY_NUM \tab character \tab Jersey number worn by the player. \cr
+#'       POSITION \tab character \tab Listed roster position (G, F, C, etc.). \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **TOTAL_PTS** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |PTS                    |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PTS \tab integer \tab Points scored. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **TOTAL_REB** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |REB                    |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       REB \tab integer \tab Total rebounds. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **TOTAL_AST** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |AST                    |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       AST \tab integer \tab Assists. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **ALL_TIME_TD3** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |TD3                    |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       TD3 \tab integer \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **TD3** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |SEASON_YEAR            |character |
-#'    |TD3                    |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       SEASON_YEAR \tab character \tab Season year string ('YYYY-YY' format). \cr
+#'       TD3 \tab integer \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **GAME_FG3M** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |FG3M                   |integer   |
-#'    |GAME_ID                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       FG3M \tab integer \tab Three-point field goals made. \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **GAME_PTS** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |PTS                    |integer   |
-#'    |GAME_ID                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PTS \tab integer \tab Points scored. \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **GAME_AST** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |AST                    |integer   |
-#'    |GAME_ID                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       AST \tab integer \tab Assists. \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **GAME_STL** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |STL                    |integer   |
-#'    |GAME_ID                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       STL \tab integer \tab Steals. \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **GAME_BLK** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |BLK                    |integer   |
-#'    |GAME_ID                |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       BLK \tab integer \tab Blocks. \cr
+#'       GAME_ID \tab character \tab Unique game identifier. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **PCT_PTS_3PT** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |PCT_PTS_3PT            |numeric   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PCT_PTS_3PT \tab numeric \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **PCT_PTS_2PT** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |PCT_PTS_2PT            |numeric   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PCT_PTS_2PT \tab numeric \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'    
 #'    **PCT_PTS_2PT_MR** 
 #'    
 #'    
-#'    |col_name               |types     |
-#'    |:----------------------|:---------|
-#'    |title                  |character |
-#'    |deep_link              |character |
-#'    |name                   |character |
-#'    |timestamp              |character |
-#'    |permode                |character |
-#'    |season                 |character |
-#'    |seasontype             |character |
-#'    |PLAYER_ID              |integer   |
-#'    |PLAYER_NAME            |character |
-#'    |PLAYER_NAME_LAST_FIRST |character |
-#'    |NICKNAME               |character |
-#'    |TEAM_ID                |integer   |
-#'    |TEAM_ABBREVIATION      |character |
-#'    |TEAM_NAME              |character |
-#'    |PCT_PTS_2PT_MR         |numeric   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       title \tab character \tab Title or label for the record. \cr
+#'       deep_link \tab character \tab Deep link URL into wnba.com / espn.com. \cr
+#'       name \tab character \tab Display name. \cr
+#'       timestamp \tab character \tab ISO 8601 UTC timestamp. \cr
+#'       permode \tab character \tab Per-mode aggregation ('Totals', 'PerGame', 'Per40', 'Per100Possessions', etc.). \cr
+#'       season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+#'       seasontype \tab character \tab Season type ('Regular Season', 'Playoffs', 'Pre Season', 'All Star'). \cr
+#'       PLAYER_ID \tab integer \tab Unique player identifier. \cr
+#'       PLAYER_NAME \tab character \tab Player name. \cr
+#'       PLAYER_NAME_LAST_FIRST \tab character \tab  \cr
+#'       NICKNAME \tab character \tab Team or athlete nickname. \cr
+#'       TEAM_ID \tab integer \tab Unique team identifier. \cr
+#'       TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+#'       TEAM_NAME \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+#'       PCT_PTS_2PT_MR \tab numeric \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1233,6 +1285,7 @@ NULL
 wnba_homepagewidget <- function(
     player_or_team = 'Player',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   full_url <- "https://stats.wnba.com/js/data/widgets/home_season.json"
   
@@ -1240,15 +1293,15 @@ wnba_homepagewidget <- function(
     
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
-      resp <- httr::RETRY("GET", url = full_url,
-                          httr::add_headers(.headers = wnba_headers_params())
-      )
-      json <- resp$content %>%
-        rawToChar() %>%
-        jsonlite::fromJSON(simplifyVector = T) 
+      resp <- .retry_request(full_url, headers = wnba_headers_params())
+      json <- resp %>%
+        .resp_text() %>%
+        jsonlite::fromJSON(simplifyVector = TRUE)
       
       
       categories <- json$items %>%
@@ -1339,13 +1392,12 @@ wnba_homepagewidget <- function(
       }
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no homepage widget data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no homepage widget data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
@@ -1375,46 +1427,28 @@ NULL
 #'    **LeadersTiles**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_homepagev2_home_page_stat1_schema] table.
 #'
 #'    **AllTimeSeasonHigh**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |SEASON_YEAR       |character |
-#'    |PTS               |character |
+#'    |col_name          |types     |description                                     |
+#'    |:-----------------|:---------|:-----------------------------------------------|
+#'    |TEAM_ID           |character |Unique team identifier.                         |
+#'    |TEAM_ABBREVIATION |character |Short team abbreviation (e.g. 'LAS').           |
+#'    |TEAM_NAME         |character |Full team display name (e.g. 'Las Vegas Aces'). |
+#'    |SEASON_YEAR       |character |Season year string ('YYYY-YY' format).          |
+#'    |PTS               |character |Points scored.                                  |
 #'
 #'    **LastSeasonHigh**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |RANK              |character |
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |PTS               |character |
+#'    Columns as documented in the shared [wnba_homepagev2_home_page_stat1_schema] table.
 #'
 #'    **LowSeasonHigh**
 #'
 #'
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |TEAM_ID           |character |
-#'    |TEAM_ABBREVIATION |character |
-#'    |TEAM_NAME         |character |
-#'    |SEASON_YEAR       |character |
-#'    |PTS               |character |
+#'    Same columns as the **AllTimeSeasonHigh** table above.
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1436,7 +1470,13 @@ wnba_leaderstiles <- function(
     season_type = 'Regular Season',
     stat = 'PTS',
     ...){
-  cli::cli_alert_danger("As of v2.1.0, `wnba_leaderstiles()` is deprecated due to changes from the WNBA Stats API. Please use `wnba_homepagewidget()` instead.")
+  .args <- .capture_args()
+
+  lifecycle::deprecate_stop(
+    when = "2.1.0",
+    what = "wnba_leaderstiles()",
+    with = "wnba_homepagewidget()"
+  )
   
   # player_scope <- gsub(' ','+',player_scope)
   # # season_type <- gsub(' ','+',season_type)
@@ -1496,36 +1536,38 @@ NULL
 #'    **LeagueLeaders**
 #'
 #'
-#'    |col_name  |types     |
-#'    |:---------|:---------|
-#'    |PLAYER_ID |character |
-#'    |RANK      |character |
-#'    |PLAYER    |character |
-#'    |TEAM_ID   |character |
-#'    |TEAM      |character |
-#'    |GP        |character |
-#'    |MIN       |character |
-#'    |FGM       |character |
-#'    |FGA       |character |
-#'    |FG_PCT    |character |
-#'    |FG3M      |character |
-#'    |FG3A      |character |
-#'    |FG3_PCT   |character |
-#'    |FTM       |character |
-#'    |FTA       |character |
-#'    |FT_PCT    |character |
-#'    |OREB      |character |
-#'    |DREB      |character |
-#'    |REB       |character |
-#'    |AST       |character |
-#'    |STL       |character |
-#'    |BLK       |character |
-#'    |TOV       |character |
-#'    |PF        |character |
-#'    |PTS       |character |
-#'    |EFF       |character |
-#'    |AST_TOV   |character |
-#'    |STL_TOV   |character |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       PLAYER_ID \tab character \tab Unique player identifier. \cr
+#'       RANK \tab character \tab Whether to include statistical ranks in the returned table. \cr
+#'       PLAYER \tab character \tab  \cr
+#'       TEAM_ID \tab character \tab Unique team identifier. \cr
+#'       TEAM \tab character \tab Team-side label or team identifier. \cr
+#'       GP \tab character \tab Games played. \cr
+#'       MIN \tab character \tab Minutes played. \cr
+#'       FGM \tab character \tab Field goals made. \cr
+#'       FGA \tab character \tab Field goal attempts. \cr
+#'       FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+#'       FG3M \tab character \tab Three-point field goals made. \cr
+#'       FG3A \tab character \tab Three-point field goal attempts. \cr
+#'       FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+#'       FTM \tab character \tab Free throws made. \cr
+#'       FTA \tab character \tab Free throw attempts. \cr
+#'       FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+#'       OREB \tab character \tab Offensive rebounds. \cr
+#'       DREB \tab character \tab Defensive rebounds. \cr
+#'       REB \tab character \tab Total rebounds. \cr
+#'       AST \tab character \tab Assists. \cr
+#'       STL \tab character \tab Steals. \cr
+#'       BLK \tab character \tab Blocks. \cr
+#'       TOV \tab character \tab Turnovers. \cr
+#'       PF \tab character \tab Personal fouls. \cr
+#'       PTS \tab character \tab Points scored. \cr
+#'       EFF \tab character \tab  \cr
+#'       AST_TOV \tab character \tab  \cr
+#'       STL_TOV \tab character \tab  \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom dplyr filter select rename bind_cols bind_rows as_tibble
@@ -1546,6 +1588,7 @@ wnba_leagueleaders <- function(
     season_type = 'Regular Season',
     stat_category = 'PTS',
     ...){
+  .args <- mget(setdiff(names(formals()), "..."))
   
   scope <- gsub(' ','+',scope)
   # season_type <- gsub(' ','+',season_type)
@@ -1564,6 +1607,8 @@ wnba_leagueleaders <- function(
     StatCategory = stat_category
   )
   
+  df_list <- list()
+
   tryCatch(
     expr = {
       
@@ -1581,13 +1626,12 @@ wnba_leagueleaders <- function(
       names(df_list) <- resp$resultSet$name
       
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no league leaders data for {season} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no league leaders data for {season} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )

@@ -41,10 +41,10 @@ wnba_cumestatsplayergames(
 \value{
 Returns a named list of data frames: CumeStatsPlayerGames
 
-\strong{CumeStatsPlayerGames}\tabular{ll}{
-   col_name \tab types \cr
-   MATCHUP \tab character \cr
-   GAME_ID \tab character \cr
+\strong{CumeStatsPlayerGames}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   MATCHUP \tab character \tab Matchup. \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
 }
 }
 \description{
@@ -57,10 +57,10 @@ Returns a named list of data frames: CumeStatsPlayerGames
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Cume Functions: 
-\code{\link{wnba_cumestatsplayer}()},
-\code{\link{wnba_cumestatsteamgames}()},
-\code{\link{wnba_cumestatsteam}()}
+Other WNBA Cume Functions:
+\code{\link[=wnba_cumestatsplayer]{wnba_cumestatsplayer()}},
+\code{\link[=wnba_cumestatsteam]{wnba_cumestatsteam()}},
+\code{\link[=wnba_cumestatsteamgames]{wnba_cumestatsteamgames()}}
 }
 \author{
 Saiem Gilani

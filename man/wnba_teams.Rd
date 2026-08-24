@@ -10,30 +10,33 @@ wnba_teams(...)
 \item{...}{Additional arguments passed to an underlying function like httr.}
 }
 \value{
-Return a data frame with the following columns:\tabular{ll}{
-   col_name \tab types \cr
-   league_id \tab character \cr
-   season_id \tab character \cr
-   team_id \tab character \cr
-   team_city \tab character \cr
-   team_name \tab character \cr
-   team_slug \tab character \cr
-   conference \tab character \cr
-   division \tab character \cr
-   team_abbreviation \tab character \cr
-   team_name_full \tab character \cr
-   season \tab character \cr
-   espn_team_id \tab integer \cr
-   team \tab character \cr
-   mascot \tab character \cr
-   display_name \tab character \cr
-   abbreviation \tab character \cr
-   color \tab character \cr
-   alternate_color \tab character \cr
-   logo \tab character \cr
-   logo_dark \tab character \cr
-   wnba_logo_svg \tab character \cr
-}
+Return a data frame with the following columns:
+
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      league_id \tab character \tab League identifier ('10' = WNBA). \cr
+      season_id \tab character \tab Unique season identifier. \cr
+      team_id \tab character \tab Unique team identifier. \cr
+      team_city \tab character \tab Team city or region (e.g. 'Las Vegas'). \cr
+      team_name \tab character \tab Full team display name (e.g. 'Las Vegas Aces'). \cr
+      team_slug \tab character \tab URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). \cr
+      conference \tab character \tab Filter players or teams by conference. \cr
+      division \tab character \tab Team division. \cr
+      team_abbreviation \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+      team_name_full \tab character \tab Team name full. \cr
+      season \tab character \tab Season identifier (4-digit year or 'YYYY-YY' string). \cr
+      espn_team_id \tab integer \tab Unique identifier for espn team. \cr
+      team \tab character \tab Team-side label or team identifier. \cr
+      mascot \tab character \tab Team mascot. \cr
+      display_name \tab character \tab Display name. \cr
+      abbreviation \tab character \tab Short abbreviation. \cr
+      color \tab character \tab Primary color (hex without leading '#'). \cr
+      alternate_color \tab character \tab Alternate color (hex without leading '#'). \cr
+      logo \tab character \tab Team or league logo URL. \cr
+      logo_dark \tab character \tab Logo dark. \cr
+      wnba_logo_svg \tab character \tab Wnba logo svg. \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 }
 \description{
 \strong{Get WNBA Stats API Teams}
@@ -45,28 +48,20 @@ Return a data frame with the following columns:\tabular{ll}{
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Team Functions: 
-\code{\link{wnba_leaguedashteamstats}()},
-\code{\link{wnba_teamdashboardbyclutch}()},
-\code{\link{wnba_teamdashboardbygamesplits}()},
-\code{\link{wnba_teamdashboardbygeneralsplits}()},
-\code{\link{wnba_teamdashboardbylastngames}()},
-\code{\link{wnba_teamdashboardbyopponent}()},
-\code{\link{wnba_teamdashboardbyshootingsplits}()},
-\code{\link{wnba_teamdashboardbyteamperformance}()},
-\code{\link{wnba_teamdashboardbyyearoveryear}()},
-\code{\link{wnba_teamdashlineups}()},
-\code{\link{wnba_teamdetails}()},
-\code{\link{wnba_teamestimatedmetrics}()},
-\code{\link{wnba_teamgamelogs}()},
-\code{\link{wnba_teamgamelog}()},
-\code{\link{wnba_teamgamestreakfinder}()},
-\code{\link{wnba_teamhistoricalleaders}()},
-\code{\link{wnba_teamplayerdashboard}()},
-\code{\link{wnba_teamplayeronoffdetails}()},
-\code{\link{wnba_teamplayeronoffsummary}()},
-\code{\link{wnba_teamvsplayer}()},
-\code{\link{wnba_teamyearbyyearstats}()}
+Other WNBA Team Functions:
+\code{\link[=wnba_leaguedashteamstats]{wnba_leaguedashteamstats()}},
+\code{\link[=wnba_teamdashboardbyclutch]{wnba_teamdashboardbyclutch()}},
+\code{\link[=wnba_teamdashlineups]{wnba_teamdashlineups()}},
+\code{\link[=wnba_teamdetails]{wnba_teamdetails()}},
+\code{\link[=wnba_teamestimatedmetrics]{wnba_teamestimatedmetrics()}},
+\code{\link[=wnba_teamgamelog]{wnba_teamgamelog()}},
+\code{\link[=wnba_teamgamelogs]{wnba_teamgamelogs()}},
+\code{\link[=wnba_teamgamestreakfinder]{wnba_teamgamestreakfinder()}},
+\code{\link[=wnba_teamhistoricalleaders]{wnba_teamhistoricalleaders()}},
+\code{\link[=wnba_teaminfocommon]{wnba_teaminfocommon()}},
+\code{\link[=wnba_teamplayeronoffdetails]{wnba_teamplayeronoffdetails()}},
+\code{\link[=wnba_teamvsplayer]{wnba_teamvsplayer()}},
+\code{\link[=wnba_teamyearbyyearstats]{wnba_teamyearbyyearstats()}}
 }
 \author{
 Saiem Gilani

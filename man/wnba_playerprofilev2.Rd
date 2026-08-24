@@ -5,7 +5,7 @@
 \title{\strong{Get WNBA Stats API Player Profile V2}}
 \usage{
 wnba_playerprofilev2(
-  league_id = "",
+  league_id = "10",
   per_mode = "Totals",
   player_id = "1628932",
   ...
@@ -25,364 +25,109 @@ Return a named list of data frames: CareerHighs, CareerTotalsAllStarSeason, Care
 CareerTotalsRegularSeason, NextGame, SeasonHighs, SeasonRankingsPostSeason, SeasonRankingsRegularSeason, SeasonTotalsAllStarSeason, SeasonTotalsCollegeSeason,
 SeasonTotalsPostSeason, SeasonTotalsPreseason, SeasonTotalsRegularSeason
 
-\strong{SeasonTotalsRegularSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
+\strong{SeasonTotalsRegularSeason}
+
+Columns as documented in the shared \link{wnba_playercareerstats_season_totals_schema} table.
+
+\strong{CareerTotalsRegularSeason}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   PLAYER_ID \tab character \tab Unique player identifier. \cr
+   LEAGUE_ID \tab character \tab League identifier ('10' = WNBA). \cr
+   TEAM_ID \tab character \tab Unique team identifier. \cr
+   GP \tab character \tab Games played. \cr
+   GS \tab character \tab Games started. \cr
+   MIN \tab character \tab Minutes played. \cr
+   FGM \tab character \tab Field goals made. \cr
+   FGA \tab character \tab Field goal attempts. \cr
+   FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+   FG3M \tab character \tab Three-point field goals made. \cr
+   FG3A \tab character \tab Three-point field goal attempts. \cr
+   FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+   FTM \tab character \tab Free throws made. \cr
+   FTA \tab character \tab Free throw attempts. \cr
+   FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+   OREB \tab character \tab Offensive rebounds. \cr
+   DREB \tab character \tab Defensive rebounds. \cr
+   REB \tab character \tab Total rebounds. \cr
+   AST \tab character \tab Assists. \cr
+   STL \tab character \tab Steals. \cr
+   BLK \tab character \tab Blocks. \cr
+   TOV \tab character \tab Turnovers. \cr
+   PF \tab character \tab Personal fouls. \cr
+   PTS \tab character \tab Points scored. \cr
 }
 
 
-\strong{CareerTotalsRegularSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{SeasonTotalsPostSeason}
 
+Columns as documented in the shared \link{wnba_playercareerstats_season_totals_schema} table.
 
-\strong{SeasonTotalsPostSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{CareerTotalsPostSeason}
 
+Same columns as the \strong{CareerTotalsRegularSeason} table above.
 
-\strong{CareerTotalsPostSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{SeasonTotalsAllStarSeason}
 
+Columns as documented in the shared \link{wnba_playercareerstats_season_totals_schema} table.
 
-\strong{SeasonTotalsAllStarSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{CareerTotalsAllStarSeason}
 
-
-\strong{CareerTotalsAllStarSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
-
+Same columns as the \strong{CareerTotalsRegularSeason} table above.
 
 \strong{SeasonTotalsCollegeSeason}
 
 \strong{CareerTotalsCollegeSeason}
 
-\strong{SeasonTotalsPreseason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
+\strong{SeasonTotalsPreseason}
+
+Columns as documented in the shared \link{wnba_playercareerstats_season_totals_schema} table.
+
+\strong{CareerTotalsPreseason}
+
+Same columns as the \strong{CareerTotalsRegularSeason} table above.
+
+\strong{SeasonRankingsRegularSeason}
+
+Columns as documented in the shared \link{wnba_playercareerstats_season_rankings_schema} table.
+
+\strong{SeasonRankingsPostSeason}
+
+Columns as documented in the shared \link{wnba_playercareerstats_season_rankings_schema} table.
+
+\strong{SeasonHighs}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   PLAYER_ID \tab character \tab Unique player identifier. \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
+   GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+   VS_TEAM_ID \tab character \tab  \cr
+   VS_TEAM_CITY \tab character \tab  \cr
+   VS_TEAM_NAME \tab character \tab  \cr
+   VS_TEAM_ABBREVIATION \tab character \tab  \cr
+   STAT \tab character \tab  \cr
+   STAT_VALUE \tab character \tab Stat value. \cr
+   STAT_ORDER \tab character \tab  \cr
+   DATE_EST \tab character \tab  \cr
 }
 
 
-\strong{CareerTotalsPreseason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   MIN \tab character \cr
-   FGM \tab character \cr
-   FGA \tab character \cr
-   FG_PCT \tab character \cr
-   FG3M \tab character \cr
-   FG3A \tab character \cr
-   FG3_PCT \tab character \cr
-   FTM \tab character \cr
-   FTA \tab character \cr
-   FT_PCT \tab character \cr
-   OREB \tab character \cr
-   DREB \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   PF \tab character \cr
-   PTS \tab character \cr
-}
+\strong{CareerHighs}
 
+Same columns as the \strong{SeasonHighs} table above.
 
-\strong{SeasonRankingsRegularSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   RANK_MIN \tab character \cr
-   RANK_FGM \tab character \cr
-   RANK_FGA \tab character \cr
-   RANK_FG_PCT \tab character \cr
-   RANK_FG3M \tab character \cr
-   RANK_FG3A \tab character \cr
-   RANK_FG3_PCT \tab character \cr
-   RANK_FTM \tab character \cr
-   RANK_FTA \tab character \cr
-   RANK_FT_PCT \tab character \cr
-   RANK_OREB \tab character \cr
-   RANK_DREB \tab character \cr
-   RANK_REB \tab character \cr
-   RANK_AST \tab character \cr
-   RANK_STL \tab character \cr
-   RANK_BLK \tab character \cr
-   RANK_TOV \tab character \cr
-   RANK_PTS \tab character \cr
-   RANK_EFF \tab character \cr
-}
-
-
-\strong{SeasonRankingsPostSeason}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   PLAYER_AGE \tab character \cr
-   GP \tab character \cr
-   GS \tab character \cr
-   RANK_MIN \tab character \cr
-   RANK_FGM \tab character \cr
-   RANK_FGA \tab character \cr
-   RANK_FG_PCT \tab character \cr
-   RANK_FG3M \tab character \cr
-   RANK_FG3A \tab character \cr
-   RANK_FG3_PCT \tab character \cr
-   RANK_FTM \tab character \cr
-   RANK_FTA \tab character \cr
-   RANK_FT_PCT \tab character \cr
-   RANK_OREB \tab character \cr
-   RANK_DREB \tab character \cr
-   RANK_REB \tab character \cr
-   RANK_AST \tab character \cr
-   RANK_STL \tab character \cr
-   RANK_BLK \tab character \cr
-   RANK_TOV \tab character \cr
-   RANK_PTS \tab character \cr
-   RANK_EFF \tab character \cr
-}
-
-
-\strong{SeasonHighs}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   GAME_ID \tab character \cr
-   GAME_DATE \tab character \cr
-   VS_TEAM_ID \tab character \cr
-   VS_TEAM_CITY \tab character \cr
-   VS_TEAM_NAME \tab character \cr
-   VS_TEAM_ABBREVIATION \tab character \cr
-   STAT \tab character \cr
-   STAT_VALUE \tab character \cr
-   STAT_ORDER \tab character \cr
-   DATE_EST \tab character \cr
-}
-
-
-\strong{CareerHighs}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   GAME_ID \tab character \cr
-   GAME_DATE \tab character \cr
-   VS_TEAM_ID \tab character \cr
-   VS_TEAM_CITY \tab character \cr
-   VS_TEAM_NAME \tab character \cr
-   VS_TEAM_ABBREVIATION \tab character \cr
-   STAT \tab character \cr
-   STAT_VALUE \tab character \cr
-   STAT_ORDER \tab character \cr
-   DATE_EST \tab character \cr
-}
-
-
-\strong{NextGame}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_ID \tab character \cr
-   GAME_DATE \tab character \cr
-   GAME_TIME \tab character \cr
-   LOCATION \tab character \cr
-   PLAYER_TEAM_ID \tab character \cr
-   PLAYER_TEAM_CITY \tab character \cr
-   PLAYER_TEAM_NICKNAME \tab character \cr
-   PLAYER_TEAM_ABBREVIATION \tab character \cr
-   VS_TEAM_ID \tab character \cr
-   VS_TEAM_CITY \tab character \cr
-   VS_TEAM_NICKNAME \tab character \cr
-   VS_TEAM_ABBREVIATION \tab character \cr
+\strong{NextGame}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
+   GAME_DATE \tab character \tab Game date (YYYY-MM-DD). \cr
+   GAME_TIME \tab character \tab Game start time. \cr
+   LOCATION \tab character \tab Filter results by game location. \cr
+   PLAYER_TEAM_ID \tab character \tab  \cr
+   PLAYER_TEAM_CITY \tab character \tab  \cr
+   PLAYER_TEAM_NICKNAME \tab character \tab  \cr
+   PLAYER_TEAM_ABBREVIATION \tab character \tab  \cr
+   VS_TEAM_ID \tab character \tab  \cr
+   VS_TEAM_CITY \tab character \tab  \cr
+   VS_TEAM_NICKNAME \tab character \tab  \cr
+   VS_TEAM_ABBREVIATION \tab character \tab  \cr
 }
 }
 \description{
@@ -395,37 +140,30 @@ SeasonTotalsPostSeason, SeasonTotalsPreseason, SeasonTotalsRegularSeason
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Player Functions: 
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_playerawards}()},
-\code{\link{wnba_playercareerbycollegerollup}()},
-\code{\link{wnba_playercareerbycollege}()},
-\code{\link{wnba_playercareerstats}()},
-\code{\link{wnba_playercompare}()},
-\code{\link{wnba_playerdashboardbyclutch}()},
-\code{\link{wnba_playerdashboardbygamesplits}()},
-\code{\link{wnba_playerdashboardbygeneralsplits}()},
-\code{\link{wnba_playerdashboardbylastngames}()},
-\code{\link{wnba_playerdashboardbyopponent}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_playerdashboardbyteamperformance}()},
-\code{\link{wnba_playerdashboardbyyearoveryear}()},
-\code{\link{wnba_playerestimatedmetrics}()},
-\code{\link{wnba_playerfantasyprofilebargraph}()},
-\code{\link{wnba_playerfantasyprofile}()},
-\code{\link{wnba_playergamelogs}()},
-\code{\link{wnba_playergamelog}()},
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_playerheadshot}()},
-\code{\link{wnba_playerindex}()},
-\code{\link{wnba_playernextngames}()},
-\code{\link{wnba_playervsplayer}()}
+Other WNBA Player Functions:
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_playerawards]{wnba_playerawards()}},
+\code{\link[=wnba_playercareerbycollege]{wnba_playercareerbycollege()}},
+\code{\link[=wnba_playercareerbycollegerollup]{wnba_playercareerbycollegerollup()}},
+\code{\link[=wnba_playercareerstats]{wnba_playercareerstats()}},
+\code{\link[=wnba_playercompare]{wnba_playercompare()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_playerestimatedmetrics]{wnba_playerestimatedmetrics()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}},
+\code{\link[=wnba_playerfantasyprofilebargraph]{wnba_playerfantasyprofilebargraph()}},
+\code{\link[=wnba_playergamelog]{wnba_playergamelog()}},
+\code{\link[=wnba_playergamelogs]{wnba_playergamelogs()}},
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_playerheadshot]{wnba_playerheadshot()}},
+\code{\link[=wnba_playerindex]{wnba_playerindex()}},
+\code{\link[=wnba_playernextngames]{wnba_playernextngames()}},
+\code{\link[=wnba_playervsplayer]{wnba_playervsplayer()}}
 }
 \author{
 Saiem Gilani

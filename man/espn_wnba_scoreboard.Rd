@@ -10,43 +10,9 @@ espn_wnba_scoreboard(season)
 \item{season}{Either numeric or character}
 }
 \value{
-Returns a tibble\tabular{ll}{
-   col_name \tab types \cr
-   matchup \tab character \cr
-   matchup_short \tab character \cr
-   season \tab integer \cr
-   season_type \tab integer \cr
-   season_slug \tab character \cr
-   game_id \tab integer \cr
-   game_uid \tab character \cr
-   game_date \tab Date \cr
-   attendance \tab integer \cr
-   status_name \tab character \cr
-   broadcast_market \tab character \cr
-   broadcast_name \tab character \cr
-   start_date \tab character \cr
-   game_date_time \tab POSIXct \cr
-   home_team_name \tab character \cr
-   home_team_logo \tab character \cr
-   home_team_abb \tab character \cr
-   home_team_id \tab integer \cr
-   home_team_location \tab character \cr
-   home_team_full_name \tab character \cr
-   home_team_color \tab character \cr
-   home_score \tab integer \cr
-   home_win \tab integer \cr
-   home_record \tab character \cr
-   away_team_name \tab character \cr
-   away_team_logo \tab character \cr
-   away_team_abb \tab character \cr
-   away_team_id \tab integer \cr
-   away_team_location \tab character \cr
-   away_team_full_name \tab character \cr
-   away_team_color \tab character \cr
-   away_score \tab integer \cr
-   away_win \tab integer \cr
-   away_record \tab character \cr
-}
+Returns a tibble
+
+Columns as documented in the shared \link{espn_basketball_scoreboard_schema} table.
 }
 \description{
 \strong{Get WNBA schedule for a specific year/date from ESPN's API}
@@ -58,16 +24,71 @@ Returns a tibble\tabular{ll}{
 }
 }
 \seealso{
-Other ESPN WNBA Functions: 
-\code{\link{espn_wnba_game_all}()},
-\code{\link{espn_wnba_game_rosters}()},
-\code{\link{espn_wnba_pbp}()},
-\code{\link{espn_wnba_player_box}()},
-\code{\link{espn_wnba_player_stats}()},
-\code{\link{espn_wnba_standings}()},
-\code{\link{espn_wnba_team_box}()},
-\code{\link{espn_wnba_team_stats}()},
-\code{\link{espn_wnba_teams}()}
+Other ESPN WNBA Functions:
+\code{\link[=espn_wnba_athletes_index]{espn_wnba_athletes_index()}},
+\code{\link[=espn_wnba_award]{espn_wnba_award()}},
+\code{\link[=espn_wnba_calendar]{espn_wnba_calendar()}},
+\code{\link[=espn_wnba_coach_season]{espn_wnba_coach_season()}},
+\code{\link[=espn_wnba_coaches]{espn_wnba_coaches()}},
+\code{\link[=espn_wnba_conferences]{espn_wnba_conferences()}},
+\code{\link[=espn_wnba_draft]{espn_wnba_draft()}},
+\code{\link[=espn_wnba_draft_athlete_detail]{espn_wnba_draft_athlete_detail()}},
+\code{\link[=espn_wnba_draft_pick]{espn_wnba_draft_pick()}},
+\code{\link[=espn_wnba_draft_rounds]{espn_wnba_draft_rounds()}},
+\code{\link[=espn_wnba_franchise]{espn_wnba_franchise()}},
+\code{\link[=espn_wnba_franchises]{espn_wnba_franchises()}},
+\code{\link[=espn_wnba_freeagents]{espn_wnba_freeagents()}},
+\code{\link[=espn_wnba_futures]{espn_wnba_futures()}},
+\code{\link[=espn_wnba_game_all]{espn_wnba_game_all()}},
+\code{\link[=espn_wnba_game_odds]{espn_wnba_game_odds()}},
+\code{\link[=espn_wnba_game_official_detail]{espn_wnba_game_official_detail()}},
+\code{\link[=espn_wnba_game_play]{espn_wnba_game_play()}},
+\code{\link[=espn_wnba_game_play_personnel]{espn_wnba_game_play_personnel()}},
+\code{\link[=espn_wnba_game_player_box]{espn_wnba_game_player_box()}},
+\code{\link[=espn_wnba_game_probabilities]{espn_wnba_game_probabilities()}},
+\code{\link[=espn_wnba_game_propbets]{espn_wnba_game_propbets()}},
+\code{\link[=espn_wnba_game_team_linescores]{espn_wnba_game_team_linescores()}},
+\code{\link[=espn_wnba_game_team_roster_entry]{espn_wnba_game_team_roster_entry()}},
+\code{\link[=espn_wnba_injuries]{espn_wnba_injuries()}},
+\code{\link[=espn_wnba_leaders]{espn_wnba_leaders()}},
+\code{\link[=espn_wnba_news]{espn_wnba_news()}},
+\code{\link[=espn_wnba_player_awards]{espn_wnba_player_awards()}},
+\code{\link[=espn_wnba_player_career_stats]{espn_wnba_player_career_stats()}},
+\code{\link[=espn_wnba_player_eventlog_v2]{espn_wnba_player_eventlog_v2()}},
+\code{\link[=espn_wnba_player_info]{espn_wnba_player_info()}},
+\code{\link[=espn_wnba_player_overview]{espn_wnba_player_overview()}},
+\code{\link[=espn_wnba_player_seasons]{espn_wnba_player_seasons()}},
+\code{\link[=espn_wnba_player_stats]{espn_wnba_player_stats()}},
+\code{\link[=espn_wnba_position]{espn_wnba_position()}},
+\code{\link[=espn_wnba_positions]{espn_wnba_positions()}},
+\code{\link[=espn_wnba_powerindex]{espn_wnba_powerindex()}},
+\code{\link[=espn_wnba_season_awards]{espn_wnba_season_awards()}},
+\code{\link[=espn_wnba_season_group]{espn_wnba_season_group()}},
+\code{\link[=espn_wnba_season_groups]{espn_wnba_season_groups()}},
+\code{\link[=espn_wnba_season_info]{espn_wnba_season_info()}},
+\code{\link[=espn_wnba_season_leaders]{espn_wnba_season_leaders()}},
+\code{\link[=espn_wnba_season_ranking]{espn_wnba_season_ranking()}},
+\code{\link[=espn_wnba_season_rankings]{espn_wnba_season_rankings()}},
+\code{\link[=espn_wnba_season_type]{espn_wnba_season_type()}},
+\code{\link[=espn_wnba_season_types]{espn_wnba_season_types()}},
+\code{\link[=espn_wnba_season_week]{espn_wnba_season_week()}},
+\code{\link[=espn_wnba_season_weeks]{espn_wnba_season_weeks()}},
+\code{\link[=espn_wnba_seasons]{espn_wnba_seasons()}},
+\code{\link[=espn_wnba_standings]{espn_wnba_standings()}},
+\code{\link[=espn_wnba_team]{espn_wnba_team()}},
+\code{\link[=espn_wnba_team_injuries]{espn_wnba_team_injuries()}},
+\code{\link[=espn_wnba_team_news]{espn_wnba_team_news()}},
+\code{\link[=espn_wnba_team_record]{espn_wnba_team_record()}},
+\code{\link[=espn_wnba_team_record_detail]{espn_wnba_team_record_detail()}},
+\code{\link[=espn_wnba_team_schedule]{espn_wnba_team_schedule()}},
+\code{\link[=espn_wnba_team_season_roster]{espn_wnba_team_season_roster()}},
+\code{\link[=espn_wnba_team_season_statistics]{espn_wnba_team_season_statistics()}},
+\code{\link[=espn_wnba_team_stats]{espn_wnba_team_stats()}},
+\code{\link[=espn_wnba_teams]{espn_wnba_teams()}},
+\code{\link[=espn_wnba_transactions]{espn_wnba_transactions()}},
+\code{\link[=espn_wnba_venues]{espn_wnba_venues()}},
+\code{\link[=espn_wnba_week_ranking]{espn_wnba_week_ranking()}},
+\code{\link[=espn_wnba_week_rankings]{espn_wnba_week_rankings()}}
 }
 \author{
 Saiem Gilani.

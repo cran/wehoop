@@ -2,6 +2,7 @@
 
 test_that("ESPN - WBB Teams", {
   skip_on_cran()
+  skip_espn_test()
   x <- espn_wbb_teams()
   
   cols <- c(
@@ -27,6 +28,6 @@ test_that("ESPN - WBB Teams", {
     "conference_id"
   )
   
-  expect_in(sort(colnames(x)), sort(cols))
+  expect_in(sort(cols), sort(colnames(x)))
   expect_s3_class(x, "data.frame")
 })

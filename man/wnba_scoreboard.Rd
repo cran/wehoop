@@ -24,126 +24,63 @@ wnba_scoreboard(
 Return a named list of data frames: Available, EastConfStandingsByDay,
 GameHeader, LastMeeting, LineScore, SeriesStandings, WestConfStandingsByDay
 
-\strong{GameHeader}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_DATE_EST \tab character \cr
-   GAME_SEQUENCE \tab character \cr
-   GAME_ID \tab character \cr
-   GAME_STATUS_ID \tab character \cr
-   GAME_STATUS_TEXT \tab character \cr
-   GAMECODE \tab character \cr
-   HOME_TEAM_ID \tab character \cr
-   VISITOR_TEAM_ID \tab character \cr
-   SEASON \tab character \cr
-   LIVE_PERIOD \tab character \cr
-   LIVE_PC_TIME \tab character \cr
-   NATL_TV_BROADCASTER_ABBREVIATION \tab character \cr
-   LIVE_PERIOD_TIME_BCAST \tab character \cr
-   WH_STATUS \tab character \cr
+\strong{GameHeader}
+
+Columns as documented in the shared \link{wnba_boxscoresummaryv2_game_summary_schema} table.
+
+\strong{LineScore}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   GAME_DATE_EST \tab character \tab Game date est. \cr
+   GAME_SEQUENCE \tab character \tab Game sequence. \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
+   TEAM_ID \tab character \tab Unique team identifier. \cr
+   TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+   TEAM_CITY_NAME \tab character \tab Team city name. \cr
+   TEAM_WINS_LOSSES \tab character \tab Team wins losses. \cr
+   PTS_QTR1 \tab character \tab Pts qtr1. \cr
+   PTS_QTR2 \tab character \tab Pts qtr2. \cr
+   PTS_QTR3 \tab character \tab Pts qtr3. \cr
+   PTS_QTR4 \tab character \tab Pts qtr4. \cr
+   PTS_OT1 \tab character \tab Pts ot1. \cr
+   PTS_OT2 \tab character \tab  \cr
+   PTS_OT3 \tab character \tab  \cr
+   PTS_OT4 \tab character \tab  \cr
+   PTS_OT5 \tab character \tab  \cr
+   PTS_OT6 \tab character \tab  \cr
+   PTS_OT7 \tab character \tab  \cr
+   PTS_OT8 \tab character \tab  \cr
+   PTS_OT9 \tab character \tab  \cr
+   PTS_OT10 \tab character \tab  \cr
+   PTS \tab character \tab Points scored. \cr
+   FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+   FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+   FG3_PCT \tab character \tab Three-point field goal percentage (0-1). \cr
+   AST \tab character \tab Assists. \cr
+   REB \tab character \tab Total rebounds. \cr
+   TOV \tab character \tab Turnovers. \cr
 }
 
 
-\strong{LineScore}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_DATE_EST \tab character \cr
-   GAME_SEQUENCE \tab character \cr
-   GAME_ID \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   TEAM_CITY_NAME \tab character \cr
-   TEAM_WINS_LOSSES \tab character \cr
-   PTS_QTR1 \tab character \cr
-   PTS_QTR2 \tab character \cr
-   PTS_QTR3 \tab character \cr
-   PTS_QTR4 \tab character \cr
-   PTS_OT1 \tab character \cr
-   PTS_OT2 \tab character \cr
-   PTS_OT3 \tab character \cr
-   PTS_OT4 \tab character \cr
-   PTS_OT5 \tab character \cr
-   PTS_OT6 \tab character \cr
-   PTS_OT7 \tab character \cr
-   PTS_OT8 \tab character \cr
-   PTS_OT9 \tab character \cr
-   PTS_OT10 \tab character \cr
-   PTS \tab character \cr
-   FG_PCT \tab character \cr
-   FT_PCT \tab character \cr
-   FG3_PCT \tab character \cr
-   AST \tab character \cr
-   REB \tab character \cr
-   TOV \tab character \cr
-}
+\strong{SeriesStandings}
 
+Columns as documented in the shared \link{wnba_boxscoresummaryv2_season_series_schema} table.
 
-\strong{SeriesStandings}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_ID \tab character \cr
-   HOME_TEAM_ID \tab character \cr
-   VISITOR_TEAM_ID \tab character \cr
-   GAME_DATE_EST \tab character \cr
-   HOME_TEAM_WINS \tab character \cr
-   HOME_TEAM_LOSSES \tab character \cr
-   SERIES_LEADER \tab character \cr
-}
+\strong{LastMeeting}
 
+Columns as documented in the shared \link{wnba_boxscoresummaryv2_last_meeting_schema} table.
 
-\strong{LastMeeting}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_ID \tab character \cr
-   LAST_GAME_ID \tab character \cr
-   LAST_GAME_DATE_EST \tab character \cr
-   LAST_GAME_HOME_TEAM_ID \tab character \cr
-   LAST_GAME_HOME_TEAM_CITY \tab character \cr
-   LAST_GAME_HOME_TEAM_NAME \tab character \cr
-   LAST_GAME_HOME_TEAM_ABBREVIATION \tab character \cr
-   LAST_GAME_HOME_TEAM_POINTS \tab character \cr
-   LAST_GAME_VISITOR_TEAM_ID \tab character \cr
-   LAST_GAME_VISITOR_TEAM_CITY \tab character \cr
-   LAST_GAME_VISITOR_TEAM_NAME \tab character \cr
-   LAST_GAME_VISITOR_TEAM_CITY1 \tab character \cr
-   LAST_GAME_VISITOR_TEAM_POINTS \tab character \cr
-}
+\strong{EastConfStandingsByDay}
 
+Columns as documented in the shared \link{wnba_scoreboard_east_conf_standings_by_day_schema} table.
 
-\strong{EastConfStandingsByDay}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   STANDINGSDATE \tab character \cr
-   CONFERENCE \tab character \cr
-   TEAM \tab character \cr
-   G \tab character \cr
-   W \tab character \cr
-   L \tab character \cr
-   W_PCT \tab character \cr
-   HOME_RECORD \tab character \cr
-   ROAD_RECORD \tab character \cr
-}
+\strong{WestConfStandingsByDay}
 
+Columns as documented in the shared \link{wnba_scoreboard_east_conf_standings_by_day_schema} table.
 
-\strong{WestConfStandingsByDay}\tabular{ll}{
-   col_name \tab types \cr
-   TEAM_ID \tab character \cr
-   LEAGUE_ID \tab character \cr
-   SEASON_ID \tab character \cr
-   STANDINGSDATE \tab character \cr
-   CONFERENCE \tab character \cr
-   TEAM \tab character \cr
-   G \tab character \cr
-   W \tab character \cr
-   L \tab character \cr
-   W_PCT \tab character \cr
-   HOME_RECORD \tab character \cr
-   ROAD_RECORD \tab character \cr
-}
-
-
-\strong{Available}\tabular{ll}{
-   col_name \tab types \cr
-   GAME_ID \tab character \cr
-   PT_AVAILABLE \tab character \cr
+\strong{Available}\tabular{lll}{
+   col_name \tab types \tab description \cr
+   GAME_ID \tab character \tab Unique game identifier. \cr
+   PT_AVAILABLE \tab character \tab  \cr
 }
 }
 \description{

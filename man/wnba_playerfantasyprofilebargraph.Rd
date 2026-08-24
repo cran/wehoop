@@ -26,44 +26,31 @@ wnba_playerfantasyprofilebargraph(
 \value{
 Return a named list of data frames: LastFiveGamesAvg, SeasonAvg
 
-\strong{SeasonAvg}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   PLAYER_NAME \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   FAN_DUEL_PTS \tab character \cr
-   NBA_FANTASY_PTS \tab character \cr
-   PTS \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   FG3M \tab character \cr
-   FT_PCT \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   FG_PCT \tab character \cr
-}
+\strong{SeasonAvg}
 
+\if{html}{\tabular{lll}{
+      col_name \tab types \tab description \cr
+      PLAYER_ID \tab character \tab Unique player identifier. \cr
+      PLAYER_NAME \tab character \tab Player name. \cr
+      TEAM_ID \tab character \tab Unique team identifier. \cr
+      TEAM_ABBREVIATION \tab character \tab Short team abbreviation (e.g. 'LAS'). \cr
+      FAN_DUEL_PTS \tab character \tab  \cr
+      NBA_FANTASY_PTS \tab character \tab  \cr
+      PTS \tab character \tab Points scored. \cr
+      REB \tab character \tab Total rebounds. \cr
+      AST \tab character \tab Assists. \cr
+      FG3M \tab character \tab Three-point field goals made. \cr
+      FT_PCT \tab character \tab Free throw percentage (0-1). \cr
+      STL \tab character \tab Steals. \cr
+      BLK \tab character \tab Blocks. \cr
+      TOV \tab character \tab Turnovers. \cr
+      FG_PCT \tab character \tab Field goal percentage (0-1). \cr
+   }}
+\if{latex}{See the HTML help or pkgdown reference for the column table.}
 
-\strong{LastFiveGamesAvg}\tabular{ll}{
-   col_name \tab types \cr
-   PLAYER_ID \tab character \cr
-   PLAYER_NAME \tab character \cr
-   TEAM_ID \tab character \cr
-   TEAM_ABBREVIATION \tab character \cr
-   FAN_DUEL_PTS \tab character \cr
-   NBA_FANTASY_PTS \tab character \cr
-   PTS \tab character \cr
-   REB \tab character \cr
-   AST \tab character \cr
-   FG3M \tab character \cr
-   FT_PCT \tab character \cr
-   STL \tab character \cr
-   BLK \tab character \cr
-   TOV \tab character \cr
-   FG_PCT \tab character \cr
-}
+\strong{LastFiveGamesAvg}
+
+Same columns as the \strong{SeasonAvg} table above.
 }
 \description{
 \strong{Get WNBA Stats API Player Fantasy Profile Bar Graph}
@@ -75,42 +62,35 @@ Return a named list of data frames: LastFiveGamesAvg, SeasonAvg
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other WNBA Player Functions: 
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_leaguedashplayerbiostats}()},
-\code{\link{wnba_leaguedashplayerclutch}()},
-\code{\link{wnba_leaguedashplayershotlocations}()},
-\code{\link{wnba_leaguedashplayerstats}()},
-\code{\link{wnba_leagueplayerondetails}()},
-\code{\link{wnba_leagueseasonmatchups}()},
-\code{\link{wnba_playerawards}()},
-\code{\link{wnba_playercareerbycollegerollup}()},
-\code{\link{wnba_playercareerbycollege}()},
-\code{\link{wnba_playercareerstats}()},
-\code{\link{wnba_playercompare}()},
-\code{\link{wnba_playerdashboardbyclutch}()},
-\code{\link{wnba_playerdashboardbygamesplits}()},
-\code{\link{wnba_playerdashboardbygeneralsplits}()},
-\code{\link{wnba_playerdashboardbylastngames}()},
-\code{\link{wnba_playerdashboardbyopponent}()},
-\code{\link{wnba_playerdashboardbyshootingsplits}()},
-\code{\link{wnba_playerdashboardbyteamperformance}()},
-\code{\link{wnba_playerdashboardbyyearoveryear}()},
-\code{\link{wnba_playerestimatedmetrics}()},
-\code{\link{wnba_playerfantasyprofile}()},
-\code{\link{wnba_playergamelogs}()},
-\code{\link{wnba_playergamelog}()},
-\code{\link{wnba_playergamestreakfinder}()},
-\code{\link{wnba_playerheadshot}()},
-\code{\link{wnba_playerindex}()},
-\code{\link{wnba_playernextngames}()},
-\code{\link{wnba_playerprofilev2}()},
-\code{\link{wnba_playervsplayer}()}
+Other WNBA Player Functions:
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_leaguedashplayerbiostats]{wnba_leaguedashplayerbiostats()}},
+\code{\link[=wnba_leaguedashplayerclutch]{wnba_leaguedashplayerclutch()}},
+\code{\link[=wnba_leaguedashplayershotlocations]{wnba_leaguedashplayershotlocations()}},
+\code{\link[=wnba_leaguedashplayerstats]{wnba_leaguedashplayerstats()}},
+\code{\link[=wnba_leagueplayerondetails]{wnba_leagueplayerondetails()}},
+\code{\link[=wnba_leagueseasonmatchups]{wnba_leagueseasonmatchups()}},
+\code{\link[=wnba_playerawards]{wnba_playerawards()}},
+\code{\link[=wnba_playercareerbycollege]{wnba_playercareerbycollege()}},
+\code{\link[=wnba_playercareerbycollegerollup]{wnba_playercareerbycollegerollup()}},
+\code{\link[=wnba_playercareerstats]{wnba_playercareerstats()}},
+\code{\link[=wnba_playercompare]{wnba_playercompare()}},
+\code{\link[=wnba_playerdashboardbyclutch]{wnba_playerdashboardbyclutch()}},
+\code{\link[=wnba_playerestimatedmetrics]{wnba_playerestimatedmetrics()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}},
+\code{\link[=wnba_playergamelog]{wnba_playergamelog()}},
+\code{\link[=wnba_playergamelogs]{wnba_playergamelogs()}},
+\code{\link[=wnba_playergamestreakfinder]{wnba_playergamestreakfinder()}},
+\code{\link[=wnba_playerheadshot]{wnba_playerheadshot()}},
+\code{\link[=wnba_playerindex]{wnba_playerindex()}},
+\code{\link[=wnba_playernextngames]{wnba_playernextngames()}},
+\code{\link[=wnba_playerprofilev2]{wnba_playerprofilev2()}},
+\code{\link[=wnba_playervsplayer]{wnba_playervsplayer()}}
 
-Other WNBA Fantasy Functions: 
-\code{\link{wnba_fantasywidget}()},
-\code{\link{wnba_infographicfanduelplayer}()},
-\code{\link{wnba_playerfantasyprofile}()}
+Other WNBA Fantasy Functions:
+\code{\link[=wnba_fantasywidget]{wnba_fantasywidget()}},
+\code{\link[=wnba_infographicfanduelplayer]{wnba_infographicfanduelplayer()}},
+\code{\link[=wnba_playerfantasyprofile]{wnba_playerfantasyprofile()}}
 }
 \author{
 Saiem Gilani

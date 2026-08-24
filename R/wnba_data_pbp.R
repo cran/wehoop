@@ -9,28 +9,30 @@ NULL
 #' @param ... Additional arguments passed to an underlying function like httr.
 #' @return Returns a tibble
 #' 
-#'    |col_name          |types     |
-#'    |:-----------------|:---------|
-#'    |game_id           |character |
-#'    |league            |character |
-#'    |period            |integer   |
-#'    |event_num         |integer   |
-#'    |clock             |character |
-#'    |description       |character |
-#'    |locX              |integer   |
-#'    |locY              |integer   |
-#'    |opt1              |integer   |
-#'    |opt2              |integer   |
-#'    |event_action_type |integer   |
-#'    |event_type        |integer   |
-#'    |team_id           |integer   |
-#'    |offense_team_id   |integer   |
-#'    |player1_id        |integer   |
-#'    |player2_id        |integer   |
-#'    |player3_id        |integer   |
-#'    |home_score        |integer   |
-#'    |away_score        |integer   |
-#'    |order             |integer   |
+#'    \if{html}{\tabular{lll}{
+#'       col_name \tab types \tab description \cr
+#'       game_id \tab character \tab Unique game identifier. \cr
+#'       league \tab character \tab League. \cr
+#'       period \tab integer \tab Period of the game (1-4 quarters; 5+ for OT). \cr
+#'       event_num \tab integer \tab Sequential event number within the game (V2 PBP). \cr
+#'       clock \tab character \tab Game clock value. \cr
+#'       description \tab character \tab Long-form description text. \cr
+#'       locX \tab integer \tab  \cr
+#'       locY \tab integer \tab  \cr
+#'       opt1 \tab integer \tab Opt1. \cr
+#'       opt2 \tab integer \tab Opt2. \cr
+#'       event_action_type \tab integer \tab Numeric event-action-type code (V2 PBP). \cr
+#'       event_type \tab integer \tab Event / play type code (V2 PBP). \cr
+#'       team_id \tab integer \tab Unique team identifier. \cr
+#'       offense_team_id \tab integer \tab Unique identifier for offense team. \cr
+#'       player1_id \tab integer \tab V2 PBP primary player ID (e.g. shooter / fouler). \cr
+#'       player2_id \tab integer \tab V2 PBP secondary player ID (e.g. assister / fouled-by). \cr
+#'       player3_id \tab integer \tab V2 PBP tertiary player ID (e.g. blocker). \cr
+#'       home_score \tab integer \tab Home team score at the time of the play. \cr
+#'       away_score \tab integer \tab Away team score at the time of the play. \cr
+#'       order \tab integer \tab Display order within the result set. \cr
+#'    }}
+#'    \if{latex}{See the HTML help or pkgdown reference for the column table.}
 #'
 #'   Event Message Types (event_type):
 #'
@@ -74,7 +76,15 @@ NULL
 #' ```
 wnba_data_pbp <- function(game_id = "1022200034",
                           ...){
-  
+  .args <- mget(setdiff(names(formals()), "..."))
+
+  lifecycle::deprecate_stop(
+    when = "3.0.0",
+    what = "wnba_data_pbp()",
+    with = "wnba_pbp()",
+    details = "The `data.wnba.com` mobile_teams play-by-play feed is unstable (HTTP/2 stream errors are routine). Use `wnba_pbp()` (which wraps the WNBA Stats API V3 endpoint) for play-by-play instead."
+  )
+
   league_id <- substr(game_id, 1, 2)
   season_id <- substr(game_id, 4, 5)
   season <- ifelse(substr(season_id,1,1) == "9", paste0('19', season_id), paste0('20', season_id))
@@ -84,17 +94,22 @@ wnba_data_pbp <- function(game_id = "1022200034",
     substr(game_id, 1, 2) == '20' ~ 'dleague',
     TRUE ~ 'NBA'
   )
-  full_url <- glue::glue("https://data.{league}.com/data/10s/v2015/json/mobile_teams/{league}/{season}/scores/pbp/{game_id}_full_pbp.json")
-  
+  full_url <- sprintf(
+    "https://data.%s.com/data/10s/v2015/json/mobile_teams/%s/%s/scores/pbp/%s_full_pbp.json",
+    league, league, season, game_id
+  )
+
+  plays_df <- data.frame()
+
   tryCatch(
     expr = {
-      res <- httr::RETRY("GET", full_url, ...)
+      res <- .retry_request(full_url)
       
       # Check the result
       check_status(res)
       
       resp <- res %>%
-        httr::content(as = "text", encoding = "UTF-8")
+        .resp_text()
       
       data <- resp %>% 
         jsonlite::fromJSON() %>% 
@@ -143,13 +158,12 @@ wnba_data_pbp <- function(game_id = "1022200034",
         dplyr::select("game_id", "league", tidyr::everything()) %>%
         make_wehoop_data("WNBA Play-by-Play Information from data.WNBA.com",Sys.time())
     },
-    error = function(e) {
-      cli::cli_alert_danger("{Sys.time()}: Invalid arguments or no play-by-play data for {game_id} available!")
-      cli::cli_alert_danger("Error:\n{e}")
-    },
-    warning = function(w) {
-      cli::cli_alert_warning("{Sys.time()}: Warning:\n{w}")
-    },
+    error = function(e) .report_api_error(
+      e,
+      hint = "Invalid arguments or no play-by-play data for {game_id} available!",
+      args = .args
+    ),
+    warning = function(w) .report_api_warning(w, args = .args),
     finally = {
     }
   )
